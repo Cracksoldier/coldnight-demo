@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Git Dashboard | coldnight demo</title>
+<meta name="description" content="A terminal dashboard that displays activity across all local Git repositories. Scans a configurable list of directories, fetches recent commits, and renders a u">
+<meta name="author" content="Cracksoldier">
+
+
+<!-- Open Graph -->
+<meta property="og:title" content="Git Dashboard">
+<meta property="og:description" content="A terminal dashboard that displays activity across all local Git repositories. Scans a configurable list of directories, fetches recent commits, and renders a u">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cracksoldier.github.io/coldnight-demo/showroom/git-dashboard/">
+<meta property="og:site_name" content="coldnight demo">
+<meta property="og:locale" content="en_US">
+
+<meta property="og:image" content="https://cracksoldier.github.io/coldnight-demo/images/showroom/git-dashboard.png">
+
+
+
+<link rel="canonical" href="https://cracksoldier.github.io/coldnight-demo/showroom/git-dashboard/">
+
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Git Dashboard">
+<meta name="twitter:description" content="A terminal dashboard that displays activity across all local Git repositories. Scans a configurable list of directories, fetches recent commits, and renders a u">
+
+
+<meta name="twitter:image" content="https://cracksoldier.github.io/coldnight-demo/images/showroom/git-dashboard.png">
+
+
+<!-- Favicon -->
+
+
+<link rel="icon" type="image/svg+xml" href="/coldnight-demo/favicon.svg">
+
+
+<!-- Fonts (self-hosted, latin + latin-ext) -->
+<link rel="preload" href="/coldnight-demo/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Theme stylesheet -->
+<link rel="stylesheet" href="/coldnight-demo/css/style.css">
+
+
+<!-- Cross-document View Transitions (progressive enhancement; inline because compiled SCSS can't read theme config) -->
+<style>@media not (prefers-reduced-motion: reduce){@view-transition{navigation:auto}}</style>
+
+
+<!-- LightGallery CSS — post pages only -->
+
+
+<!-- KaTeX CSS — post pages only -->
+
+
+<!-- RSS -->
+
+<link rel="alternate" type="application/rss+xml" title="coldnight demo" href="/coldnight-demo/atom.xml">
+
+
+<link rel="alternate" type="application/feed+json" title="coldnight demo" href="/coldnight-demo/feed.json">
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="navbar" role="banner">
+  <div class="navbar__inner">
+
+    <!-- Brand -->
+    <a href="/coldnight-demo/" class="navbar__brand" aria-label="My Blog — home">
+      
+      
+      <span class="navbar__brand-text navbar__brand-text--icon">
+        
+        <span class="navbar__logo navbar__logo--text" aria-hidden="true" style="color: #60a5fa">❄</span>
+        
+        <span class="navbar__title">My Blog</span>
+        
+      </span>
+      
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="navbar__nav" aria-label="Main navigation" id="main-nav">
+      
+        
+        <a href="/coldnight-demo/"
+           class="nav-link"
+           >
+          Home
+        </a>
+      
+        
+        <a href="/coldnight-demo/archives"
+           class="nav-link"
+           >
+          Archive
+        </a>
+      
+        
+        <a href="/coldnight-demo/stats"
+           class="nav-link"
+           >
+          Stats
+        </a>
+      
+        
+        <a href="/coldnight-demo/links"
+           class="nav-link"
+           >
+          Links
+        </a>
+      
+        
+        <a href="/coldnight-demo/showroom"
+           class="nav-link"
+           >
+          Showroom
+        </a>
+      
+        
+        <a href="/coldnight-demo/about"
+           class="nav-link"
+           >
+          About
+        </a>
+      
+    </nav>
+
+    <!-- Actions -->
+    <div class="navbar__actions">
+      
+
+      <!-- GitHub -->
+      
+
+      
+      <div class="search-wrap navbar__search" id="search-wrap">
+        <input type="search"
+               role="combobox"
+               class="search-input"
+               id="search-input"
+               placeholder="Search…"
+               aria-label="Search posts"
+               aria-expanded="false"
+               aria-autocomplete="list"
+               aria-haspopup="listbox"
+               aria-controls="search-results"
+               autocomplete="off"
+               spellcheck="false">
+        <div class="search-results" id="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      
+
+      <!-- Mobile hamburger -->
+      <button class="btn btn--icon navbar__hamburger"
+              id="nav-toggle"
+              aria-expanded="false"
+              aria-controls="mobile-nav"
+              aria-label="Toggle navigation">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="2" y1="4.5" x2="16" y2="4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="13.5" x2="16" y2="13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile nav drawer -->
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+  
+  <div class="search-wrap mobile-nav__search" id="search-wrap-mobile">
+    <input type="search"
+           role="combobox"
+           class="search-input"
+           id="search-input-mobile"
+           placeholder="Search…"
+           aria-label="Search posts"
+           aria-expanded="false"
+           aria-autocomplete="list"
+           aria-haspopup="listbox"
+           aria-controls="search-results-mobile"
+           autocomplete="off"
+           spellcheck="false">
+    <div class="search-results" id="search-results-mobile" role="listbox" aria-label="Search results"></div>
+  </div>
+  
+  
+    
+    <a href="/coldnight-demo/"
+       class="nav-link"
+       >
+      Home
+    </a>
+  
+    
+    <a href="/coldnight-demo/archives"
+       class="nav-link"
+       >
+      Archive
+    </a>
+  
+    
+    <a href="/coldnight-demo/stats"
+       class="nav-link"
+       >
+      Stats
+    </a>
+  
+    
+    <a href="/coldnight-demo/links"
+       class="nav-link"
+       >
+      Links
+    </a>
+  
+    
+    <a href="/coldnight-demo/showroom"
+       class="nav-link"
+       >
+      Showroom
+    </a>
+  
+    
+    <a href="/coldnight-demo/about"
+       class="nav-link"
+       >
+      About
+    </a>
+  
+</nav>
+
+
+<div class="archive-wrapper">
+  <main id="main-content" role="main">
+
+    <a class="project-back" href="/coldnight-demo/showroom/">&#8592; Showroom</a>
+
+    
+      <div class="project-cover">
+        <img src="/coldnight-demo/images/showroom/git-dashboard.png" alt="Git Dashboard" loading="lazy">
+      </div>
+    
+
+    <h1>Git Dashboard</h1>
+    
+      <p class="project-subtitle">Local repository activity overview</p>
+    
+    
+
+    <div class="prose">
+      <p>A terminal dashboard that displays activity across all local Git repositories. Scans a configurable list of directories, fetches recent commits, and renders a unified activity feed grouped by day.</p>
+<h2 id="Display"><a href="#Display" class="headerlink" title="Display"></a>Display</h2><figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">Today<br>  ● my-blog       feat: add showroom page          2 min ago<br>  ● cli-tool      fix: handle missing config        1 h ago<br><br>Yesterday<br>  ● design-system chore: update spacing tokens     10 h ago<br>  ● rss-reader    feat: add OPML import            14 h ago<br></code></pre></td></tr></table></figure>
+
+<h2 id="Tech"><a href="#Tech" class="headerlink" title="Tech"></a>Tech</h2><ul>
+<li><strong>Runtime</strong>: Node.js</li>
+<li><strong>UI</strong>: <code>blessed</code> (terminal UI library)</li>
+<li><strong>Git</strong>: <code>simple-git</code> for repository introspection</li>
+</ul>
+
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <ul class="footer-links">
+      
+      
+      
+        <li><a href="/coldnight-demo/atom.xml">RSS</a></li>
+      
+    </ul>
+    <span>&copy; 2026 Cracksoldier. Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> &middot; coldnight v1.9.1</span>
+  </div>
+</footer>
+
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+<script src="/coldnight-demo/js/back-to-top.js" defer></script>
+
+<script src="/coldnight-demo/js/search.js" data-search-url="/coldnight-demo/search.json" defer></script>
+
+
+<div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+
+<script src="/coldnight-demo/js/nav.js" defer></script>
+<script src="/coldnight-demo/js/copy-code.js" defer></script>
+
+</body>
+</html>

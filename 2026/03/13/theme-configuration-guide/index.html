@@ -1,0 +1,1393 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Configuring the Coldnight Theme | coldnight demo</title>
+<meta name="description" content="Complete reference for every option in themes/coldnight/_config.yml — navbar, sidebar, grid, code blocks, math, diagrams, search, and all tag plugins.">
+<meta name="author" content="Cracksoldier">
+
+<meta name="keywords" content="theme, hexo, configuration, setup">
+
+
+<!-- Open Graph -->
+<meta property="og:title" content="Configuring the Coldnight Theme">
+<meta property="og:description" content="Complete reference for every option in themes/coldnight/_config.yml — navbar, sidebar, grid, code blocks, math, diagrams, search, and all tag plugins.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cracksoldier.github.io/coldnight-demo/2026/03/13/theme-configuration-guide/">
+<meta property="og:site_name" content="coldnight demo">
+<meta property="og:locale" content="en_US">
+
+<meta property="og:image" content="https://picsum.photos/800/450">
+
+
+<meta property="article:published_time" content="2026-03-13T10:00:00.000Z">
+<meta property="article:author" content="Cracksoldier">
+
+
+<link rel="canonical" href="https://cracksoldier.github.io/coldnight-demo/2026/03/13/theme-configuration-guide/">
+
+
+<!-- Structured data -->
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Configuring the Coldnight Theme","datePublished":"2026-03-13T10:00:00.000Z","dateModified":"2026-08-13T00:00:00.000Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://cracksoldier.github.io/coldnight-demo/2026/03/13/theme-configuration-guide/"},"description":"Complete reference for every option in themes/coldnight/_config.yml — navbar, sidebar, grid, code blocks, math, diagrams, search, and all tag plugins.","author":{"@type":"Person","name":"Cracksoldier"},"publisher":{"@type":"Person","name":"Cracksoldier"},"image":"https://picsum.photos/800/450","keywords":"theme, hexo, configuration, setup"}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cracksoldier.github.io/coldnight-demo/"},{"@type":"ListItem","position":2,"name":"Documentation","item":"https://cracksoldier.github.io/coldnight-demo/categories/Documentation/"},{"@type":"ListItem","position":3,"name":"Configuring the Coldnight Theme"}]}</script>
+
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Configuring the Coldnight Theme">
+<meta name="twitter:description" content="Complete reference for every option in themes/coldnight/_config.yml — navbar, sidebar, grid, code blocks, math, diagrams, search, and all tag plugins.">
+
+
+<meta name="twitter:image" content="https://picsum.photos/800/450">
+
+
+<!-- Favicon -->
+
+
+<link rel="icon" type="image/svg+xml" href="/coldnight-demo/favicon.svg">
+
+
+<!-- Fonts (self-hosted, latin + latin-ext) -->
+<link rel="preload" href="/coldnight-demo/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Theme stylesheet -->
+<link rel="stylesheet" href="/coldnight-demo/css/style.css">
+
+
+<!-- Cross-document View Transitions (progressive enhancement; inline because compiled SCSS can't read theme config) -->
+<style>@media not (prefers-reduced-motion: reduce){@view-transition{navigation:auto}}</style>
+
+
+<!-- LightGallery CSS — post pages only -->
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lightgallery.css">
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lg-zoom.css">
+
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lg-thumbnail.css">
+
+
+
+<!-- KaTeX CSS — post pages only -->
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/katex/katex.min.css">
+
+
+<!-- RSS -->
+
+<link rel="alternate" type="application/rss+xml" title="coldnight demo" href="/coldnight-demo/atom.xml">
+
+
+<link rel="alternate" type="application/feed+json" title="coldnight demo" href="/coldnight-demo/feed.json">
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+
+
+<div id="reading-progress" class="reading-progress" role="progressbar"
+     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="navbar" role="banner">
+  <div class="navbar__inner">
+
+    <!-- Brand -->
+    <a href="/coldnight-demo/" class="navbar__brand" aria-label="My Blog — home">
+      
+      
+      <span class="navbar__brand-text navbar__brand-text--icon">
+        
+        <span class="navbar__logo navbar__logo--text" aria-hidden="true" style="color: #60a5fa">❄</span>
+        
+        <span class="navbar__title">My Blog</span>
+        
+      </span>
+      
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="navbar__nav" aria-label="Main navigation" id="main-nav">
+      
+        
+        <a href="/coldnight-demo/"
+           class="nav-link"
+           >
+          Home
+        </a>
+      
+        
+        <a href="/coldnight-demo/archives"
+           class="nav-link"
+           >
+          Archive
+        </a>
+      
+        
+        <a href="/coldnight-demo/stats"
+           class="nav-link"
+           >
+          Stats
+        </a>
+      
+        
+        <a href="/coldnight-demo/links"
+           class="nav-link"
+           >
+          Links
+        </a>
+      
+        
+        <a href="/coldnight-demo/showroom"
+           class="nav-link"
+           >
+          Showroom
+        </a>
+      
+        
+        <a href="/coldnight-demo/about"
+           class="nav-link"
+           >
+          About
+        </a>
+      
+    </nav>
+
+    <!-- Actions -->
+    <div class="navbar__actions">
+      
+
+      <!-- GitHub -->
+      
+
+      
+      <div class="search-wrap navbar__search" id="search-wrap">
+        <input type="search"
+               role="combobox"
+               class="search-input"
+               id="search-input"
+               placeholder="Search…"
+               aria-label="Search posts"
+               aria-expanded="false"
+               aria-autocomplete="list"
+               aria-haspopup="listbox"
+               aria-controls="search-results"
+               autocomplete="off"
+               spellcheck="false">
+        <div class="search-results" id="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      
+
+      <!-- Mobile hamburger -->
+      <button class="btn btn--icon navbar__hamburger"
+              id="nav-toggle"
+              aria-expanded="false"
+              aria-controls="mobile-nav"
+              aria-label="Toggle navigation">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="2" y1="4.5" x2="16" y2="4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="13.5" x2="16" y2="13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile nav drawer -->
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+  
+  <div class="search-wrap mobile-nav__search" id="search-wrap-mobile">
+    <input type="search"
+           role="combobox"
+           class="search-input"
+           id="search-input-mobile"
+           placeholder="Search…"
+           aria-label="Search posts"
+           aria-expanded="false"
+           aria-autocomplete="list"
+           aria-haspopup="listbox"
+           aria-controls="search-results-mobile"
+           autocomplete="off"
+           spellcheck="false">
+    <div class="search-results" id="search-results-mobile" role="listbox" aria-label="Search results"></div>
+  </div>
+  
+  
+    
+    <a href="/coldnight-demo/"
+       class="nav-link"
+       >
+      Home
+    </a>
+  
+    
+    <a href="/coldnight-demo/archives"
+       class="nav-link"
+       >
+      Archive
+    </a>
+  
+    
+    <a href="/coldnight-demo/stats"
+       class="nav-link"
+       >
+      Stats
+    </a>
+  
+    
+    <a href="/coldnight-demo/links"
+       class="nav-link"
+       >
+      Links
+    </a>
+  
+    
+    <a href="/coldnight-demo/showroom"
+       class="nav-link"
+       >
+      Showroom
+    </a>
+  
+    
+    <a href="/coldnight-demo/about"
+       class="nav-link"
+       >
+      About
+    </a>
+  
+</nav>
+
+
+<div class="page-wrapper">
+
+  <main class="main-content post-page" id="main-content" role="main">
+
+    <article>
+
+      <header class="post-header">
+        <h1 class="post-title">Configuring the Coldnight Theme</h1>
+
+        <div class="post-meta">
+          <time datetime="2026-03-13T10:00:00.000Z">
+            13.03.2026
+          </time>
+
+          
+          <time class="post-updated" datetime="2026-08-13T00:00:00.000Z"
+                title="Last updated">↻ Updated 13.08.2026</time>
+          
+
+          
+            <span>Cracksoldier</span>
+          
+
+          
+            <span>11 min read</span>
+          
+
+          
+            <span>2,124 words</span>
+          
+
+          
+            
+              <a href="/coldnight-demo/categories/Documentation/" class="tag-pill" data-category-desc="Reference guides for the coldnight theme and this demo site.">Documentation</a>
+            
+          
+
+          <span class="difficulty difficulty--level-1" role="img" aria-label="Difficulty: 1 of 5" title="Difficulty: 1 of 5"><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span></span>
+
+          
+            <button class="btn btn--icon btn--sm post-permalink-btn"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2026/03/13/theme-configuration-guide/"
+                    aria-label="Copy link to post"
+                    title="Copy permalink">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+                <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+              </svg>
+            </button>
+          
+          
+            <button class="btn btn--icon btn--sm epub-export-btn"
+                    data-title="Configuring the Coldnight Theme"
+                    data-author="Cracksoldier"
+                    data-url="https://cracksoldier.github.io/coldnight-demo/2026/03/13/theme-configuration-guide/"
+                    data-slug="theme-configuration-guide"
+                    data-language="en"
+                    aria-label="Export as ePub"
+                    title="Download as ePub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/>
+              </svg>
+            </button>
+          
+        </div>
+      </header>
+
+      
+
+      
+        
+        <img src="https://picsum.photos/800/450" alt="Configuring the Coldnight Theme"
+             class="post-cover" loading="eager" fetchpriority="high">
+        
+      
+
+      
+
+      
+
+      <div class="post-body prose">
+        <p>All theme options live in <code>themes/coldnight/_config.yml</code>. You can override any of them in the root <code>_config.yml</code> under <code>theme_config:</code> without touching the theme source.</p>
+<h2 id="Navbar"><a href="#Navbar" class="headerlink" title="Navbar"></a>Navbar</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">navbar:</span><br>  <span class="hljs-attr">title:</span> <span class="hljs-string">&quot;My Blog&quot;</span><br>  <span class="hljs-attr">links:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Home</span><br>      <span class="hljs-attr">url:</span> <span class="hljs-string">/</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Archive</span><br>      <span class="hljs-attr">url:</span> <span class="hljs-string">/archives</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">About</span><br>      <span class="hljs-attr">url:</span> <span class="hljs-string">/about</span><br></code></pre></td></tr></table></figure>
+
+<p>The active link is highlighted with <code>accent-light</code> text. A full-text search box is embedded in the navbar when <code>search.enabled: true</code>.</p>
+<h2 id="Sidebar"><a href="#Sidebar" class="headerlink" title="Sidebar"></a>Sidebar</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">sidebar:</span><br>  <span class="hljs-attr">position:</span> <span class="hljs-string">right</span>      <span class="hljs-comment"># left | right | hidden</span><br>  <span class="hljs-attr">about:</span> <span class="hljs-literal">true</span>          <span class="hljs-comment"># false = hide the About widget</span><br>  <span class="hljs-attr">widgets:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">toc</span>              <span class="hljs-comment"># table of contents (post pages only)</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">recent_posts</span>     <span class="hljs-comment"># last 5 posts by date</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">tags</span>             <span class="hljs-comment"># all tags as pills</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">archives</span>         <span class="hljs-comment"># posts grouped by year</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">about</span>            <span class="hljs-comment"># author name, bio, avatar, social links</span><br></code></pre></td></tr></table></figure>
+
+<p>Set <code>position: hidden</code> to remove the sidebar entirely — the main content expands to fill the full width. The <code>toc</code> widget only renders on post pages and is suppressed when the post has no headings.</p>
+<p>Set <code>about: false</code> to drop just the About widget while keeping the rest of the sidebar — no need to re-declare the whole <code>widgets:</code> list in your <code>theme_config:</code>. The widget also hides itself when <code>author</code>, <code>description</code>, <code>avatar</code> and both social handles are empty, so a site that hasn’t filled those in never shows an empty box.</p>
+<h2 id="Sponsor-coffee-button"><a href="#Sponsor-coffee-button" class="headerlink" title="Sponsor &#x2F; coffee button"></a>Sponsor &#x2F; coffee button</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">sponsor:</span><br>  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">label:</span> <span class="hljs-string">&quot;Buy me a coffee&quot;</span><br>  <span class="hljs-attr">url:</span> <span class="hljs-string">&quot;https://ko-fi.com/yourname&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>Renders as an amber-tinted button in the navbar. Uses a dedicated colour palette distinct from the blue accent so it stands out without clashing.</p>
+<h2 id="Social-links"><a href="#Social-links" class="headerlink" title="Social links"></a>Social links</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">social:</span><br>  <span class="hljs-attr">github:</span> <span class="hljs-string">&quot;yourname&quot;</span>    <span class="hljs-comment"># appended to https://github.com/</span><br>  <span class="hljs-attr">twitter:</span> <span class="hljs-string">&quot;yourname&quot;</span>   <span class="hljs-comment"># appended to https://twitter.com/</span><br>  <span class="hljs-attr">rss:</span> <span class="hljs-literal">true</span>             <span class="hljs-comment"># adds &lt;link rel=&quot;alternate&quot;&gt; and an RSS link in the footer</span><br></code></pre></td></tr></table></figure>
+
+<p>Social links appear in the navbar (GitHub icon), the footer, and the About sidebar widget.</p>
+<h2 id="Index-page-grid"><a href="#Index-page-grid" class="headerlink" title="Index page grid"></a>Index page grid</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">grid:</span><br>  <span class="hljs-attr">columns:</span> <span class="hljs-number">1</span>    <span class="hljs-comment"># 1 = list view, 2–6 = card grid</span><br>  <span class="hljs-attr">rows:</span> <span class="hljs-number">3</span>       <span class="hljs-comment"># rows per page; per_page = columns × rows</span><br></code></pre></td></tr></table></figure>
+
+<p><code>columns: 1</code> switches to list view (thumbnail left, text right). Any value ≥ 2 activates the card grid. <code>per_page</code> is computed automatically from <code>columns × rows</code>.</p>
+<h2 id="Reading-time-and-word-count"><a href="#Reading-time-and-word-count" class="headerlink" title="Reading time and word count"></a>Reading time and word count</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">reading_time:</span> <span class="hljs-literal">true</span>    <span class="hljs-comment"># &quot;4 min read&quot; on cards and post header</span><br><span class="hljs-attr">word_count:</span> <span class="hljs-literal">true</span>      <span class="hljs-comment"># &quot;1,240 words&quot; in the post header</span><br></code></pre></td></tr></table></figure>
+
+<p>Both strip code blocks before counting so large snippets don’t inflate the estimates.</p>
+<h2 id="Difficulty-indicator"><a href="#Difficulty-indicator" class="headerlink" title="Difficulty indicator"></a>Difficulty indicator</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">difficulty:</span> <span class="hljs-literal">true</span>    <span class="hljs-comment"># set false to hide the meter everywhere</span><br></code></pre></td></tr></table></figure>
+
+<p>Posts and showroom projects can declare how demanding their topic is with <code>difficulty:</code> (or the <code>effort:</code> alias) in <abbr class="glossary-term" title="The YAML block between --- markers at the top of a Markdown file holding page metadata.">front-matter</abbr> — an integer from 1 to 5. The theme renders it as a small signal-bar pill next to the other post metadata: green bars for levels 1–2, amber for 3, red for 4–5. This post sets <code>difficulty: 1</code>, so the meter is visible in the header above.</p>
+<p>The tooltip follows the key you used — <code>effort: 4</code> reads “Effort: 4 of 5” instead of “Difficulty”. If both keys are set, <code>difficulty</code> wins. Values that aren’t a whole number between 1 and 5 are silently ignored, and the pill simply doesn’t render on posts that omit the key. On showroom cards it appears in the top-left corner of the cover, opposite the AI-assisted badge.</p>
+<h2 id="Table-of-contents"><a href="#Table-of-contents" class="headerlink" title="Table of contents"></a>Table of contents</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">toc:</span><br>  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">max_depth:</span> <span class="hljs-number">3</span>    <span class="hljs-comment"># 2 = h2 only, 3 = h2 + h3</span><br></code></pre></td></tr></table></figure>
+
+<p>The TOC widget appears in the sidebar on post pages. It uses <code>IntersectionObserver</code> to highlight the heading currently in view. Set <code>enabled: false</code> to disable globally or omit the <code>toc</code> widget from <code>sidebar.widgets</code> to hide it without disabling the feature.</p>
+<h2 id="Reading-progress-bar"><a href="#Reading-progress-bar" class="headerlink" title="Reading progress bar"></a>Reading progress bar</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">progress_bar:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<p>A 3 px bar fixed to the top of the viewport on post pages. Animates as you scroll; <code>pointer-events: none</code> so it never intercepts clicks.</p>
+<h2 id="Search"><a href="#Search" class="headerlink" title="Search"></a>Search</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">search:</span><br>  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<p>Full-text search powered by <code>hexo-generator-search</code>. The index (<code>search.json</code>) is built at generate time. Requires the search plugin config in <code>_config.yml</code>:</p>
+<figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">search:</span><br>  <span class="hljs-attr">path:</span> <span class="hljs-string">search.json</span><br>  <span class="hljs-attr">field:</span> <span class="hljs-string">post</span><br>  <span class="hljs-attr">content:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<p>Keyboard shortcuts: <code>/</code> focuses the search box; <code>↑</code>&#x2F;<code>↓</code> navigate results; <code>Esc</code> closes the dropdown; <code>?</code> opens the shortcuts modal.</p>
+<h2 id="llms-txt"><a href="#llms-txt" class="headerlink" title="llms.txt"></a>llms.txt</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">llms_txt:</span><br>  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>   <span class="hljs-comment"># opt-in — default is false</span><br>  <span class="hljs-attr">full:</span> <span class="hljs-literal">true</span>      <span class="hljs-comment"># also emit /llms-full.txt</span><br></code></pre></td></tr></table></figure>
+
+<p>Emits an <a href="https://llmstxt.org/" target="_blank" rel="noopener noreferrer">llms.txt</a> file at the site root — a markdown index (site title, description, and link lists for all posts, showroom projects, and pages) that LLMs and AI crawlers can consume without parsing HTML. With <code>full: true</code> a companion <code>/llms-full.txt</code> is also generated, containing the complete markdown body of every post and project along with its URL, date, and tags.</p>
+<p>Post descriptions in the index come from front-matter <code>description:</code>, falling back to the excerpt and then to the start of the body; projects use their <code>subtitle:</code>. Both files are built at generate time — zero runtime cost. This site has it enabled — both files live at the site root: <code>/llms.txt</code> and <code>/llms-full.txt</code>.</p>
+<p>To keep a specific post, project, or page out of both files — an unlisted page, or a post whose full text you don’t want packaged for LLM ingestion — set <code>llms_txt: false</code> in its front-matter.</p>
+<h2 id="Related-posts"><a href="#Related-posts" class="headerlink" title="Related posts"></a>Related posts</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">related_posts:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<p>Shows up to 3 “You might also like” cards at the bottom of each post. Scoring is purely build-time: +2 pts per shared tag, +1 pt for a shared category. Posts with score 0 are excluded.</p>
+<h2 id="Series-navigation"><a href="#Series-navigation" class="headerlink" title="Series navigation"></a>Series navigation</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">series:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<p>Posts with <code>series: &quot;Series Name&quot;</code> in their front-matter show a numbered nav strip above the post body. Parts are ordered by date (oldest &#x3D; Part 1). The strip is suppressed when the series has only one post.</p>
+<h2 id="Code-blocks"><a href="#Code-blocks" class="headerlink" title="Code blocks"></a>Code blocks</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">code:</span><br>  <span class="hljs-attr">copy_button:</span> <span class="hljs-literal">true</span>      <span class="hljs-comment"># clipboard icon on each code block</span><br>  <span class="hljs-attr">language_label:</span> <span class="hljs-literal">true</span>   <span class="hljs-comment"># language chip in the top-right corner</span><br></code></pre></td></tr></table></figure>
+
+<div class="note note-info" role="note"><span class="note-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span><div><p>The language label is injected at build time via a <abbr class="glossary-term" title="A fast Node.js static site generator that turns Markdown into HTML at build time.">Hexo</abbr> <code>after_render:html</code> filter that adds <code>data-lang</code> to every <code>&lt;figure class=&quot;highlight &lt;lang&gt;&quot;&gt;</code> element so the CSS <code>::before</code> rule can display it.</p>
+</div></div>
+
+<h2 id="Mermaid-diagrams"><a href="#Mermaid-diagrams" class="headerlink" title="Mermaid diagrams"></a>Mermaid diagrams</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">mermaid:</span><br>  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>     <span class="hljs-comment"># convert ```mermaid blocks to rendered SVG</span><br>  <span class="hljs-attr">theme:</span> <span class="hljs-string">dark</span>       <span class="hljs-comment"># default | dark | neutral | forest</span><br></code></pre></td></tr></table></figure>
+
+<p>Fenced <code>```mermaid</code> blocks are converted to <code>&lt;div class=&quot;mermaid&quot;&gt;</code> at build time and rendered client-side by the vendored Mermaid JS library. All Mermaid assets are self-hosted under <code>vendor/mermaid/</code> — no CDN requests.</p>
+<figure class="highlight markdown" data-lang="markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-code">```mermaid</span><br><span class="hljs-code">flowchart LR</span><br><span class="hljs-code">    A[Write Post] --&gt; B&#123;Has diagrams?&#125;</span><br><span class="hljs-code">    B -- Yes --&gt; C[Add mermaid block]</span><br><span class="hljs-code">    B -- No --&gt; D[Publish]</span><br><span class="hljs-code">```</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="Math-KaTeX"><a href="#Math-KaTeX" class="headerlink" title="Math (KaTeX)"></a>Math (KaTeX)</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">math:</span><br>  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>    <span class="hljs-comment"># render $...$ and $$...$$ as KaTeX HTML</span><br></code></pre></td></tr></table></figure>
+
+<p>Math is rendered at <code>hexo generate</code> time by <abbr class="glossary-term" title="A fast math typesetting library that renders LaTeX formulas — here at build time, no client JS.">KaTeX</abbr>’s Node.js API — zero JavaScript on the page. Only the KaTeX CSS file is served to the browser. Output includes both visual HTML and a <code>&lt;math&gt;</code> element for screen readers.</p>
+<table>
+<thead>
+<tr>
+<th>Syntax</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$expr$</code></td>
+<td>Inline math within a sentence</td>
+</tr>
+<tr>
+<td><code>$$expr$$</code></td>
+<td>Display block, centred on its own line</td>
+</tr>
+</tbody></table>
+<figure class="highlight markdown" data-lang="markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs markdown">Einstein&#x27;s equation, $E = mc^2$, is well known.<br><br>$$\int<span class="hljs-emphasis">_&#123;-\infty&#125;^&#123;\infty&#125; e^&#123;-x^2&#125;\, dx = \sqrt&#123;\pi&#125;$$</span><br></code></pre></td></tr></table></figure>
+
+<p>Math inside fenced code blocks is never processed — it stays as literal <code>$</code> text.</p>
+<p><strong>Avoiding false positives</strong> — <code>$...$</code> matches any two dollar signs on the same line, so prose with currency amounts can trigger the renderer. Escape a literal dollar sign with a backslash: <code>\$50</code>. Display blocks (<code>$$...$$</code>) are less prone to this since they span their own line.</p>
+<h2 id="Image-captions"><a href="#Image-captions" class="headerlink" title="Image captions"></a>Image captions</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">image_captions:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<p>Standalone images with non-empty <code>alt</code> text are automatically wrapped in <code>&lt;figure&gt;&lt;figcaption&gt;</code> at build time. The alt text becomes the visible caption below the image.</p>
+<h2 id="PDF-viewer"><a href="#PDF-viewer" class="headerlink" title="PDF viewer"></a>PDF viewer</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">pdf_viewer:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<p>Loads a lightweight PDF preview script on post pages. Use the <code>&#123;% pdf %&#125;</code> tag to embed a clickable card in a post — clicking it opens a modal that renders the document via PDF.js (loaded lazily from CDN on first click). Supports page navigation, zoom, and direct download. Set <code>false</code> to prevent the script from loading entirely.</p>
+<h2 id="External-links"><a href="#External-links" class="headerlink" title="External links"></a>External links</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">external_links:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<p>Every link in a post body pointing to an external domain automatically receives <code>target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;</code> and a small <code>↗</code> icon. Internal links and links with an existing <code>target</code> are left untouched.</p>
+<h2 id="Category-tooltips"><a href="#Category-tooltips" class="headerlink" title="Category tooltips"></a>Category tooltips</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">category_descriptions:</span><br>  <span class="hljs-attr">Development:</span> <span class="hljs-string">Programming,</span> <span class="hljs-string">languages</span> <span class="hljs-string">and</span> <span class="hljs-string">day-to-day</span> <span class="hljs-string">engineering</span> <span class="hljs-string">practice.</span><br>  <span class="hljs-attr">Documentation:</span> <span class="hljs-string">Reference</span> <span class="hljs-string">guides</span> <span class="hljs-string">for</span> <span class="hljs-string">the</span> <span class="hljs-string">coldnight</span> <span class="hljs-string">theme</span> <span class="hljs-string">and</span> <span class="hljs-string">this</span> <span class="hljs-string">demo</span> <span class="hljs-string">site.</span><br></code></pre></td></tr></table></figure>
+
+<p>Give a category a one-line description and it appears as a small tooltip when the reader hovers or keyboard-focuses that category — on the pills in a post’s metadata row and on the category label of every post card, including the pinned hero and the related-posts strip.</p>
+<p>There is no separate on&#x2F;off switch: categories you don’t list simply have no tooltip, and if the map is empty the feature adds nothing to the page at all — no markup, no stylesheet weight, no script. Names are matched case-insensitively, so <code>Development</code> in the config finds a post categorised as <code>development</code>.</p>
+<h2 id="Permalink-button"><a href="#Permalink-button" class="headerlink" title="Permalink button"></a>Permalink button</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">permalink_button:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<p>Adds a copy-to-clipboard icon next to the post date. Clicking it copies the full permalink to the clipboard and shows a brief toast confirmation.</p>
+<h2 id="LightGallery"><a href="#LightGallery" class="headerlink" title="LightGallery"></a>LightGallery</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">lightgallery:</span><br>  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>       <span class="hljs-comment"># load LightGallery assets</span><br>  <span class="hljs-attr">auto_mount:</span> <span class="hljs-literal">true</span>    <span class="hljs-comment"># wire up all .post-body images automatically</span><br>  <span class="hljs-attr">zoom:</span> <span class="hljs-literal">true</span>          <span class="hljs-comment"># pinch-to-zoom and scroll zoom</span><br>  <span class="hljs-attr">thumbnail:</span> <span class="hljs-literal">true</span>     <span class="hljs-comment"># thumbnail strip at the bottom of the lightbox</span><br></code></pre></td></tr></table></figure>
+
+<p>Set <code>auto_mount: false</code> to opt out of automatic wiring and use only explicit gallery blocks. Add <code>class=&quot;no-gallery&quot;</code> to individual images to exclude them from auto-mount. All LightGallery assets are self-hosted under <code>vendor/lightgallery/</code>.</p>
+<h2 id="Cover-images"><a href="#Cover-images" class="headerlink" title="Cover images"></a>Cover images</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">cover:</span><br>  <span class="hljs-attr">default:</span> <span class="hljs-string">&quot;&quot;</span>          <span class="hljs-comment"># fallback when no cover_image in front-matter</span><br>  <span class="hljs-attr">fallback:</span> <span class="hljs-literal">true</span>       <span class="hljs-comment"># false = no thumbnail instead of cover.default</span><br>  <span class="hljs-attr">large:</span> <span class="hljs-literal">false</span>         <span class="hljs-comment"># true = full-width thumbnail above the card body</span><br>  <span class="hljs-attr">aspect_ratio:</span> <span class="hljs-string">&quot;16/9&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>Set <code>cover_image</code> in a post’s front-matter to use a per-post image. If omitted, <code>cover.default</code> is used. If that is also empty, the card renders without a cover strip.</p>
+<p>A similar fallback chain feeds the <code>og:image</code> meta tag, so <code>cover.default</code> doubles as your site-wide social-preview image (1200×630 px recommended). This demo site sets it to <code>/images/og-default.jpg</code>.</p>
+<p>Thumbnails are entirely optional — two switches decouple them from the social-preview fallback:</p>
+<ul>
+<li><code>cover.fallback: false</code> — posts without a <code>cover_image</code> render no card or hero thumbnail at all, instead of falling back to <code>cover.default</code>.</li>
+<li><code>cover_image: false</code> in a post’s front-matter (bare boolean, not <code>&quot;false&quot;</code>) — hides the thumbnail for that single post while the rest of the site keeps the fallback.</li>
+</ul>
+<p>In both cases <code>og:image</code> still uses <code>cover.default</code>, so social previews keep working for posts that opt out of the visible thumbnail.</p>
+<h3 id="Large-thumbnails"><a href="#Large-thumbnails" class="headerlink" title="Large thumbnails"></a>Large thumbnails</h3><p>In list view (<code>grid.columns: 1</code>) a card’s thumbnail normally sits in a fixed square panel to the left of the text. Large mode moves it above the body at full card width and a 16&#x2F;9 ratio — worth it for image-led posts, where a 180px square doesn’t do the picture justice. It is off by default and opts in at two levels:</p>
+<ul>
+<li><code>cover.large: true</code> in the theme config — every card and the pinned hero go large.</li>
+<li><code>cover_large: true</code> in a single post’s front-matter — that post alone goes large.</li>
+</ul>
+<p>Front-matter wins over the config in <strong>both</strong> directions, so with <code>cover.large: true</code> site-wide, <code>cover_large: false</code> pulls one post back to the compact side layout. The value must be a bare boolean, not <code>&quot;true&quot;</code> in quotes.</p>
+<p>The pinned hero honors the same key: instead of its 45%-wide side cover it stacks the image above the text. Unlike the cards, the hero does this at <strong>any</strong> column count — it sits outside the post grid and is side-by-side by default there too, so switching to a grid layout does not neutralise it.</p>
+<p>Posts with no thumbnail at all are unaffected. For the cards, grid mode (<code>grid.columns: 2</code> and up) is a no-op — those already stack their cover on top. Below 640px every card stacks anyway, so large and normal cards look the same on phones.</p>
+<p>The two posts on this index with a full-width thumbnail — <em>Image Compare Slider Demo</em> and <em>Syntax Highlighting Showcase</em> — are set this way.</p>
+<div class="note note-warning" role="note"><span class="note-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><div><p>If you set <code>cover.default</code>, make sure the file actually exists in your site’s <code>source/</code> directory. The theme trusts the configured path — a missing file means every post without its own <code>cover_image</code> shows a broken image in its card cover, and social previews point at a 404.</p>
+</div></div>
+
+<h2 id="Card-colours"><a href="#Card-colours" class="headerlink" title="Card colours"></a>Card colours</h2><p>Cards are uniform by default — the same elevated surface and subtle blue border everywhere. Two front-matter keys recolour a single post’s card:</p>
+<figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">Modern</span> <span class="hljs-string">JavaScript</span> <span class="hljs-string">Async</span> <span class="hljs-string">Patterns</span><br><span class="hljs-attr">card_border:</span> <span class="hljs-string">&quot;#f5c518&quot;</span><br><span class="hljs-attr">card_bg:</span> <span class="hljs-string">&quot;#1c1608&quot;</span><br><span class="hljs-meta">---</span><br></code></pre></td></tr></table></figure>
+
+<p>There is no theme config counterpart and nothing to switch on: a post that sets neither key renders exactly as before.</p>
+<p>The keys are independent — set one, the other, or both. This post uses both; <em>Image Compare Slider Demo</em> sets only <code>card_border</code> and keeps the default background, while <em>Audio Player Demo</em> sets only <code>card_bg</code> and keeps the default border.</p>
+<p>Values must be <strong>hex codes</strong> — <code>#rgb</code>, <code>#rgba</code>, <code>#rrggbb</code>, or <code>#rrggbbaa</code>. Named colours and <code>rgb()</code>&#x2F;<code>oklch()</code> notation are deliberately not accepted; anything that isn’t a hex code is ignored per key, so a malformed <code>card_bg</code> won’t take a valid <code>card_border</code> down with it.</p>
+<p>The colour is a property of the post, not of the index page, so it follows the post wherever its card appears — the grid, the pinned hero, and the <em>You might also like</em> strip at the foot of related posts. On hover a custom border keeps its colour rather than snapping to the default blue; the shadow lift still marks the hover.</p>
+<div class="note note-tip" role="note"><span class="note-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span><div><p><code>card_bg</code> replaces the card surface but not the text colour on top of it. Stick to dark, low-saturation backgrounds on this theme — a light fill will leave the excerpt and metadata unreadable.</p>
+</div></div>
+
+<hr>
+<h2 id="Tag-plugins"><a href="#Tag-plugins" class="headerlink" title="Tag plugins"></a>Tag plugins</h2><h3 id="note"><a href="#note" class="headerlink" title="note"></a>note</h3><p>Renders a callout box with an icon. Types: <code>tip</code> | <code>info</code> | <code>warning</code> | <code>danger</code>.</p>
+
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&#123;% note tip %&#125;<br>This is a **tip** callout. Body is rendered as Markdown.<br>&#123;% endnote %&#125;<br></code></pre></td></tr></table></figure>
+
+
+<div class="note note-tip" role="note"><span class="note-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span><div><p>Tip callout — for helpful hints and best practices.</p>
+</div></div>
+
+<div class="note note-warning" role="note"><span class="note-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><div><p>Warning callout — for caveats and things to watch out for.</p>
+</div></div>
+
+<h3 id="gallery"><a href="#gallery" class="headerlink" title="gallery"></a>gallery</h3><p>Renders a LightGallery grid from a list of Markdown images. The optional number sets the column count (default 3).</p>
+
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&#123;% gallery 3 %&#125;<br>![Caption one](image1.jpg)<br>![Caption two](image2.jpg)<br>&#123;% endgallery %&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="tabs"><a href="#tabs" class="headerlink" title="tabs"></a>tabs</h3><p>CSS-only tab switching via radio inputs — no JavaScript required.</p>
+
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&#123;% tabs %&#125;<br>&lt;!-- tab JavaScript --&gt;<br>console.log(&#x27;hello&#x27;)<br>&lt;!-- endtab --&gt;<br>&lt;!-- tab Python --&gt;<br>print(&#x27;hello&#x27;)<br>&lt;!-- endtab --&gt;<br>&#123;% endtabs %&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="download"><a href="#download" class="headerlink" title="download"></a>download</h3><p>Renders a styled download button. Add <code>external</code> at the end to badge links hosted off-site.</p>
+
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&#123;% download /files/report.pdf Report Q4 2025 %&#125;<br>&#123;% download https://example.com/file.zip My File external %&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="pdf"><a href="#pdf" class="headerlink" title="pdf"></a>pdf</h3><p>Renders a clickable card that opens an in-page PDF preview modal. The first argument is the file path; everything after it is the display title (defaults to the filename without the <code>.pdf</code> extension).</p>
+
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&#123;% pdf /files/report.pdf Annual Report 2025 %&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p>Clicking the card loads PDF.js from CDN (once, lazily) and renders the document on a canvas. Controls: previous&#x2F;next page, zoom out&#x2F;in (0.5×–3×), download, and close. The modal is keyboard-accessible — <code>Esc</code> closes it; the card responds to <code>Enter</code> and <code>Space</code>.</p>
+<p>Requires <code>pdf_viewer: true</code> in the theme config (the default).</p>
+<hr>
+<h2 id="Post-front-matter-reference"><a href="#Post-front-matter-reference" class="headerlink" title="Post front-matter reference"></a>Post front-matter reference</h2><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>title</code></td>
+<td>string</td>
+<td>Post title (H1 and browser tab)</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>datetime</td>
+<td>Publication date, used for ordering and display</td>
+</tr>
+<tr>
+<td><code>categories</code></td>
+<td>list</td>
+<td>First category shown as a pill on post cards</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td>list</td>
+<td>Tags shown at the bottom of the post</td>
+</tr>
+<tr>
+<td><code>cover_image</code></td>
+<td>string</td>
+<td>URL or path to the cover image</td>
+</tr>
+<tr>
+<td><code>cover_large</code></td>
+<td>boolean</td>
+<td>Full-width thumbnail above the card body instead of beside it (overrides <code>cover.large</code>)</td>
+</tr>
+<tr>
+<td><code>excerpt</code></td>
+<td>string</td>
+<td>Override the auto-generated excerpt on post cards</td>
+</tr>
+<tr>
+<td><code>pinned</code></td>
+<td>boolean</td>
+<td>Promote to featured hero on index page 1</td>
+</tr>
+<tr>
+<td><code>series</code></td>
+<td>string</td>
+<td>Group post into a numbered series nav strip</td>
+</tr>
+<tr>
+<td><code>difficulty</code></td>
+<td>integer</td>
+<td>1–5 signal-bar meter in the post header and on cards (alias: <code>effort</code>)</td>
+</tr>
+</tbody></table>
+<p>Use <code>&lt;!-- more --&gt;</code> in the post body to set the excerpt boundary instead of the <code>excerpt</code> key if you want the card to show a natural cut from the content.</p>
+
+      </div>
+
+      <footer class="post-footer">
+
+        
+          <div class="post-tags">
+            
+              <a href="/coldnight-demo/tags/theme/" class="tag-pill">#theme</a>
+            
+              <a href="/coldnight-demo/tags/hexo/" class="tag-pill">#hexo</a>
+            
+              <a href="/coldnight-demo/tags/configuration/" class="tag-pill">#configuration</a>
+            
+              <a href="/coldnight-demo/tags/setup/" class="tag-pill">#setup</a>
+            
+          </div>
+        
+
+        
+        <div class="post-share">
+          <span class="post-share__label">Share</span>
+          <div class="post-share__btns">
+            <a class="btn btn--ghost btn--sm"
+               href="https://twitter.com/intent/tweet?text=Configuring%20the%20Coldnight%20Theme&url=https%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2026%2F03%2F13%2Ftheme-configuration-guide%2F"
+               target="_blank" rel="noopener noreferrer">X / Twitter</a>
+            <a class="btn btn--ghost btn--sm"
+               href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2026%2F03%2F13%2Ftheme-configuration-guide%2F"
+               target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a class="btn btn--ghost btn--sm"
+               href="https://bsky.app/intent/compose?text=Configuring%20the%20Coldnight%20Theme%0A%0Ahttps%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2026%2F03%2F13%2Ftheme-configuration-guide%2F"
+               target="_blank" rel="noopener noreferrer">Bluesky</a>
+            <button class="btn btn--ghost btn--sm post-share-mastodon"
+                    data-title="Configuring the Coldnight Theme"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2026/03/13/theme-configuration-guide/">Mastodon</button>
+            <button class="btn btn--ghost btn--sm post-share-copy"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2026/03/13/theme-configuration-guide/">Copy link</button>
+          </div>
+        </div>
+        
+
+        <nav class="post-nav" aria-label="Post navigation">
+          <div class="post-nav__item post-nav__item--prev">
+            
+              <span class="post-nav__label">← Previous</span>
+              <a href="/coldnight-demo/2026/03/20/bash-scripting-guide/" class="post-nav__title">Practical Bash Scripting</a>
+            
+          </div>
+          <div class="post-nav__item post-nav__item--next">
+            
+              <span class="post-nav__label">Next →</span>
+              <a href="/coldnight-demo/2026/03/06/git-workflow/" class="post-nav__title">A Clean Git Workflow for Solo Developers</a>
+            
+          </div>
+        </nav>
+
+      </footer>
+
+    </article>
+
+    
+
+    
+    <section class="related-posts" aria-labelledby="related-heading">
+      <h3 class="related-posts__heading" id="related-heading">You might also like</h3>
+      <div class="post-grid" style="--post-grid-cols: 2; --post-grid-cols-md: 2;">
+        
+          
+
+<article class="post-card fade-in" style="--card-border: #34d399">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/08/23/chart-demo/" tabindex="-1" aria-hidden="true">
+      <img src="/coldnight-demo/images/og-default.jpg" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Demo/" class="post-card__category" data-category-desc="Live demonstrations of the theme's tag plugins and widgets.">Demo</a>
+      
+      
+        <span>2 min read</span>
+      
+      <span class="difficulty difficulty--level-2" role="img" aria-label="Difficulty: 2 of 5" title="Difficulty: 2 of 5"><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span></span>
+    </div>
+
+    <a href="/coldnight-demo/2026/08/23/chart-demo/" class="post-card__title">
+      Build-Time SVG Charts
+    </a>
+
+    
+      <div class="post-card__excerpt">The chart tag turns plain text into finished SVG at build time — no JavaScript, no library, and it still works with scripts disabled.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-08-23T00:00:00.000Z">23.08.2026</time>
+      <a href="/coldnight-demo/2026/08/23/chart-demo/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+        
+          
+
+<article class="post-card fade-in" style="--card-border: #f43f5e; --card-bg: #2a0d16">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/07/11/video-embed-demo/" tabindex="-1" aria-hidden="true">
+      <img src="/coldnight-demo/images/og-default.jpg" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Demo/" class="post-card__category" data-category-desc="Live demonstrations of the theme's tag plugins and widgets.">Demo</a>
+      
+      
+        <span>1 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/07/11/video-embed-demo/" class="post-card__title">
+      Video Embed Demo
+    </a>
+
+    
+      <div class="post-card__excerpt">Demonstrating the click-to-load video facade — no YouTube or Vimeo iframe loads until you press play.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-07-11T00:00:00.000Z">11.07.2026</time>
+      <a href="/coldnight-demo/2026/07/11/video-embed-demo/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+        
+          
+
+<article class="post-card fade-in post-card--large" style="--card-border: #2dd4bf">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/07/02/image-compare-demo/" tabindex="-1" aria-hidden="true">
+      <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Demo/" class="post-card__category" data-category-desc="Live demonstrations of the theme's tag plugins and widgets.">Demo</a>
+      
+      
+        <span>1 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/07/02/image-compare-demo/" class="post-card__title">
+      Image Compare Slider Demo
+    </a>
+
+    
+      <div class="post-card__excerpt">Demonstrating the built-in before/after compare slider tag — drag, touch, or use arrow keys to reveal the difference.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-07-02T00:00:00.000Z">02.07.2026</time>
+      <a href="/coldnight-demo/2026/07/02/image-compare-demo/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+        
+      </div>
+    </section>
+    
+
+  </main>
+
+  
+    
+
+
+<aside class="sidebar" role="complementary" aria-label="Sidebar">
+  
+    
+      
+        
+
+<div class="sidebar-widget widget-toc">
+  <button class="widget-toc__toggle" aria-expanded="true" aria-controls="toc-list">
+    <span class="sidebar-widget__title">Contents</span>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+  <nav id="toc-list" aria-label="Table of contents">
+    <ol class="toc-list">
+<li class="toc-item toc-item--h2"><a href="#Navbar" class="toc-link">Navbar</a></li>
+<li class="toc-item toc-item--h2"><a href="#Sidebar" class="toc-link">Sidebar</a></li>
+<li class="toc-item toc-item--h2"><a href="#Sponsor-coffee-button" class="toc-link">Sponsor &amp;#x2F; coffee button</a></li>
+<li class="toc-item toc-item--h2"><a href="#Social-links" class="toc-link">Social links</a></li>
+<li class="toc-item toc-item--h2"><a href="#Index-page-grid" class="toc-link">Index page grid</a></li>
+<li class="toc-item toc-item--h2"><a href="#Reading-time-and-word-count" class="toc-link">Reading time and word count</a></li>
+<li class="toc-item toc-item--h2"><a href="#Difficulty-indicator" class="toc-link">Difficulty indicator</a></li>
+<li class="toc-item toc-item--h2"><a href="#Table-of-contents" class="toc-link">Table of contents</a></li>
+<li class="toc-item toc-item--h2"><a href="#Reading-progress-bar" class="toc-link">Reading progress bar</a></li>
+<li class="toc-item toc-item--h2"><a href="#Search" class="toc-link">Search</a></li>
+<li class="toc-item toc-item--h2"><a href="#llms-txt" class="toc-link">llms.txt</a></li>
+<li class="toc-item toc-item--h2"><a href="#Related-posts" class="toc-link">Related posts</a></li>
+<li class="toc-item toc-item--h2"><a href="#Series-navigation" class="toc-link">Series navigation</a></li>
+<li class="toc-item toc-item--h2"><a href="#Code-blocks" class="toc-link">Code blocks</a></li>
+<li class="toc-item toc-item--h2"><a href="#Mermaid-diagrams" class="toc-link">Mermaid diagrams</a></li>
+<li class="toc-item toc-item--h2"><a href="#Math-KaTeX" class="toc-link">Math (KaTeX)</a></li>
+<li class="toc-item toc-item--h2"><a href="#Image-captions" class="toc-link">Image captions</a></li>
+<li class="toc-item toc-item--h2"><a href="#PDF-viewer" class="toc-link">PDF viewer</a></li>
+<li class="toc-item toc-item--h2"><a href="#External-links" class="toc-link">External links</a></li>
+<li class="toc-item toc-item--h2"><a href="#Category-tooltips" class="toc-link">Category tooltips</a></li>
+<li class="toc-item toc-item--h2"><a href="#Permalink-button" class="toc-link">Permalink button</a></li>
+<li class="toc-item toc-item--h2"><a href="#LightGallery" class="toc-link">LightGallery</a></li>
+<li class="toc-item toc-item--h2"><a href="#Cover-images" class="toc-link">Cover images</a></li>
+<li class="toc-item toc-item--h3"><a href="#Large-thumbnails" class="toc-link">Large thumbnails</a></li>
+<li class="toc-item toc-item--h2"><a href="#Card-colours" class="toc-link">Card colours</a></li>
+<li class="toc-item toc-item--h2"><a href="#Tag-plugins" class="toc-link">Tag plugins</a></li>
+<li class="toc-item toc-item--h3"><a href="#note" class="toc-link">note</a></li>
+<li class="toc-item toc-item--h3"><a href="#gallery" class="toc-link">gallery</a></li>
+<li class="toc-item toc-item--h3"><a href="#tabs" class="toc-link">tabs</a></li>
+<li class="toc-item toc-item--h3"><a href="#download" class="toc-link">download</a></li>
+<li class="toc-item toc-item--h3"><a href="#pdf" class="toc-link">pdf</a></li>
+<li class="toc-item toc-item--h2"><a href="#Post-front-matter-reference" class="toc-link">Post front-matter reference</a></li>
+</ol>
+  </nav>
+</div>
+
+
+      
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Recent Posts</p>
+  <ul class="sidebar-widget__list">
+    
+      <li>
+        <a href="/coldnight-demo/2026/08/23/chart-demo/">
+          <span>Build-Time SVG Charts</span>
+          <span class="sidebar-widget__count">23.08.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/07/11/video-embed-demo/">
+          <span>Video Embed Demo</span>
+          <span class="sidebar-widget__count">11.07.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/07/02/image-compare-demo/">
+          <span>Image Compare Slider Demo</span>
+          <span class="sidebar-widget__count">02.07.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/06/03/audio-player-demo/">
+          <span>Audio Player Demo</span>
+          <span class="sidebar-widget__count">03.06.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/06/01/3d-model-viewer-demo/">
+          <span>3D Model Viewer</span>
+          <span class="sidebar-widget__count">01.06.</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Tags</p>
+  <div class="tag-cloud">
+    
+      <a href="/coldnight-demo/tags/3d/" class="tag-pill">
+        3d <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/api-design/" class="tag-pill">
+        api-design <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/async/" class="tag-pill">
+        async <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/audio/" class="tag-pill">
+        audio <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/background-jobs/" class="tag-pill">
+        background-jobs <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/bash/" class="tag-pill">
+        bash <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/build-systems/" class="tag-pill">
+        build-systems <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/callouts/" class="tag-pill">
+        callouts <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/charts/" class="tag-pill">
+        charts <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/cli/" class="tag-pill">
+        cli <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/code/" class="tag-pill">
+        code <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/concurrency/" class="tag-pill">
+        concurrency <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/configuration/" class="tag-pill">
+        configuration <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/css/" class="tag-pill">
+        css <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/databases/" class="tag-pill">
+        databases <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/dataviz/" class="tag-pill">
+        dataviz <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/debugging/" class="tag-pill">
+        debugging <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/diagrams/" class="tag-pill">
+        diagrams <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/diff/" class="tag-pill">
+        diff <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/documentation/" class="tag-pill">
+        documentation <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/dotfiles/" class="tag-pill">
+        dotfiles <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/errors/" class="tag-pill">
+        errors <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/features/" class="tag-pill">
+        features <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/flexbox/" class="tag-pill">
+        flexbox <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/frontend/" class="tag-pill">
+        frontend <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/gallery/" class="tag-pill">
+        gallery <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/git/" class="tag-pill">
+        git <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/go/" class="tag-pill">
+        go <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/grid/" class="tag-pill">
+        grid <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/hexo/" class="tag-pill">
+        hexo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/images/" class="tag-pill">
+        images <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/infrastructure/" class="tag-pill">
+        infrastructure <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/javascript/" class="tag-pill">
+        javascript <span class="tag-cloud__count">(3)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/katex/" class="tag-pill">
+        katex <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/latex/" class="tag-pill">
+        latex <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/layout/" class="tag-pill">
+        layout <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/lightgallery/" class="tag-pill">
+        lightgallery <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/linux/" class="tag-pill">
+        linux <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/markdown/" class="tag-pill">
+        markdown <span class="tag-cloud__count">(3)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/math/" class="tag-pill">
+        math <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/memory/" class="tag-pill">
+        memory <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/mermaid/" class="tag-pill">
+        mermaid <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/monorepo/" class="tag-pill">
+        monorepo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/packaging/" class="tag-pill">
+        packaging <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/patterns/" class="tag-pill">
+        patterns <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/postgres/" class="tag-pill">
+        postgres <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/productivity/" class="tag-pill">
+        productivity <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/promises/" class="tag-pill">
+        promises <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/python/" class="tag-pill">
+        python <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/queues/" class="tag-pill">
+        queues <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/redis/" class="tag-pill">
+        redis <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/responsive-design/" class="tag-pill">
+        responsive-design <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/scripting/" class="tag-pill">
+        scripting <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/search/" class="tag-pill">
+        search <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/setup/" class="tag-pill">
+        setup <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/sql/" class="tag-pill">
+        sql <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/syntax-highlighting/" class="tag-pill">
+        syntax-highlighting <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/terminal/" class="tag-pill">
+        terminal <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/theme/" class="tag-pill">
+        theme <span class="tag-cloud__count">(5)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/threejs/" class="tag-pill">
+        threejs <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/timeline/" class="tag-pill">
+        timeline <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/tooling/" class="tag-pill">
+        tooling <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/turborepo/" class="tag-pill">
+        turborepo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/typography/" class="tag-pill">
+        typography <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/uv/" class="tag-pill">
+        uv <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/ux/" class="tag-pill">
+        ux <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/version-control/" class="tag-pill">
+        version-control <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/video/" class="tag-pill">
+        video <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/webgl/" class="tag-pill">
+        webgl <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/workflow/" class="tag-pill">
+        workflow <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/writing/" class="tag-pill">
+        writing <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/zsh/" class="tag-pill">
+        zsh <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+  </div>
+</div>
+
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Archives</p>
+  <ul class="sidebar-widget__list">
+    
+    
+      <li>
+        <a href="/coldnight-demo/archives/2026">
+          <span>2026</span>
+          <span class="sidebar-widget__count">19</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/archives/2025">
+          <span>2025</span>
+          <span class="sidebar-widget__count">4</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/archives/2024">
+          <span>2024</span>
+          <span class="sidebar-widget__count">5</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+    
+  
+    
+      
+        
+
+<div class="sidebar-widget widget-about">
+  <p class="sidebar-widget__title">About</p>
+  
+  
+    <p class="widget-about__name">Cracksoldier</p>
+  
+  
+    <p class="widget-about__bio">A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.</p>
+  
+  <div class="widget-about__social">
+    
+    
+  </div>
+</div>
+
+
+      
+    
+  
+</aside>
+
+  
+
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <ul class="footer-links">
+      
+      
+      
+        <li><a href="/coldnight-demo/atom.xml">RSS</a></li>
+      
+    </ul>
+    <span>&copy; 2026 Cracksoldier. Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> &middot; coldnight v1.9.1</span>
+  </div>
+</footer>
+
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+<script src="/coldnight-demo/js/back-to-top.js" defer></script>
+
+<script src="/coldnight-demo/js/search.js" data-search-url="/coldnight-demo/search.json" defer></script>
+
+
+<div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+
+
+
+<button class="toc-fab" id="toc-drawer-btn"
+        aria-label="Open table of contents"
+        aria-expanded="false"
+        aria-controls="toc-drawer">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <line x1="3" y1="6"  x2="21" y2="6"/>
+    <line x1="3" y1="12" x2="15" y2="12"/>
+    <line x1="3" y1="18" x2="18" y2="18"/>
+  </svg>
+</button>
+<div class="toc-drawer" id="toc-drawer" hidden
+     role="dialog" aria-modal="true" aria-label="Table of contents">
+  <div class="toc-drawer__overlay" id="toc-drawer-overlay"></div>
+  <div class="toc-drawer__panel">
+    <div class="toc-drawer__header">
+      <span class="toc-drawer__title">Contents</span>
+      <button class="toc-drawer__close" id="toc-drawer-close"
+              aria-label="Close table of contents">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="18" y1="6"  x2="6"  y2="18"/>
+          <line x1="6"  y1="6"  x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="toc-drawer__body" aria-label="Table of contents">
+      <ol class="toc-list">
+<li class="toc-item toc-item--h2"><a href="#Navbar" class="toc-link">Navbar</a></li>
+<li class="toc-item toc-item--h2"><a href="#Sidebar" class="toc-link">Sidebar</a></li>
+<li class="toc-item toc-item--h2"><a href="#Sponsor-coffee-button" class="toc-link">Sponsor &amp;#x2F; coffee button</a></li>
+<li class="toc-item toc-item--h2"><a href="#Social-links" class="toc-link">Social links</a></li>
+<li class="toc-item toc-item--h2"><a href="#Index-page-grid" class="toc-link">Index page grid</a></li>
+<li class="toc-item toc-item--h2"><a href="#Reading-time-and-word-count" class="toc-link">Reading time and word count</a></li>
+<li class="toc-item toc-item--h2"><a href="#Difficulty-indicator" class="toc-link">Difficulty indicator</a></li>
+<li class="toc-item toc-item--h2"><a href="#Table-of-contents" class="toc-link">Table of contents</a></li>
+<li class="toc-item toc-item--h2"><a href="#Reading-progress-bar" class="toc-link">Reading progress bar</a></li>
+<li class="toc-item toc-item--h2"><a href="#Search" class="toc-link">Search</a></li>
+<li class="toc-item toc-item--h2"><a href="#llms-txt" class="toc-link">llms.txt</a></li>
+<li class="toc-item toc-item--h2"><a href="#Related-posts" class="toc-link">Related posts</a></li>
+<li class="toc-item toc-item--h2"><a href="#Series-navigation" class="toc-link">Series navigation</a></li>
+<li class="toc-item toc-item--h2"><a href="#Code-blocks" class="toc-link">Code blocks</a></li>
+<li class="toc-item toc-item--h2"><a href="#Mermaid-diagrams" class="toc-link">Mermaid diagrams</a></li>
+<li class="toc-item toc-item--h2"><a href="#Math-KaTeX" class="toc-link">Math (KaTeX)</a></li>
+<li class="toc-item toc-item--h2"><a href="#Image-captions" class="toc-link">Image captions</a></li>
+<li class="toc-item toc-item--h2"><a href="#PDF-viewer" class="toc-link">PDF viewer</a></li>
+<li class="toc-item toc-item--h2"><a href="#External-links" class="toc-link">External links</a></li>
+<li class="toc-item toc-item--h2"><a href="#Category-tooltips" class="toc-link">Category tooltips</a></li>
+<li class="toc-item toc-item--h2"><a href="#Permalink-button" class="toc-link">Permalink button</a></li>
+<li class="toc-item toc-item--h2"><a href="#LightGallery" class="toc-link">LightGallery</a></li>
+<li class="toc-item toc-item--h2"><a href="#Cover-images" class="toc-link">Cover images</a></li>
+<li class="toc-item toc-item--h3"><a href="#Large-thumbnails" class="toc-link">Large thumbnails</a></li>
+<li class="toc-item toc-item--h2"><a href="#Card-colours" class="toc-link">Card colours</a></li>
+<li class="toc-item toc-item--h2"><a href="#Tag-plugins" class="toc-link">Tag plugins</a></li>
+<li class="toc-item toc-item--h3"><a href="#note" class="toc-link">note</a></li>
+<li class="toc-item toc-item--h3"><a href="#gallery" class="toc-link">gallery</a></li>
+<li class="toc-item toc-item--h3"><a href="#tabs" class="toc-link">tabs</a></li>
+<li class="toc-item toc-item--h3"><a href="#download" class="toc-link">download</a></li>
+<li class="toc-item toc-item--h3"><a href="#pdf" class="toc-link">pdf</a></li>
+<li class="toc-item toc-item--h2"><a href="#Post-front-matter-reference" class="toc-link">Post front-matter reference</a></li>
+</ol>
+    </nav>
+  </div>
+</div>
+
+
+
+
+<script src="/coldnight-demo/js/nav.js" defer></script>
+<script src="/coldnight-demo/js/copy-code.js" data-collapse-lines="25" defer></script>
+
+<script src="/coldnight-demo/js/category-tooltip.js" defer></script>
+
+
+<script src="/coldnight-demo/js/toc.js" defer></script>
+<script src="/coldnight-demo/js/toc-drawer.js" defer></script>
+
+
+<script src="/coldnight-demo/js/post-title.js" defer></script>
+
+
+<script src="/coldnight-demo/js/reading-progress.js" defer></script>
+
+<script src="/coldnight-demo/js/post-nav-keys.js" defer></script>
+
+<script src="/coldnight-demo/vendor/jszip/jszip.min.js" defer></script>
+<script src="/coldnight-demo/js/epub-export.js" defer></script>
+
+
+<script src="/coldnight-demo/js/pdf-viewer.js" defer></script>
+
+
+
+  <script src="/coldnight-demo/vendor/lightgallery/lightgallery.umd.js" defer></script>
+  
+  <script src="/coldnight-demo/vendor/lightgallery/lg-zoom.umd.js" defer></script>
+  
+  
+  <script src="/coldnight-demo/vendor/lightgallery/lg-thumbnail.umd.js" defer></script>
+  
+  
+  <script src="/coldnight-demo/js/gallery.js" defer></script>
+  
+
+
+<script type="module">
+  import mermaid from '/coldnight-demo/vendor/mermaid/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+</script>
+
+
+
+
+
+
+</body>
+</html>

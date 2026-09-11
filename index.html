@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>coldnight demo</title>
+<meta name="description" content="A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.">
+<meta name="author" content="Cracksoldier">
+
+
+<!-- Open Graph -->
+<meta property="og:title" content="coldnight demo">
+<meta property="og:description" content="A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cracksoldier.github.io/coldnight-demo/">
+<meta property="og:site_name" content="coldnight demo">
+<meta property="og:locale" content="en_US">
+
+<meta property="og:image" content="https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg">
+
+
+
+<link rel="canonical" href="https://cracksoldier.github.io/coldnight-demo/">
+
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="coldnight demo">
+<meta name="twitter:description" content="A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.">
+
+
+<meta name="twitter:image" content="https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg">
+
+
+<!-- Favicon -->
+
+
+<link rel="icon" type="image/svg+xml" href="/coldnight-demo/favicon.svg">
+
+
+<!-- Fonts (self-hosted, latin + latin-ext) -->
+<link rel="preload" href="/coldnight-demo/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Theme stylesheet -->
+<link rel="stylesheet" href="/coldnight-demo/css/style.css">
+
+
+<!-- Cross-document View Transitions (progressive enhancement; inline because compiled SCSS can't read theme config) -->
+<style>@media not (prefers-reduced-motion: reduce){@view-transition{navigation:auto}}</style>
+
+
+<!-- LightGallery CSS — post pages only -->
+
+
+<!-- KaTeX CSS — post pages only -->
+
+
+<!-- RSS -->
+
+<link rel="alternate" type="application/rss+xml" title="coldnight demo" href="/coldnight-demo/atom.xml">
+
+
+<link rel="alternate" type="application/feed+json" title="coldnight demo" href="/coldnight-demo/feed.json">
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="navbar" role="banner">
+  <div class="navbar__inner">
+
+    <!-- Brand -->
+    <a href="/coldnight-demo/" class="navbar__brand" aria-label="My Blog — home">
+      
+      
+      <span class="navbar__brand-text navbar__brand-text--icon">
+        
+        <span class="navbar__logo navbar__logo--text" aria-hidden="true" style="color: #60a5fa">❄</span>
+        
+        <span class="navbar__title">My Blog</span>
+        
+      </span>
+      
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="navbar__nav" aria-label="Main navigation" id="main-nav">
+      
+        
+        <a href="/coldnight-demo/"
+           class="nav-link active"
+           aria-current=&#34;page&#34;>
+          Home
+        </a>
+      
+        
+        <a href="/coldnight-demo/archives"
+           class="nav-link"
+           >
+          Archive
+        </a>
+      
+        
+        <a href="/coldnight-demo/stats"
+           class="nav-link"
+           >
+          Stats
+        </a>
+      
+        
+        <a href="/coldnight-demo/links"
+           class="nav-link"
+           >
+          Links
+        </a>
+      
+        
+        <a href="/coldnight-demo/showroom"
+           class="nav-link"
+           >
+          Showroom
+        </a>
+      
+        
+        <a href="/coldnight-demo/about"
+           class="nav-link"
+           >
+          About
+        </a>
+      
+    </nav>
+
+    <!-- Actions -->
+    <div class="navbar__actions">
+      
+
+      <!-- GitHub -->
+      
+
+      
+      <div class="search-wrap navbar__search" id="search-wrap">
+        <input type="search"
+               role="combobox"
+               class="search-input"
+               id="search-input"
+               placeholder="Search…"
+               aria-label="Search posts"
+               aria-expanded="false"
+               aria-autocomplete="list"
+               aria-haspopup="listbox"
+               aria-controls="search-results"
+               autocomplete="off"
+               spellcheck="false">
+        <div class="search-results" id="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      
+
+      <!-- Mobile hamburger -->
+      <button class="btn btn--icon navbar__hamburger"
+              id="nav-toggle"
+              aria-expanded="false"
+              aria-controls="mobile-nav"
+              aria-label="Toggle navigation">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="2" y1="4.5" x2="16" y2="4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="13.5" x2="16" y2="13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile nav drawer -->
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+  
+  <div class="search-wrap mobile-nav__search" id="search-wrap-mobile">
+    <input type="search"
+           role="combobox"
+           class="search-input"
+           id="search-input-mobile"
+           placeholder="Search…"
+           aria-label="Search posts"
+           aria-expanded="false"
+           aria-autocomplete="list"
+           aria-haspopup="listbox"
+           aria-controls="search-results-mobile"
+           autocomplete="off"
+           spellcheck="false">
+    <div class="search-results" id="search-results-mobile" role="listbox" aria-label="Search results"></div>
+  </div>
+  
+  
+    
+    <a href="/coldnight-demo/"
+       class="nav-link active"
+       aria-current=&#34;page&#34;>
+      Home
+    </a>
+  
+    
+    <a href="/coldnight-demo/archives"
+       class="nav-link"
+       >
+      Archive
+    </a>
+  
+    
+    <a href="/coldnight-demo/stats"
+       class="nav-link"
+       >
+      Stats
+    </a>
+  
+    
+    <a href="/coldnight-demo/links"
+       class="nav-link"
+       >
+      Links
+    </a>
+  
+    
+    <a href="/coldnight-demo/showroom"
+       class="nav-link"
+       >
+      Showroom
+    </a>
+  
+    
+    <a href="/coldnight-demo/about"
+       class="nav-link"
+       >
+      About
+    </a>
+  
+</nav>
+
+
+<div class="page-wrapper">
+
+  <main class="main-content" id="main-content" role="main">
+
+    
+
+    
+      
+<article class="pinned-post fade-in" style="--card-border: #f5c518; --card-bg: #1c1608">
+
+  <span class="pinned-post__marker">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 17v5"/><path d="M9 3h6l1 7 2.5 3h-13L8 10z"/></svg>
+    Pinned
+  </span>
+
+  
+  <a href="/coldnight-demo/2026/04/10/javascript-async-patterns/" class="pinned-post__cover" tabindex="-1" aria-hidden="true">
+    <img src="https://picsum.photos/800/450" alt="" loading="eager" fetchpriority="high">
+  </a>
+  
+
+  <div class="pinned-post__body">
+    <div class="pinned-post__meta">
+      
+        <a href="/coldnight-demo/categories/Development/" class="post-card__category" data-category-desc="Programming, languages and day-to-day engineering practice.">Development</a>
+      
+      <span>1 min read</span>
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/04/10/javascript-async-patterns/" class="pinned-post__title">Modern JavaScript Async Patterns</a>
+
+    
+      <div class="pinned-post__excerpt">A practical reference for async/await, Promise combinators, AbortController, and async generators — with annotated examples.</div>
+    
+
+    <div class="pinned-post__footer">
+      <time datetime="2026-04-10T08:00:00.000Z">10.04.2026</time>
+      <a href="/coldnight-demo/2026/04/10/javascript-async-patterns/" class="post-card__read-more">Read more →</a>
+    </div>
+  </div>
+
+</article>
+
+    
+
+    <div class="post-grid post-grid--list"
+         style="--post-grid-cols: 1; --post-grid-cols-md: 1;">
+      
+        
+        
+
+<article class="post-card fade-in" style="--card-border: #34d399">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/08/23/chart-demo/" tabindex="-1" aria-hidden="true">
+      <img src="/coldnight-demo/images/og-default.jpg" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Demo/" class="post-card__category" data-category-desc="Live demonstrations of the theme's tag plugins and widgets.">Demo</a>
+      
+      
+        <span>2 min read</span>
+      
+      <span class="difficulty difficulty--level-2" role="img" aria-label="Difficulty: 2 of 5" title="Difficulty: 2 of 5"><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span></span>
+    </div>
+
+    <a href="/coldnight-demo/2026/08/23/chart-demo/" class="post-card__title">
+      Build-Time SVG Charts
+    </a>
+
+    
+      <div class="post-card__excerpt">The chart tag turns plain text into finished SVG at build time — no JavaScript, no library, and it still works with scripts disabled.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-08-23T00:00:00.000Z">23.08.2026</time>
+      <a href="/coldnight-demo/2026/08/23/chart-demo/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+      
+        
+        
+
+<article class="post-card fade-in" style="--card-border: #f43f5e; --card-bg: #2a0d16">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/07/11/video-embed-demo/" tabindex="-1" aria-hidden="true">
+      <img src="/coldnight-demo/images/og-default.jpg" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Demo/" class="post-card__category" data-category-desc="Live demonstrations of the theme's tag plugins and widgets.">Demo</a>
+      
+      
+        <span>1 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/07/11/video-embed-demo/" class="post-card__title">
+      Video Embed Demo
+    </a>
+
+    
+      <div class="post-card__excerpt">Demonstrating the click-to-load video facade — no YouTube or Vimeo iframe loads until you press play.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-07-11T00:00:00.000Z">11.07.2026</time>
+      <a href="/coldnight-demo/2026/07/11/video-embed-demo/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+      
+        
+        
+
+<article class="post-card fade-in post-card--large" style="--card-border: #2dd4bf">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/07/02/image-compare-demo/" tabindex="-1" aria-hidden="true">
+      <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Demo/" class="post-card__category" data-category-desc="Live demonstrations of the theme's tag plugins and widgets.">Demo</a>
+      
+      
+        <span>1 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/07/02/image-compare-demo/" class="post-card__title">
+      Image Compare Slider Demo
+    </a>
+
+    
+      <div class="post-card__excerpt">Demonstrating the built-in before/after compare slider tag — drag, touch, or use arrow keys to reveal the difference.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-07-02T00:00:00.000Z">02.07.2026</time>
+      <a href="/coldnight-demo/2026/07/02/image-compare-demo/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+      
+        
+        
+
+<article class="post-card fade-in" style="--card-bg: #1b1033">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/06/03/audio-player-demo/" tabindex="-1" aria-hidden="true">
+      <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Demo/" class="post-card__category" data-category-desc="Live demonstrations of the theme's tag plugins and widgets.">Demo</a>
+      
+      
+        <span>1 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/06/03/audio-player-demo/" class="post-card__title">
+      Audio Player Demo
+    </a>
+
+    
+      <div class="post-card__excerpt">Demonstrating the built-in audio player tag — themed controls, seek bar, mute, and keyboard navigation.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-06-03T00:00:00.000Z">03.06.2026</time>
+      <a href="/coldnight-demo/2026/06/03/audio-player-demo/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+      
+        
+        
+
+<article class="post-card fade-in">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/06/01/3d-model-viewer-demo/" tabindex="-1" aria-hidden="true">
+      <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Demo/" class="post-card__category" data-category-desc="Live demonstrations of the theme's tag plugins and widgets.">Demo</a>
+      
+      
+        <span>1 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/06/01/3d-model-viewer-demo/" class="post-card__title">
+      3D Model Viewer
+    </a>
+
+    
+      <div class="post-card__excerpt">Embed interactive 3D models directly in posts using the {% model %} tag. Supports GLB, GLTF, and STL files — rendered with Three.js, no CDN required.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-06-01T12:00:00.000Z">01.06.2026</time>
+      <a href="/coldnight-demo/2026/06/01/3d-model-viewer-demo/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+      
+        
+        
+
+<article class="post-card fade-in">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/05/20/timeline-showcase/" tabindex="-1" aria-hidden="true">
+      <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Documentation/" class="post-card__category" data-category-desc="Reference guides for the coldnight theme and this demo site.">Documentation</a>
+      
+      
+        <span>3 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/05/20/timeline-showcase/" class="post-card__title">
+      Timelines — the timeline block tag
+    </a>
+
+    
+      <div class="post-card__excerpt">The timeline block tag renders vertical timelines for changelogs, career histories, and project journals — all at build time, zero runtime JavaScript.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-05-20T14:00:00.000Z">20.05.2026</time>
+      <a href="/coldnight-demo/2026/05/20/timeline-showcase/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+      
+        
+        
+
+<article class="post-card fade-in">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/05/20/katex-math-showcase/" tabindex="-1" aria-hidden="true">
+      <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Development/" class="post-card__category" data-category-desc="Programming, languages and day-to-day engineering practice.">Development</a>
+      
+      
+        <span>2 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/05/20/katex-math-showcase/" class="post-card__title">
+      Math Typesetting with KaTeX
+    </a>
+
+    
+      <div class="post-card__excerpt">Inline and display math rendered at build time by KaTeX — zero runtime JavaScript, crisp at any resolution. Covers inline expressions, display blocks, aligned systems, series, matrices, and more.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-05-20T13:00:00.000Z">20.05.2026</time>
+      <a href="/coldnight-demo/2026/05/20/katex-math-showcase/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+      
+        
+        
+
+<article class="post-card fade-in">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/05/20/mermaid-diagrams-showcase/" tabindex="-1" aria-hidden="true">
+      <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Development/" class="post-card__category" data-category-desc="Programming, languages and day-to-day engineering practice.">Development</a>
+      
+      
+        <span>1 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/05/20/mermaid-diagrams-showcase/" class="post-card__title">
+      Diagramming with Mermaid
+    </a>
+
+    
+      <div class="post-card__excerpt">Embed flowcharts, sequence diagrams, ER diagrams, and more directly in Markdown using fenced mermaid code blocks — rendered as crisp SVGs at build time.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-05-20T12:00:00.000Z">20.05.2026</time>
+      <a href="/coldnight-demo/2026/05/20/mermaid-diagrams-showcase/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+      
+        
+        
+
+<article class="post-card fade-in post-card--large">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/05/15/syntax-highlighting-showcase/" tabindex="-1" aria-hidden="true">
+      <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Development/" class="post-card__category" data-category-desc="Programming, languages and day-to-day engineering practice.">Development</a>
+      
+      
+        <span>1 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/05/15/syntax-highlighting-showcase/" class="post-card__title">
+      Syntax Highlighting Showcase
+    </a>
+
+    
+      <div class="post-card__excerpt">A tour of syntax highlighting across JavaScript, TypeScript, Python, CSS, JSON, and Bash — all rendered by the built-in highlight.js processor.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-05-15T10:00:00.000Z">15.05.2026</time>
+      <a href="/coldnight-demo/2026/05/15/syntax-highlighting-showcase/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+      
+    </div>
+
+    
+<nav class="pagination" aria-label="Pagination">
+  <span class="page-number page-number current">1</span><a class="page-number" href="/coldnight-demo/page/2/">2</a><a class="page-number" href="/coldnight-demo/page/3/">3</a><a class="page-number" href="/coldnight-demo/page/4/">4</a><a class="btn btn--ghost" rel="next" href="/coldnight-demo/page/2/">Next →</a>
+</nav>
+
+
+
+  </main>
+
+  
+    
+
+
+<aside class="sidebar" role="complementary" aria-label="Sidebar">
+  
+    
+      
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Recent Posts</p>
+  <ul class="sidebar-widget__list">
+    
+      <li>
+        <a href="/coldnight-demo/2026/08/23/chart-demo/">
+          <span>Build-Time SVG Charts</span>
+          <span class="sidebar-widget__count">23.08.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/07/11/video-embed-demo/">
+          <span>Video Embed Demo</span>
+          <span class="sidebar-widget__count">11.07.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/07/02/image-compare-demo/">
+          <span>Image Compare Slider Demo</span>
+          <span class="sidebar-widget__count">02.07.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/06/03/audio-player-demo/">
+          <span>Audio Player Demo</span>
+          <span class="sidebar-widget__count">03.06.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/06/01/3d-model-viewer-demo/">
+          <span>3D Model Viewer</span>
+          <span class="sidebar-widget__count">01.06.</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Tags</p>
+  <div class="tag-cloud">
+    
+      <a href="/coldnight-demo/tags/3d/" class="tag-pill">
+        3d <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/api-design/" class="tag-pill">
+        api-design <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/async/" class="tag-pill">
+        async <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/audio/" class="tag-pill">
+        audio <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/background-jobs/" class="tag-pill">
+        background-jobs <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/bash/" class="tag-pill">
+        bash <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/build-systems/" class="tag-pill">
+        build-systems <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/callouts/" class="tag-pill">
+        callouts <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/charts/" class="tag-pill">
+        charts <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/cli/" class="tag-pill">
+        cli <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/code/" class="tag-pill">
+        code <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/concurrency/" class="tag-pill">
+        concurrency <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/configuration/" class="tag-pill">
+        configuration <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/css/" class="tag-pill">
+        css <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/databases/" class="tag-pill">
+        databases <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/dataviz/" class="tag-pill">
+        dataviz <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/debugging/" class="tag-pill">
+        debugging <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/diagrams/" class="tag-pill">
+        diagrams <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/diff/" class="tag-pill">
+        diff <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/documentation/" class="tag-pill">
+        documentation <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/dotfiles/" class="tag-pill">
+        dotfiles <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/errors/" class="tag-pill">
+        errors <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/features/" class="tag-pill">
+        features <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/flexbox/" class="tag-pill">
+        flexbox <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/frontend/" class="tag-pill">
+        frontend <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/gallery/" class="tag-pill">
+        gallery <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/git/" class="tag-pill">
+        git <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/go/" class="tag-pill">
+        go <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/grid/" class="tag-pill">
+        grid <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/hexo/" class="tag-pill">
+        hexo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/images/" class="tag-pill">
+        images <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/infrastructure/" class="tag-pill">
+        infrastructure <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/javascript/" class="tag-pill">
+        javascript <span class="tag-cloud__count">(3)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/katex/" class="tag-pill">
+        katex <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/latex/" class="tag-pill">
+        latex <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/layout/" class="tag-pill">
+        layout <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/lightgallery/" class="tag-pill">
+        lightgallery <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/linux/" class="tag-pill">
+        linux <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/markdown/" class="tag-pill">
+        markdown <span class="tag-cloud__count">(3)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/math/" class="tag-pill">
+        math <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/memory/" class="tag-pill">
+        memory <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/mermaid/" class="tag-pill">
+        mermaid <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/monorepo/" class="tag-pill">
+        monorepo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/packaging/" class="tag-pill">
+        packaging <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/patterns/" class="tag-pill">
+        patterns <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/postgres/" class="tag-pill">
+        postgres <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/productivity/" class="tag-pill">
+        productivity <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/promises/" class="tag-pill">
+        promises <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/python/" class="tag-pill">
+        python <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/queues/" class="tag-pill">
+        queues <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/redis/" class="tag-pill">
+        redis <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/responsive-design/" class="tag-pill">
+        responsive-design <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/scripting/" class="tag-pill">
+        scripting <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/search/" class="tag-pill">
+        search <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/setup/" class="tag-pill">
+        setup <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/sql/" class="tag-pill">
+        sql <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/syntax-highlighting/" class="tag-pill">
+        syntax-highlighting <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/terminal/" class="tag-pill">
+        terminal <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/theme/" class="tag-pill">
+        theme <span class="tag-cloud__count">(5)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/threejs/" class="tag-pill">
+        threejs <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/timeline/" class="tag-pill">
+        timeline <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/tooling/" class="tag-pill">
+        tooling <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/turborepo/" class="tag-pill">
+        turborepo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/typography/" class="tag-pill">
+        typography <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/uv/" class="tag-pill">
+        uv <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/ux/" class="tag-pill">
+        ux <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/version-control/" class="tag-pill">
+        version-control <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/video/" class="tag-pill">
+        video <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/webgl/" class="tag-pill">
+        webgl <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/workflow/" class="tag-pill">
+        workflow <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/writing/" class="tag-pill">
+        writing <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/zsh/" class="tag-pill">
+        zsh <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+  </div>
+</div>
+
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Archives</p>
+  <ul class="sidebar-widget__list">
+    
+    
+      <li>
+        <a href="/coldnight-demo/archives/2026">
+          <span>2026</span>
+          <span class="sidebar-widget__count">19</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/archives/2025">
+          <span>2025</span>
+          <span class="sidebar-widget__count">4</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/archives/2024">
+          <span>2024</span>
+          <span class="sidebar-widget__count">5</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+    
+  
+    
+      
+        
+
+<div class="sidebar-widget widget-about">
+  <p class="sidebar-widget__title">About</p>
+  
+  
+    <p class="widget-about__name">Cracksoldier</p>
+  
+  
+    <p class="widget-about__bio">A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.</p>
+  
+  <div class="widget-about__social">
+    
+    
+  </div>
+</div>
+
+
+      
+    
+  
+</aside>
+
+  
+
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <ul class="footer-links">
+      
+      
+      
+        <li><a href="/coldnight-demo/atom.xml">RSS</a></li>
+      
+    </ul>
+    <span>&copy; 2026 Cracksoldier. Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> &middot; coldnight v1.9.1</span>
+  </div>
+</footer>
+
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+<script src="/coldnight-demo/js/back-to-top.js" defer></script>
+
+<script src="/coldnight-demo/js/search.js" data-search-url="/coldnight-demo/search.json" defer></script>
+
+
+<div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+
+<script src="/coldnight-demo/js/nav.js" defer></script>
+<script src="/coldnight-demo/js/copy-code.js" defer></script>
+
+<script src="/coldnight-demo/js/category-tooltip.js" defer></script>
+
+
+</body>
+</html>

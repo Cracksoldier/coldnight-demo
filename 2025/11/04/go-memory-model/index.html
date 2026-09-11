@@ -1,0 +1,1093 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Understanding Go&#39;s Memory Model | coldnight demo</title>
+<meta name="description" content="The Go memory model defines when one goroutine is guaranteed to see writes made by another. Getting this wrong leads to races that only show up in production un">
+<meta name="author" content="Cracksoldier">
+
+<meta name="keywords" content="go, concurrency, memory">
+
+
+<!-- Open Graph -->
+<meta property="og:title" content="Understanding Go&#39;s Memory Model">
+<meta property="og:description" content="The Go memory model defines when one goroutine is guaranteed to see writes made by another. Getting this wrong leads to races that only show up in production un">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cracksoldier.github.io/coldnight-demo/2025/11/04/go-memory-model/">
+<meta property="og:site_name" content="coldnight demo">
+<meta property="og:locale" content="en_US">
+
+<meta property="og:image" content="https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg">
+
+
+<meta property="article:published_time" content="2025-11-04T09:00:00.000Z">
+<meta property="article:author" content="Cracksoldier">
+
+
+<link rel="canonical" href="https://cracksoldier.github.io/coldnight-demo/2025/11/04/go-memory-model/">
+
+
+<!-- Structured data -->
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Understanding Go's Memory Model","datePublished":"2025-11-04T09:00:00.000Z","dateModified":"2025-11-04T09:00:00.000Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://cracksoldier.github.io/coldnight-demo/2025/11/04/go-memory-model/"},"description":"The Go memory model defines when one goroutine is guaranteed to see writes made by another. Getting this wrong leads to races that only show up in production un","author":{"@type":"Person","name":"Cracksoldier"},"publisher":{"@type":"Person","name":"Cracksoldier"},"image":"https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg","keywords":"go, concurrency, memory"}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cracksoldier.github.io/coldnight-demo/"},{"@type":"ListItem","position":2,"name":"Systems","item":"https://cracksoldier.github.io/coldnight-demo/categories/Systems/"},{"@type":"ListItem","position":3,"name":"Understanding Go's Memory Model"}]}</script>
+
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding Go&#39;s Memory Model">
+<meta name="twitter:description" content="The Go memory model defines when one goroutine is guaranteed to see writes made by another. Getting this wrong leads to races that only show up in production un">
+
+
+<meta name="twitter:image" content="https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg">
+
+
+<!-- Favicon -->
+
+
+<link rel="icon" type="image/svg+xml" href="/coldnight-demo/favicon.svg">
+
+
+<!-- Fonts (self-hosted, latin + latin-ext) -->
+<link rel="preload" href="/coldnight-demo/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Theme stylesheet -->
+<link rel="stylesheet" href="/coldnight-demo/css/style.css">
+
+
+<!-- Cross-document View Transitions (progressive enhancement; inline because compiled SCSS can't read theme config) -->
+<style>@media not (prefers-reduced-motion: reduce){@view-transition{navigation:auto}}</style>
+
+
+<!-- LightGallery CSS — post pages only -->
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lightgallery.css">
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lg-zoom.css">
+
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lg-thumbnail.css">
+
+
+
+<!-- KaTeX CSS — post pages only -->
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/katex/katex.min.css">
+
+
+<!-- RSS -->
+
+<link rel="alternate" type="application/rss+xml" title="coldnight demo" href="/coldnight-demo/atom.xml">
+
+
+<link rel="alternate" type="application/feed+json" title="coldnight demo" href="/coldnight-demo/feed.json">
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+
+
+<div id="reading-progress" class="reading-progress" role="progressbar"
+     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="navbar" role="banner">
+  <div class="navbar__inner">
+
+    <!-- Brand -->
+    <a href="/coldnight-demo/" class="navbar__brand" aria-label="My Blog — home">
+      
+      
+      <span class="navbar__brand-text navbar__brand-text--icon">
+        
+        <span class="navbar__logo navbar__logo--text" aria-hidden="true" style="color: #60a5fa">❄</span>
+        
+        <span class="navbar__title">My Blog</span>
+        
+      </span>
+      
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="navbar__nav" aria-label="Main navigation" id="main-nav">
+      
+        
+        <a href="/coldnight-demo/"
+           class="nav-link"
+           >
+          Home
+        </a>
+      
+        
+        <a href="/coldnight-demo/archives"
+           class="nav-link"
+           >
+          Archive
+        </a>
+      
+        
+        <a href="/coldnight-demo/stats"
+           class="nav-link"
+           >
+          Stats
+        </a>
+      
+        
+        <a href="/coldnight-demo/links"
+           class="nav-link"
+           >
+          Links
+        </a>
+      
+        
+        <a href="/coldnight-demo/showroom"
+           class="nav-link"
+           >
+          Showroom
+        </a>
+      
+        
+        <a href="/coldnight-demo/about"
+           class="nav-link"
+           >
+          About
+        </a>
+      
+    </nav>
+
+    <!-- Actions -->
+    <div class="navbar__actions">
+      
+
+      <!-- GitHub -->
+      
+
+      
+      <div class="search-wrap navbar__search" id="search-wrap">
+        <input type="search"
+               role="combobox"
+               class="search-input"
+               id="search-input"
+               placeholder="Search…"
+               aria-label="Search posts"
+               aria-expanded="false"
+               aria-autocomplete="list"
+               aria-haspopup="listbox"
+               aria-controls="search-results"
+               autocomplete="off"
+               spellcheck="false">
+        <div class="search-results" id="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      
+
+      <!-- Mobile hamburger -->
+      <button class="btn btn--icon navbar__hamburger"
+              id="nav-toggle"
+              aria-expanded="false"
+              aria-controls="mobile-nav"
+              aria-label="Toggle navigation">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="2" y1="4.5" x2="16" y2="4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="13.5" x2="16" y2="13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile nav drawer -->
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+  
+  <div class="search-wrap mobile-nav__search" id="search-wrap-mobile">
+    <input type="search"
+           role="combobox"
+           class="search-input"
+           id="search-input-mobile"
+           placeholder="Search…"
+           aria-label="Search posts"
+           aria-expanded="false"
+           aria-autocomplete="list"
+           aria-haspopup="listbox"
+           aria-controls="search-results-mobile"
+           autocomplete="off"
+           spellcheck="false">
+    <div class="search-results" id="search-results-mobile" role="listbox" aria-label="Search results"></div>
+  </div>
+  
+  
+    
+    <a href="/coldnight-demo/"
+       class="nav-link"
+       >
+      Home
+    </a>
+  
+    
+    <a href="/coldnight-demo/archives"
+       class="nav-link"
+       >
+      Archive
+    </a>
+  
+    
+    <a href="/coldnight-demo/stats"
+       class="nav-link"
+       >
+      Stats
+    </a>
+  
+    
+    <a href="/coldnight-demo/links"
+       class="nav-link"
+       >
+      Links
+    </a>
+  
+    
+    <a href="/coldnight-demo/showroom"
+       class="nav-link"
+       >
+      Showroom
+    </a>
+  
+    
+    <a href="/coldnight-demo/about"
+       class="nav-link"
+       >
+      About
+    </a>
+  
+</nav>
+
+
+<div class="page-wrapper">
+
+  <main class="main-content post-page" id="main-content" role="main">
+
+    <article>
+
+      <header class="post-header">
+        <h1 class="post-title">Understanding Go&#39;s Memory Model</h1>
+
+        <div class="post-meta">
+          <time datetime="2025-11-04T09:00:00.000Z">
+            04.11.2025
+          </time>
+
+          
+
+          
+            <span>Cracksoldier</span>
+          
+
+          
+            <span>2 min read</span>
+          
+
+          
+            <span>389 words</span>
+          
+
+          
+            
+              <a href="/coldnight-demo/categories/Systems/" class="tag-pill" data-category-desc="Databases, infrastructure and how things behave under load.">Systems</a>
+            
+          
+
+          <span class="difficulty difficulty--level-5" role="img" aria-label="Effort: 5 of 5" title="Effort: 5 of 5"><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span></span>
+
+          
+            <button class="btn btn--icon btn--sm post-permalink-btn"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2025/11/04/go-memory-model/"
+                    aria-label="Copy link to post"
+                    title="Copy permalink">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+                <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+              </svg>
+            </button>
+          
+          
+            <button class="btn btn--icon btn--sm epub-export-btn"
+                    data-title="Understanding Go&#39;s Memory Model"
+                    data-author="Cracksoldier"
+                    data-url="https://cracksoldier.github.io/coldnight-demo/2025/11/04/go-memory-model/"
+                    data-slug="go-memory-model"
+                    data-language="en"
+                    aria-label="Export as ePub"
+                    title="Download as ePub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/>
+              </svg>
+            </button>
+          
+        </div>
+      </header>
+
+      
+
+      
+
+      
+
+      
+
+      <div class="post-body prose">
+        <p>The Go memory model is one of those things you can ignore for a long time — until you can’t. Most concurrent Go code works by convention rather than by proof. Understanding what the runtime actually guarantees helps you reason about the cases where convention breaks down.</p>
+<h2 id="The-happens-before-relation"><a href="#The-happens-before-relation" class="headerlink" title="The happens-before relation"></a>The happens-before relation</h2><p>The model is built around one concept: <em>happens-before</em>. If event A happens-before event B, then B is guaranteed to observe all memory writes performed before or during A.</p>
+<p>Within a single goroutine, everything happens in source order. Across goroutines, the only happens-before edges are created by explicit synchronisation: channel sends and receives, <code>sync.Mutex</code> lock and unlock, <code>sync.WaitGroup</code>, and a handful of others.</p>
+<p>If two goroutines access the same variable without synchronisation, and at least one access is a write, you have a data race. The result is undefined — not “probably fine”, undefined.</p>
+<h2 id="What-the-race-detector-catches"><a href="#What-the-race-detector-catches" class="headerlink" title="What the race detector catches"></a>What the race detector catches</h2><p>Go’s built-in race detector instruments memory accesses at compile time and reports unsynchronised concurrent accesses at runtime.</p>
+<figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">go <span class="hljs-built_in">test</span> -race ./...<br>go run -race main.go<br></code></pre></td></tr></table></figure>
+
+<p>Run with <code>-race</code> in CI. It has roughly 2–20× overhead so you don’t want it in production, but it’s invaluable during development. A clean <code>-race</code> run is not a proof of correctness, but it catches a large class of bugs.</p>
+<h2 id="Channel-semantics"><a href="#Channel-semantics" class="headerlink" title="Channel semantics"></a>Channel semantics</h2><p>A send on a channel happens-before the corresponding receive completes. A receive from a closed channel happens-after the close.</p>
+<figure class="highlight go" data-lang="go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> data []<span class="hljs-type">int</span><br>done := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">struct</span>&#123;&#125;)<br><br><span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>    data = compute() <span class="hljs-comment">// write</span><br>    <span class="hljs-built_in">close</span>(done)      <span class="hljs-comment">// happens-before...</span><br>&#125;()<br><br>&lt;-done               <span class="hljs-comment">// ...this receive</span><br>fmt.Println(data)   <span class="hljs-comment">// safe to read here</span><br></code></pre></td></tr></table></figure>
+
+<p>The close-then-receive pattern is idiomatic for signalling completion. The channel is the synchronisation point.</p>
+<h2 id="sync-Once"><a href="#sync-Once" class="headerlink" title="sync.Once"></a>sync.Once</h2><p><code>sync.Once</code> is the canonical way to initialise something exactly once, safely.</p>
+<figure class="highlight go" data-lang="go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> (<br>    instance *Client<br>    once     sync.Once<br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">GetClient</span><span class="hljs-params">()</span></span> *Client &#123;<br>    once.Do(<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>        instance = newClient()<br>    &#125;)<br>    <span class="hljs-keyword">return</span> instance<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>The function passed to <code>Do</code> happens-before any call to <code>Do</code> returns. All callers block until the first invocation completes, then all receive the same <code>instance</code>.</p>
+<h2 id="Atomic-operations"><a href="#Atomic-operations" class="headerlink" title="Atomic operations"></a>Atomic operations</h2><p><code>sync/atomic</code> provides load&#x2F;store operations that are safe to use concurrently without a mutex.</p>
+<figure class="highlight go" data-lang="go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> counter <span class="hljs-type">int64</span><br><br><span class="hljs-comment">// safe from multiple goroutines</span><br>atomic.AddInt64(&amp;counter, <span class="hljs-number">1</span>)<br>n := atomic.LoadInt64(&amp;counter)<br></code></pre></td></tr></table></figure>
+
+<p>Atomics are lower overhead than mutexes but they only synchronise the specific variable, not surrounding reads and writes. They’re suited for counters and flags, not for protecting compound state.</p>
+<h2 id="The-pattern-I-reach-for-first"><a href="#The-pattern-I-reach-for-first" class="headerlink" title="The pattern I reach for first"></a>The pattern I reach for first</h2><p>When in doubt, reach for a mutex. The overhead is rarely the bottleneck and the correctness model is simple: hold the lock while reading or writing shared state.</p>
+<figure class="highlight go" data-lang="go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Store <span class="hljs-keyword">struct</span> &#123;<br>    mu   sync.RWMutex<br>    data <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(s *Store)</span></span> Get(key <span class="hljs-type">string</span>) (<span class="hljs-type">string</span>, <span class="hljs-type">bool</span>) &#123;<br>    s.mu.RLock()<br>    <span class="hljs-keyword">defer</span> s.mu.RUnlock()<br>    v, ok := s.data[key]<br>    <span class="hljs-keyword">return</span> v, ok<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(s *Store)</span></span> Set(key, value <span class="hljs-type">string</span>) &#123;<br>    s.mu.Lock()<br>    <span class="hljs-keyword">defer</span> s.mu.Unlock()<br>    s.data[key] = value<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>sync.RWMutex</code> allows multiple concurrent readers or one writer. Use it when reads significantly outnumber writes.</p>
+<h2 id="Further-reading"><a href="#Further-reading" class="headerlink" title="Further reading"></a>Further reading</h2><p>The <a href="https://go.dev/ref/mem" target="_blank" rel="noopener noreferrer">Go memory model specification</a> is short and worth reading in full. The <a href="https://go.dev/doc/articles/race_detector" target="_blank" rel="noopener noreferrer">race detector documentation</a> covers how to integrate it into your workflow.</p>
+
+      </div>
+
+      <footer class="post-footer">
+
+        
+          <div class="post-tags">
+            
+              <a href="/coldnight-demo/tags/go/" class="tag-pill">#go</a>
+            
+              <a href="/coldnight-demo/tags/concurrency/" class="tag-pill">#concurrency</a>
+            
+              <a href="/coldnight-demo/tags/memory/" class="tag-pill">#memory</a>
+            
+          </div>
+        
+
+        
+        <div class="post-share">
+          <span class="post-share__label">Share</span>
+          <div class="post-share__btns">
+            <a class="btn btn--ghost btn--sm"
+               href="https://twitter.com/intent/tweet?text=Understanding%20Go&#39;s%20Memory%20Model&url=https%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2025%2F11%2F04%2Fgo-memory-model%2F"
+               target="_blank" rel="noopener noreferrer">X / Twitter</a>
+            <a class="btn btn--ghost btn--sm"
+               href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2025%2F11%2F04%2Fgo-memory-model%2F"
+               target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a class="btn btn--ghost btn--sm"
+               href="https://bsky.app/intent/compose?text=Understanding%20Go&#39;s%20Memory%20Model%0A%0Ahttps%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2025%2F11%2F04%2Fgo-memory-model%2F"
+               target="_blank" rel="noopener noreferrer">Bluesky</a>
+            <button class="btn btn--ghost btn--sm post-share-mastodon"
+                    data-title="Understanding Go&#39;s Memory Model"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2025/11/04/go-memory-model/">Mastodon</button>
+            <button class="btn btn--ghost btn--sm post-share-copy"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2025/11/04/go-memory-model/">Copy link</button>
+          </div>
+        </div>
+        
+
+        <nav class="post-nav" aria-label="Post navigation">
+          <div class="post-nav__item post-nav__item--prev">
+            
+              <span class="post-nav__label">← Previous</span>
+              <a href="/coldnight-demo/2026/03/06/git-workflow/" class="post-nav__title">A Clean Git Workflow for Solo Developers</a>
+            
+          </div>
+          <div class="post-nav__item post-nav__item--next">
+            
+              <span class="post-nav__label">Next →</span>
+              <a href="/coldnight-demo/2025/08/19/personal-cli-toolkit/" class="post-nav__title">Building a Personal CLI Toolkit</a>
+            
+          </div>
+        </nav>
+
+      </footer>
+
+    </article>
+
+    
+
+    
+    <section class="related-posts" aria-labelledby="related-heading">
+      <h3 class="related-posts__heading" id="related-heading">You might also like</h3>
+      <div class="post-grid" style="--post-grid-cols: 2; --post-grid-cols-md: 2;">
+        
+          
+
+<article class="post-card fade-in">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2025/02/11/postgres-full-text-search/" tabindex="-1" aria-hidden="true">
+      <img src="/coldnight-demo/images/og-default.jpg" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Systems/" class="post-card__category" data-category-desc="Databases, infrastructure and how things behave under load.">Systems</a>
+      
+      
+        <span>1 min read</span>
+      
+      <span class="difficulty difficulty--level-3" role="img" aria-label="Difficulty: 3 of 5" title="Difficulty: 3 of 5"><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span></span>
+    </div>
+
+    <a href="/coldnight-demo/2025/02/11/postgres-full-text-search/" class="post-card__title">
+      Postgres Full-Text Search Without the Overhead
+    </a>
+
+    
+      <div class="post-card__excerpt">Before reaching for Elasticsearch, try Postgres full-text search. For most applications it's fast enough, much simpler to operate, and already in your stack.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2025-02-11T09:00:00.000Z">11.02.2025</time>
+      <a href="/coldnight-demo/2025/02/11/postgres-full-text-search/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+        
+          
+
+<article class="post-card fade-in">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2024/04/02/redis-job-queue/" tabindex="-1" aria-hidden="true">
+      <img src="/coldnight-demo/images/og-default.jpg" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Systems/" class="post-card__category" data-category-desc="Databases, infrastructure and how things behave under load.">Systems</a>
+      
+      
+        <span>2 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2024/04/02/redis-job-queue/" class="post-card__title">
+      Redis as a Job Queue
+    </a>
+
+    
+      <div class="post-card__excerpt">Before standing up RabbitMQ or SQS, consider that Redis can serve as a reliable job queue for most workloads. Here's the pattern and its limits.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2024-04-02T09:00:00.000Z">02.04.2024</time>
+      <a href="/coldnight-demo/2024/04/02/redis-job-queue/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+        
+      </div>
+    </section>
+    
+
+  </main>
+
+  
+    
+
+
+<aside class="sidebar" role="complementary" aria-label="Sidebar">
+  
+    
+      
+        
+
+<div class="sidebar-widget widget-toc">
+  <button class="widget-toc__toggle" aria-expanded="true" aria-controls="toc-list">
+    <span class="sidebar-widget__title">Contents</span>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+  <nav id="toc-list" aria-label="Table of contents">
+    <ol class="toc-list">
+<li class="toc-item toc-item--h2"><a href="#The-happens-before-relation" class="toc-link">The happens-before relation</a></li>
+<li class="toc-item toc-item--h2"><a href="#What-the-race-detector-catches" class="toc-link">What the race detector catches</a></li>
+<li class="toc-item toc-item--h2"><a href="#Channel-semantics" class="toc-link">Channel semantics</a></li>
+<li class="toc-item toc-item--h2"><a href="#sync-Once" class="toc-link">sync.Once</a></li>
+<li class="toc-item toc-item--h2"><a href="#Atomic-operations" class="toc-link">Atomic operations</a></li>
+<li class="toc-item toc-item--h2"><a href="#The-pattern-I-reach-for-first" class="toc-link">The pattern I reach for first</a></li>
+<li class="toc-item toc-item--h2"><a href="#Further-reading" class="toc-link">Further reading</a></li>
+</ol>
+  </nav>
+</div>
+
+
+      
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Recent Posts</p>
+  <ul class="sidebar-widget__list">
+    
+      <li>
+        <a href="/coldnight-demo/2026/08/23/chart-demo/">
+          <span>Build-Time SVG Charts</span>
+          <span class="sidebar-widget__count">23.08.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/07/11/video-embed-demo/">
+          <span>Video Embed Demo</span>
+          <span class="sidebar-widget__count">11.07.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/07/02/image-compare-demo/">
+          <span>Image Compare Slider Demo</span>
+          <span class="sidebar-widget__count">02.07.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/06/03/audio-player-demo/">
+          <span>Audio Player Demo</span>
+          <span class="sidebar-widget__count">03.06.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/06/01/3d-model-viewer-demo/">
+          <span>3D Model Viewer</span>
+          <span class="sidebar-widget__count">01.06.</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Tags</p>
+  <div class="tag-cloud">
+    
+      <a href="/coldnight-demo/tags/3d/" class="tag-pill">
+        3d <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/api-design/" class="tag-pill">
+        api-design <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/async/" class="tag-pill">
+        async <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/audio/" class="tag-pill">
+        audio <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/background-jobs/" class="tag-pill">
+        background-jobs <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/bash/" class="tag-pill">
+        bash <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/build-systems/" class="tag-pill">
+        build-systems <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/callouts/" class="tag-pill">
+        callouts <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/charts/" class="tag-pill">
+        charts <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/cli/" class="tag-pill">
+        cli <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/code/" class="tag-pill">
+        code <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/concurrency/" class="tag-pill">
+        concurrency <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/configuration/" class="tag-pill">
+        configuration <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/css/" class="tag-pill">
+        css <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/databases/" class="tag-pill">
+        databases <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/dataviz/" class="tag-pill">
+        dataviz <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/debugging/" class="tag-pill">
+        debugging <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/diagrams/" class="tag-pill">
+        diagrams <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/diff/" class="tag-pill">
+        diff <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/documentation/" class="tag-pill">
+        documentation <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/dotfiles/" class="tag-pill">
+        dotfiles <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/errors/" class="tag-pill">
+        errors <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/features/" class="tag-pill">
+        features <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/flexbox/" class="tag-pill">
+        flexbox <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/frontend/" class="tag-pill">
+        frontend <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/gallery/" class="tag-pill">
+        gallery <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/git/" class="tag-pill">
+        git <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/go/" class="tag-pill">
+        go <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/grid/" class="tag-pill">
+        grid <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/hexo/" class="tag-pill">
+        hexo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/images/" class="tag-pill">
+        images <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/infrastructure/" class="tag-pill">
+        infrastructure <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/javascript/" class="tag-pill">
+        javascript <span class="tag-cloud__count">(3)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/katex/" class="tag-pill">
+        katex <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/latex/" class="tag-pill">
+        latex <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/layout/" class="tag-pill">
+        layout <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/lightgallery/" class="tag-pill">
+        lightgallery <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/linux/" class="tag-pill">
+        linux <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/markdown/" class="tag-pill">
+        markdown <span class="tag-cloud__count">(3)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/math/" class="tag-pill">
+        math <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/memory/" class="tag-pill">
+        memory <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/mermaid/" class="tag-pill">
+        mermaid <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/monorepo/" class="tag-pill">
+        monorepo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/packaging/" class="tag-pill">
+        packaging <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/patterns/" class="tag-pill">
+        patterns <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/postgres/" class="tag-pill">
+        postgres <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/productivity/" class="tag-pill">
+        productivity <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/promises/" class="tag-pill">
+        promises <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/python/" class="tag-pill">
+        python <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/queues/" class="tag-pill">
+        queues <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/redis/" class="tag-pill">
+        redis <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/responsive-design/" class="tag-pill">
+        responsive-design <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/scripting/" class="tag-pill">
+        scripting <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/search/" class="tag-pill">
+        search <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/setup/" class="tag-pill">
+        setup <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/sql/" class="tag-pill">
+        sql <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/syntax-highlighting/" class="tag-pill">
+        syntax-highlighting <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/terminal/" class="tag-pill">
+        terminal <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/theme/" class="tag-pill">
+        theme <span class="tag-cloud__count">(5)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/threejs/" class="tag-pill">
+        threejs <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/timeline/" class="tag-pill">
+        timeline <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/tooling/" class="tag-pill">
+        tooling <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/turborepo/" class="tag-pill">
+        turborepo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/typography/" class="tag-pill">
+        typography <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/uv/" class="tag-pill">
+        uv <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/ux/" class="tag-pill">
+        ux <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/version-control/" class="tag-pill">
+        version-control <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/video/" class="tag-pill">
+        video <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/webgl/" class="tag-pill">
+        webgl <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/workflow/" class="tag-pill">
+        workflow <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/writing/" class="tag-pill">
+        writing <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/zsh/" class="tag-pill">
+        zsh <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+  </div>
+</div>
+
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Archives</p>
+  <ul class="sidebar-widget__list">
+    
+    
+      <li>
+        <a href="/coldnight-demo/archives/2026">
+          <span>2026</span>
+          <span class="sidebar-widget__count">19</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/archives/2025">
+          <span>2025</span>
+          <span class="sidebar-widget__count">4</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/archives/2024">
+          <span>2024</span>
+          <span class="sidebar-widget__count">5</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+    
+  
+    
+      
+        
+
+<div class="sidebar-widget widget-about">
+  <p class="sidebar-widget__title">About</p>
+  
+  
+    <p class="widget-about__name">Cracksoldier</p>
+  
+  
+    <p class="widget-about__bio">A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.</p>
+  
+  <div class="widget-about__social">
+    
+    
+  </div>
+</div>
+
+
+      
+    
+  
+</aside>
+
+  
+
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <ul class="footer-links">
+      
+      
+      
+        <li><a href="/coldnight-demo/atom.xml">RSS</a></li>
+      
+    </ul>
+    <span>&copy; 2026 Cracksoldier. Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> &middot; coldnight v1.9.1</span>
+  </div>
+</footer>
+
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+<script src="/coldnight-demo/js/back-to-top.js" defer></script>
+
+<script src="/coldnight-demo/js/search.js" data-search-url="/coldnight-demo/search.json" defer></script>
+
+
+<div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+
+
+
+<button class="toc-fab" id="toc-drawer-btn"
+        aria-label="Open table of contents"
+        aria-expanded="false"
+        aria-controls="toc-drawer">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <line x1="3" y1="6"  x2="21" y2="6"/>
+    <line x1="3" y1="12" x2="15" y2="12"/>
+    <line x1="3" y1="18" x2="18" y2="18"/>
+  </svg>
+</button>
+<div class="toc-drawer" id="toc-drawer" hidden
+     role="dialog" aria-modal="true" aria-label="Table of contents">
+  <div class="toc-drawer__overlay" id="toc-drawer-overlay"></div>
+  <div class="toc-drawer__panel">
+    <div class="toc-drawer__header">
+      <span class="toc-drawer__title">Contents</span>
+      <button class="toc-drawer__close" id="toc-drawer-close"
+              aria-label="Close table of contents">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="18" y1="6"  x2="6"  y2="18"/>
+          <line x1="6"  y1="6"  x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="toc-drawer__body" aria-label="Table of contents">
+      <ol class="toc-list">
+<li class="toc-item toc-item--h2"><a href="#The-happens-before-relation" class="toc-link">The happens-before relation</a></li>
+<li class="toc-item toc-item--h2"><a href="#What-the-race-detector-catches" class="toc-link">What the race detector catches</a></li>
+<li class="toc-item toc-item--h2"><a href="#Channel-semantics" class="toc-link">Channel semantics</a></li>
+<li class="toc-item toc-item--h2"><a href="#sync-Once" class="toc-link">sync.Once</a></li>
+<li class="toc-item toc-item--h2"><a href="#Atomic-operations" class="toc-link">Atomic operations</a></li>
+<li class="toc-item toc-item--h2"><a href="#The-pattern-I-reach-for-first" class="toc-link">The pattern I reach for first</a></li>
+<li class="toc-item toc-item--h2"><a href="#Further-reading" class="toc-link">Further reading</a></li>
+</ol>
+    </nav>
+  </div>
+</div>
+
+
+
+
+<script src="/coldnight-demo/js/nav.js" defer></script>
+<script src="/coldnight-demo/js/copy-code.js" data-collapse-lines="25" defer></script>
+
+<script src="/coldnight-demo/js/category-tooltip.js" defer></script>
+
+
+<script src="/coldnight-demo/js/toc.js" defer></script>
+<script src="/coldnight-demo/js/toc-drawer.js" defer></script>
+
+
+<script src="/coldnight-demo/js/post-title.js" defer></script>
+
+
+<script src="/coldnight-demo/js/reading-progress.js" defer></script>
+
+<script src="/coldnight-demo/js/post-nav-keys.js" defer></script>
+
+<script src="/coldnight-demo/vendor/jszip/jszip.min.js" defer></script>
+<script src="/coldnight-demo/js/epub-export.js" defer></script>
+
+
+<script src="/coldnight-demo/js/pdf-viewer.js" defer></script>
+
+
+
+  <script src="/coldnight-demo/vendor/lightgallery/lightgallery.umd.js" defer></script>
+  
+  <script src="/coldnight-demo/vendor/lightgallery/lg-zoom.umd.js" defer></script>
+  
+  
+  <script src="/coldnight-demo/vendor/lightgallery/lg-thumbnail.umd.js" defer></script>
+  
+  
+  <script src="/coldnight-demo/js/gallery.js" defer></script>
+  
+
+
+<script type="module">
+  import mermaid from '/coldnight-demo/vendor/mermaid/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+</script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Syntax Highlighting Showcase | coldnight demo</title>
+<meta name="description" content="A tour of syntax highlighting across JavaScript, TypeScript, Python, CSS, JSON, and Bash — all rendered by the built-in highlight.js processor.">
+<meta name="author" content="Cracksoldier">
+
+<meta name="keywords" content="code, syntax-highlighting, javascript, python">
+
+
+<!-- Open Graph -->
+<meta property="og:title" content="Syntax Highlighting Showcase">
+<meta property="og:description" content="A tour of syntax highlighting across JavaScript, TypeScript, Python, CSS, JSON, and Bash — all rendered by the built-in highlight.js processor.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cracksoldier.github.io/coldnight-demo/2026/05/15/syntax-highlighting-showcase/">
+<meta property="og:site_name" content="coldnight demo">
+<meta property="og:locale" content="en_US">
+
+<meta property="og:image" content="https://picsum.photos/800/450">
+
+
+<meta property="article:published_time" content="2026-05-15T10:00:00.000Z">
+<meta property="article:author" content="Cracksoldier">
+
+
+<link rel="canonical" href="https://cracksoldier.github.io/coldnight-demo/2026/05/15/syntax-highlighting-showcase/">
+
+
+<!-- Structured data -->
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Syntax Highlighting Showcase","datePublished":"2026-05-15T10:00:00.000Z","dateModified":"2026-07-15T00:00:00.000Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://cracksoldier.github.io/coldnight-demo/2026/05/15/syntax-highlighting-showcase/"},"description":"A tour of syntax highlighting across JavaScript, TypeScript, Python, CSS, JSON, and Bash — all rendered by the built-in highlight.js processor.","author":{"@type":"Person","name":"Cracksoldier"},"publisher":{"@type":"Person","name":"Cracksoldier"},"image":"https://picsum.photos/800/450","keywords":"code, syntax-highlighting, javascript, python"}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cracksoldier.github.io/coldnight-demo/"},{"@type":"ListItem","position":2,"name":"Development","item":"https://cracksoldier.github.io/coldnight-demo/categories/Development/"},{"@type":"ListItem","position":3,"name":"Syntax Highlighting Showcase"}]}</script>
+
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Syntax Highlighting Showcase">
+<meta name="twitter:description" content="A tour of syntax highlighting across JavaScript, TypeScript, Python, CSS, JSON, and Bash — all rendered by the built-in highlight.js processor.">
+
+
+<meta name="twitter:image" content="https://picsum.photos/800/450">
+
+
+<!-- Favicon -->
+
+
+<link rel="icon" type="image/svg+xml" href="/coldnight-demo/favicon.svg">
+
+
+<!-- Fonts (self-hosted, latin + latin-ext) -->
+<link rel="preload" href="/coldnight-demo/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Theme stylesheet -->
+<link rel="stylesheet" href="/coldnight-demo/css/style.css">
+
+
+<!-- Cross-document View Transitions (progressive enhancement; inline because compiled SCSS can't read theme config) -->
+<style>@media not (prefers-reduced-motion: reduce){@view-transition{navigation:auto}}</style>
+
+
+<!-- LightGallery CSS — post pages only -->
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lightgallery.css">
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lg-zoom.css">
+
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lg-thumbnail.css">
+
+
+
+<!-- KaTeX CSS — post pages only -->
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/katex/katex.min.css">
+
+
+<!-- RSS -->
+
+<link rel="alternate" type="application/rss+xml" title="coldnight demo" href="/coldnight-demo/atom.xml">
+
+
+<link rel="alternate" type="application/feed+json" title="coldnight demo" href="/coldnight-demo/feed.json">
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+
+
+<div id="reading-progress" class="reading-progress" role="progressbar"
+     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="navbar" role="banner">
+  <div class="navbar__inner">
+
+    <!-- Brand -->
+    <a href="/coldnight-demo/" class="navbar__brand" aria-label="My Blog — home">
+      
+      
+      <span class="navbar__brand-text navbar__brand-text--icon">
+        
+        <span class="navbar__logo navbar__logo--text" aria-hidden="true" style="color: #60a5fa">❄</span>
+        
+        <span class="navbar__title">My Blog</span>
+        
+      </span>
+      
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="navbar__nav" aria-label="Main navigation" id="main-nav">
+      
+        
+        <a href="/coldnight-demo/"
+           class="nav-link"
+           >
+          Home
+        </a>
+      
+        
+        <a href="/coldnight-demo/archives"
+           class="nav-link"
+           >
+          Archive
+        </a>
+      
+        
+        <a href="/coldnight-demo/stats"
+           class="nav-link"
+           >
+          Stats
+        </a>
+      
+        
+        <a href="/coldnight-demo/links"
+           class="nav-link"
+           >
+          Links
+        </a>
+      
+        
+        <a href="/coldnight-demo/showroom"
+           class="nav-link"
+           >
+          Showroom
+        </a>
+      
+        
+        <a href="/coldnight-demo/about"
+           class="nav-link"
+           >
+          About
+        </a>
+      
+    </nav>
+
+    <!-- Actions -->
+    <div class="navbar__actions">
+      
+
+      <!-- GitHub -->
+      
+
+      
+      <div class="search-wrap navbar__search" id="search-wrap">
+        <input type="search"
+               role="combobox"
+               class="search-input"
+               id="search-input"
+               placeholder="Search…"
+               aria-label="Search posts"
+               aria-expanded="false"
+               aria-autocomplete="list"
+               aria-haspopup="listbox"
+               aria-controls="search-results"
+               autocomplete="off"
+               spellcheck="false">
+        <div class="search-results" id="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      
+
+      <!-- Mobile hamburger -->
+      <button class="btn btn--icon navbar__hamburger"
+              id="nav-toggle"
+              aria-expanded="false"
+              aria-controls="mobile-nav"
+              aria-label="Toggle navigation">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="2" y1="4.5" x2="16" y2="4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="13.5" x2="16" y2="13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile nav drawer -->
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+  
+  <div class="search-wrap mobile-nav__search" id="search-wrap-mobile">
+    <input type="search"
+           role="combobox"
+           class="search-input"
+           id="search-input-mobile"
+           placeholder="Search…"
+           aria-label="Search posts"
+           aria-expanded="false"
+           aria-autocomplete="list"
+           aria-haspopup="listbox"
+           aria-controls="search-results-mobile"
+           autocomplete="off"
+           spellcheck="false">
+    <div class="search-results" id="search-results-mobile" role="listbox" aria-label="Search results"></div>
+  </div>
+  
+  
+    
+    <a href="/coldnight-demo/"
+       class="nav-link"
+       >
+      Home
+    </a>
+  
+    
+    <a href="/coldnight-demo/archives"
+       class="nav-link"
+       >
+      Archive
+    </a>
+  
+    
+    <a href="/coldnight-demo/stats"
+       class="nav-link"
+       >
+      Stats
+    </a>
+  
+    
+    <a href="/coldnight-demo/links"
+       class="nav-link"
+       >
+      Links
+    </a>
+  
+    
+    <a href="/coldnight-demo/showroom"
+       class="nav-link"
+       >
+      Showroom
+    </a>
+  
+    
+    <a href="/coldnight-demo/about"
+       class="nav-link"
+       >
+      About
+    </a>
+  
+</nav>
+
+
+<div class="page-wrapper">
+
+  <main class="main-content post-page" id="main-content" role="main">
+
+    <article>
+
+      <header class="post-header">
+        <h1 class="post-title">Syntax Highlighting Showcase</h1>
+
+        <div class="post-meta">
+          <time datetime="2026-05-15T10:00:00.000Z">
+            15.05.2026
+          </time>
+
+          
+          <time class="post-updated" datetime="2026-07-15T00:00:00.000Z"
+                title="Last updated">↻ Updated 15.07.2026</time>
+          
+
+          
+            <span>Cracksoldier</span>
+          
+
+          
+            <span>1 min read</span>
+          
+
+          
+            <span>75 words</span>
+          
+
+          
+            
+              <a href="/coldnight-demo/categories/Development/" class="tag-pill" data-category-desc="Programming, languages and day-to-day engineering practice.">Development</a>
+            
+          
+
+          
+
+          
+            <button class="btn btn--icon btn--sm post-permalink-btn"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2026/05/15/syntax-highlighting-showcase/"
+                    aria-label="Copy link to post"
+                    title="Copy permalink">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+                <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+              </svg>
+            </button>
+          
+          
+            <button class="btn btn--icon btn--sm epub-export-btn"
+                    data-title="Syntax Highlighting Showcase"
+                    data-author="Cracksoldier"
+                    data-url="https://cracksoldier.github.io/coldnight-demo/2026/05/15/syntax-highlighting-showcase/"
+                    data-slug="syntax-highlighting-showcase"
+                    data-language="en"
+                    aria-label="Export as ePub"
+                    title="Download as ePub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/>
+              </svg>
+            </button>
+          
+        </div>
+      </header>
+
+      
+
+      
+        
+        <img src="https://picsum.photos/800/450" alt="Syntax Highlighting Showcase"
+             class="post-cover" loading="eager" fetchpriority="high">
+        
+      
+
+      
+
+      
+
+      <div class="post-body prose">
+        <p>Every code block on this blog is processed at build time by <abbr class="glossary-term" title="A fast Node.js static site generator that turns Markdown into HTML at build time.">Hexo</abbr>’s highlight.js renderer. The output is static HTML — no runtime JS required for coloring.</p>
+<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><figure class="highlight javascript" data-lang="javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// Fibonacci with memoisation</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">fib</span>(<span class="hljs-params">n, memo = &#123;&#125;</span>) &#123;<br>  <span class="hljs-keyword">if</span> (n <span class="hljs-keyword">in</span> memo) <span class="hljs-keyword">return</span> memo[n]<br>  <span class="hljs-keyword">if</span> (n &lt;= <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> n<br>  memo[n] = <span class="hljs-title function_">fib</span>(n - <span class="hljs-number">1</span>, memo) + <span class="hljs-title function_">fib</span>(n - <span class="hljs-number">2</span>, memo)<br>  <span class="hljs-keyword">return</span> memo[n]<br>&#125;<br><br><span class="hljs-keyword">const</span> results = <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(&#123; <span class="hljs-attr">length</span>: <span class="hljs-number">10</span> &#125;, <span class="hljs-function">(<span class="hljs-params">_, i</span>) =&gt;</span> <span class="hljs-title function_">fib</span>(i))<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(results) <span class="hljs-comment">// [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h2><figure class="highlight typescript" data-lang="typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Post</span> &#123;<br>  <span class="hljs-attr">title</span>: <span class="hljs-built_in">string</span><br>  <span class="hljs-attr">date</span>: <span class="hljs-title class_">Date</span><br>  <span class="hljs-attr">tags</span>: <span class="hljs-built_in">string</span>[]<br>  <span class="hljs-attr">published</span>: <span class="hljs-built_in">boolean</span><br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">formatPost</span>(<span class="hljs-params"><span class="hljs-attr">post</span>: <span class="hljs-title class_">Post</span></span>): <span class="hljs-built_in">string</span> &#123;<br>  <span class="hljs-keyword">const</span> tags = post.<span class="hljs-property">tags</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">t</span> =&gt;</span> <span class="hljs-string">`#<span class="hljs-subst">$&#123;t&#125;</span>`</span>).<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27; &#x27;</span>)<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">`[<span class="hljs-subst">$&#123;post.date.toISOString().slice(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>)&#125;</span>] <span class="hljs-subst">$&#123;post.title&#125;</span> — <span class="hljs-subst">$&#123;tags&#125;</span>`</span><br>&#125;<br><br><span class="hljs-keyword">const</span> <span class="hljs-attr">demo</span>: <span class="hljs-title class_">Post</span> = &#123;<br>  <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Syntax Highlighting Showcase&#x27;</span>,<br>  <span class="hljs-attr">date</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-string">&#x27;2026-05-15&#x27;</span>),<br>  <span class="hljs-attr">tags</span>: [<span class="hljs-string">&#x27;code&#x27;</span>, <span class="hljs-string">&#x27;hexo&#x27;</span>],<br>  <span class="hljs-attr">published</span>: <span class="hljs-literal">true</span>,<br>&#125;<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">formatPost</span>(demo))<br></code></pre></td></tr></table></figure>
+
+<h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h2><figure class="highlight python" data-lang="python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> dataclass, field<br><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Optional</span><br><span class="hljs-keyword">import</span> re<br><br><span class="hljs-meta">@dataclass</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">BlogPost</span>:<br>    title: <span class="hljs-built_in">str</span><br>    slug: <span class="hljs-built_in">str</span><br>    tags: <span class="hljs-built_in">list</span>[<span class="hljs-built_in">str</span>] = field(default_factory=<span class="hljs-built_in">list</span>)<br>    word_count: <span class="hljs-built_in">int</span> = <span class="hljs-number">0</span><br><br><span class="hljs-meta">    @classmethod</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">from_markdown</span>(<span class="hljs-params">cls, raw: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-string">&#x27;BlogPost&#x27;</span>:<br>        title_match = re.search(<span class="hljs-string">r&#x27;^# (.+)$&#x27;</span>, raw, re.MULTILINE)<br>        title = title_match.group(<span class="hljs-number">1</span>) <span class="hljs-keyword">if</span> title_match <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;Untitled&#x27;</span><br>        slug = re.sub(<span class="hljs-string">r&#x27;\W+&#x27;</span>, <span class="hljs-string">&#x27;-&#x27;</span>, title.lower()).strip(<span class="hljs-string">&#x27;-&#x27;</span>)<br>        words = <span class="hljs-built_in">len</span>(re.findall(<span class="hljs-string">r&#x27;\w+&#x27;</span>, raw))<br>        <span class="hljs-keyword">return</span> cls(title=title, slug=slug, word_count=words)<br><br>post = BlogPost.from_markdown(<span class="hljs-string">&#x27;# Hello World\n\nThis is a test.&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;post.slug&#125;</span>: <span class="hljs-subst">&#123;post.word_count&#125;</span> words&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><figure class="highlight css" data-lang="css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-comment">/* Card component with hover transition */</span><br><span class="hljs-selector-class">.post-card</span> &#123;<br>  <span class="hljs-attribute">background</span>: <span class="hljs-number">#0f2040</span>;<br>  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#1e3a6e</span>;<br>  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">10px</span>;<br>  <span class="hljs-attribute">overflow</span>: hidden;<br>  <span class="hljs-attribute">transition</span>: border-color <span class="hljs-number">0.15s</span> ease, box-shadow <span class="hljs-number">0.15s</span> ease;<br>&#125;<br><br><span class="hljs-selector-class">.post-card</span><span class="hljs-selector-pseudo">:hover</span> &#123;<br>  <span class="hljs-attribute">border-color</span>: <span class="hljs-number">#2563eb</span>;<br>  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">4px</span> <span class="hljs-number">16px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.4</span>);<br>&#125;<br><br><span class="hljs-selector-class">.post-card__title</span> &#123;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1rem</span>;<br>  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">600</span>;<br>  <span class="hljs-attribute">color</span>: <span class="hljs-number">#e2e8f0</span>;<br>  <span class="hljs-attribute">display</span>: -webkit-box;<br>  -webkit-<span class="hljs-selector-tag">line</span>-clamp: <span class="hljs-number">2</span>;<br>  -webkit-<span class="hljs-attribute">box-orient</span>: vertical;<br>  <span class="hljs-attribute">overflow</span>: hidden;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><figure class="highlight json" data-lang="json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;coldnight&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.0.0&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Dark deep-navy Hexo blog theme&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;config&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;navbar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;My Blog&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;links&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>        <span class="hljs-punctuation">&#123;</span> <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Home&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;url&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/&quot;</span> <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-punctuation">&#123;</span> <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Archive&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;url&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/archives&quot;</span> <span class="hljs-punctuation">&#125;</span><br>      <span class="hljs-punctuation">]</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;lightgallery&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;enabled&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;zoom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;thumbnail&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="Bash"><a href="#Bash" class="headerlink" title="Bash"></a>Bash</h2><figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/usr/bin/env bash</span><br><span class="hljs-built_in">set</span> -euo pipefail<br><br>BLOG_DIR=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;1:-<span class="hljs-variable">$PWD</span>&#125;</span>&quot;</span><br>OUTPUT_DIR=<span class="hljs-string">&quot;<span class="hljs-variable">$BLOG_DIR</span>/public&quot;</span><br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Building blog at <span class="hljs-variable">$BLOG_DIR</span>...&quot;</span><br><span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$BLOG_DIR</span>&quot;</span><br><br><span class="hljs-comment"># Clean previous build</span><br>hexo clean<br><br><span class="hljs-comment"># Generate and count output files</span><br>hexo generate 2&gt;&amp;1 | <span class="hljs-built_in">tee</span> /tmp/hexo.log<br>FILE_COUNT=$(find <span class="hljs-string">&quot;<span class="hljs-variable">$OUTPUT_DIR</span>&quot;</span> -name <span class="hljs-string">&#x27;*.html&#x27;</span> | <span class="hljs-built_in">wc</span> -l)<br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Done — generated <span class="hljs-variable">$&#123;FILE_COUNT&#125;</span> HTML files&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="YAML"><a href="#YAML" class="headerlink" title="YAML"></a>YAML</h2><figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># Theme configuration</span><br><span class="hljs-attr">navbar:</span><br>  <span class="hljs-attr">title:</span> <span class="hljs-string">&quot;Coldnight&quot;</span><br>  <span class="hljs-attr">links:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Home</span><br>      <span class="hljs-attr">url:</span> <span class="hljs-string">/</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Archive</span><br>      <span class="hljs-attr">url:</span> <span class="hljs-string">/archives</span><br><br><span class="hljs-attr">sidebar:</span><br>  <span class="hljs-attr">position:</span> <span class="hljs-string">right</span><br>  <span class="hljs-attr">widgets:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">recent_posts</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">tags</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">archives</span><br><br><span class="hljs-attr">lightgallery:</span><br>  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">auto_mount:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">zoom:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">thumbnail:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><figure class="highlight sql" data-lang="sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- Top 10 posts by view count in the last 30 days</span><br><span class="hljs-keyword">SELECT</span><br>    p.slug,<br>    p.title,<br>    <span class="hljs-built_in">COUNT</span>(v.id)        <span class="hljs-keyword">AS</span> views,<br>    <span class="hljs-built_in">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> v.visitor_id) <span class="hljs-keyword">AS</span> unique_visitors<br><span class="hljs-keyword">FROM</span> posts p<br><span class="hljs-keyword">JOIN</span> page_views v<br>    <span class="hljs-keyword">ON</span> v.post_id <span class="hljs-operator">=</span> p.id<br>   <span class="hljs-keyword">AND</span> v.viewed_at <span class="hljs-operator">&gt;=</span> NOW() <span class="hljs-operator">-</span> <span class="hljs-type">INTERVAL</span> <span class="hljs-string">&#x27;30 days&#x27;</span><br><span class="hljs-keyword">WHERE</span> p.published <span class="hljs-operator">=</span> <span class="hljs-literal">TRUE</span><br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> p.id, p.slug, p.title<br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> views <span class="hljs-keyword">DESC</span><br>LIMIT <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Downloadable-filename-chip"><a href="#Downloadable-filename-chip" class="headerlink" title="Downloadable filename chip"></a>Downloadable filename chip</h2><p>A first-line <code>// filename: ...</code> comment (or <code>#</code>&#x2F;<code>/* */</code> for other languages) tags a block with a source filename. It renders as a chip in the toolbar — click it to download the block’s contents as that file.</p>
+<figure class="highlight javascript" data-lang="javascript" data-filename="fib.js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fib</span>(<span class="hljs-params">n, memo = &#123;&#125;</span>) &#123;<br>  <span class="hljs-keyword">if</span> (n <span class="hljs-keyword">in</span> memo) <span class="hljs-keyword">return</span> memo[n]<br>  <span class="hljs-keyword">if</span> (n &lt;= <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> n<br>  memo[n] = <span class="hljs-title function_">fib</span>(n - <span class="hljs-number">1</span>, memo) + <span class="hljs-title function_">fib</span>(n - <span class="hljs-number">2</span>, memo)<br>  <span class="hljs-keyword">return</span> memo[n]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+      </div>
+
+      <footer class="post-footer">
+
+        
+          <div class="post-tags">
+            
+              <a href="/coldnight-demo/tags/code/" class="tag-pill">#code</a>
+            
+              <a href="/coldnight-demo/tags/syntax-highlighting/" class="tag-pill">#syntax-highlighting</a>
+            
+              <a href="/coldnight-demo/tags/javascript/" class="tag-pill">#javascript</a>
+            
+              <a href="/coldnight-demo/tags/python/" class="tag-pill">#python</a>
+            
+          </div>
+        
+
+        
+        <div class="post-share">
+          <span class="post-share__label">Share</span>
+          <div class="post-share__btns">
+            <a class="btn btn--ghost btn--sm"
+               href="https://twitter.com/intent/tweet?text=Syntax%20Highlighting%20Showcase&url=https%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2026%2F05%2F15%2Fsyntax-highlighting-showcase%2F"
+               target="_blank" rel="noopener noreferrer">X / Twitter</a>
+            <a class="btn btn--ghost btn--sm"
+               href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2026%2F05%2F15%2Fsyntax-highlighting-showcase%2F"
+               target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a class="btn btn--ghost btn--sm"
+               href="https://bsky.app/intent/compose?text=Syntax%20Highlighting%20Showcase%0A%0Ahttps%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2026%2F05%2F15%2Fsyntax-highlighting-showcase%2F"
+               target="_blank" rel="noopener noreferrer">Bluesky</a>
+            <button class="btn btn--ghost btn--sm post-share-mastodon"
+                    data-title="Syntax Highlighting Showcase"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2026/05/15/syntax-highlighting-showcase/">Mastodon</button>
+            <button class="btn btn--ghost btn--sm post-share-copy"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2026/05/15/syntax-highlighting-showcase/">Copy link</button>
+          </div>
+        </div>
+        
+
+        <nav class="post-nav" aria-label="Post navigation">
+          <div class="post-nav__item post-nav__item--prev">
+            
+              <span class="post-nav__label">← Previous</span>
+              <a href="/coldnight-demo/2026/05/20/mermaid-diagrams-showcase/" class="post-nav__title">Diagramming with Mermaid</a>
+            
+          </div>
+          <div class="post-nav__item post-nav__item--next">
+            
+              <span class="post-nav__label">Next →</span>
+              <a href="/coldnight-demo/2026/05/08/typography-and-prose/" class="post-nav__title">Typography &amp; Prose Elements</a>
+            
+          </div>
+        </nav>
+
+      </footer>
+
+    </article>
+
+    
+
+    
+    <section class="related-posts" aria-labelledby="related-heading">
+      <h3 class="related-posts__heading" id="related-heading">You might also like</h3>
+      <div class="post-grid" style="--post-grid-cols: 2; --post-grid-cols-md: 2;">
+        
+          
+
+<article class="post-card fade-in">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/04/17/diff-and-marked-lines/" tabindex="-1" aria-hidden="true">
+      <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Development/" class="post-card__category" data-category-desc="Programming, languages and day-to-day engineering practice.">Development</a>
+      
+      
+        <span>1 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/04/17/diff-and-marked-lines/" class="post-card__title">
+      Diff Highlighting &amp; Marked Lines
+    </a>
+
+    
+      <div class="post-card__excerpt">Two advanced code block features — diff language for showing additions and deletions, and the mark option for highlighting specific lines.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-04-17T09:30:00.000Z">17.04.2026</time>
+      <a href="/coldnight-demo/2026/04/17/diff-and-marked-lines/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+        
+          
+
+<article class="post-card fade-in" style="--card-border: #f5c518; --card-bg: #1c1608">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/04/10/javascript-async-patterns/" tabindex="-1" aria-hidden="true">
+      <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Development/" class="post-card__category" data-category-desc="Programming, languages and day-to-day engineering practice.">Development</a>
+      
+      
+        <span>1 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/04/10/javascript-async-patterns/" class="post-card__title">
+      Modern JavaScript Async Patterns
+    </a>
+
+    
+      <div class="post-card__excerpt">A practical reference for async/await, Promise combinators, AbortController, and async generators — with annotated examples.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-04-10T08:00:00.000Z">10.04.2026</time>
+      <a href="/coldnight-demo/2026/04/10/javascript-async-patterns/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+        
+          
+
+<article class="post-card fade-in">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/03/27/python-tooling/" tabindex="-1" aria-hidden="true">
+      <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Development/" class="post-card__category" data-category-desc="Programming, languages and day-to-day engineering practice.">Development</a>
+      
+      
+        <span>1 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/03/27/python-tooling/" class="post-card__title">
+      Python Tooling in 2026
+    </a>
+
+    
+      <div class="post-card__excerpt">uv, ruff, pyproject.toml, and type annotations — the modern Python toolchain that makes dependency management and code quality feel effortless.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-03-27T09:00:00.000Z">27.03.2026</time>
+      <a href="/coldnight-demo/2026/03/27/python-tooling/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+        
+      </div>
+    </section>
+    
+
+  </main>
+
+  
+    
+
+
+<aside class="sidebar" role="complementary" aria-label="Sidebar">
+  
+    
+      
+        
+
+<div class="sidebar-widget widget-toc">
+  <button class="widget-toc__toggle" aria-expanded="true" aria-controls="toc-list">
+    <span class="sidebar-widget__title">Contents</span>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+  <nav id="toc-list" aria-label="Table of contents">
+    <ol class="toc-list">
+<li class="toc-item toc-item--h2"><a href="#JavaScript" class="toc-link">JavaScript</a></li>
+<li class="toc-item toc-item--h2"><a href="#TypeScript" class="toc-link">TypeScript</a></li>
+<li class="toc-item toc-item--h2"><a href="#Python" class="toc-link">Python</a></li>
+<li class="toc-item toc-item--h2"><a href="#CSS" class="toc-link">CSS</a></li>
+<li class="toc-item toc-item--h2"><a href="#JSON" class="toc-link">JSON</a></li>
+<li class="toc-item toc-item--h2"><a href="#Bash" class="toc-link">Bash</a></li>
+<li class="toc-item toc-item--h2"><a href="#YAML" class="toc-link">YAML</a></li>
+<li class="toc-item toc-item--h2"><a href="#SQL" class="toc-link">SQL</a></li>
+<li class="toc-item toc-item--h2"><a href="#Downloadable-filename-chip" class="toc-link">Downloadable filename chip</a></li>
+</ol>
+  </nav>
+</div>
+
+
+      
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Recent Posts</p>
+  <ul class="sidebar-widget__list">
+    
+      <li>
+        <a href="/coldnight-demo/2026/08/23/chart-demo/">
+          <span>Build-Time SVG Charts</span>
+          <span class="sidebar-widget__count">23.08.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/07/11/video-embed-demo/">
+          <span>Video Embed Demo</span>
+          <span class="sidebar-widget__count">11.07.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/07/02/image-compare-demo/">
+          <span>Image Compare Slider Demo</span>
+          <span class="sidebar-widget__count">02.07.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/06/03/audio-player-demo/">
+          <span>Audio Player Demo</span>
+          <span class="sidebar-widget__count">03.06.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/06/01/3d-model-viewer-demo/">
+          <span>3D Model Viewer</span>
+          <span class="sidebar-widget__count">01.06.</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Tags</p>
+  <div class="tag-cloud">
+    
+      <a href="/coldnight-demo/tags/3d/" class="tag-pill">
+        3d <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/api-design/" class="tag-pill">
+        api-design <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/async/" class="tag-pill">
+        async <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/audio/" class="tag-pill">
+        audio <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/background-jobs/" class="tag-pill">
+        background-jobs <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/bash/" class="tag-pill">
+        bash <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/build-systems/" class="tag-pill">
+        build-systems <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/callouts/" class="tag-pill">
+        callouts <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/charts/" class="tag-pill">
+        charts <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/cli/" class="tag-pill">
+        cli <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/code/" class="tag-pill">
+        code <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/concurrency/" class="tag-pill">
+        concurrency <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/configuration/" class="tag-pill">
+        configuration <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/css/" class="tag-pill">
+        css <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/databases/" class="tag-pill">
+        databases <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/dataviz/" class="tag-pill">
+        dataviz <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/debugging/" class="tag-pill">
+        debugging <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/diagrams/" class="tag-pill">
+        diagrams <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/diff/" class="tag-pill">
+        diff <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/documentation/" class="tag-pill">
+        documentation <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/dotfiles/" class="tag-pill">
+        dotfiles <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/errors/" class="tag-pill">
+        errors <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/features/" class="tag-pill">
+        features <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/flexbox/" class="tag-pill">
+        flexbox <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/frontend/" class="tag-pill">
+        frontend <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/gallery/" class="tag-pill">
+        gallery <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/git/" class="tag-pill">
+        git <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/go/" class="tag-pill">
+        go <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/grid/" class="tag-pill">
+        grid <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/hexo/" class="tag-pill">
+        hexo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/images/" class="tag-pill">
+        images <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/infrastructure/" class="tag-pill">
+        infrastructure <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/javascript/" class="tag-pill">
+        javascript <span class="tag-cloud__count">(3)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/katex/" class="tag-pill">
+        katex <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/latex/" class="tag-pill">
+        latex <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/layout/" class="tag-pill">
+        layout <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/lightgallery/" class="tag-pill">
+        lightgallery <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/linux/" class="tag-pill">
+        linux <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/markdown/" class="tag-pill">
+        markdown <span class="tag-cloud__count">(3)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/math/" class="tag-pill">
+        math <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/memory/" class="tag-pill">
+        memory <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/mermaid/" class="tag-pill">
+        mermaid <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/monorepo/" class="tag-pill">
+        monorepo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/packaging/" class="tag-pill">
+        packaging <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/patterns/" class="tag-pill">
+        patterns <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/postgres/" class="tag-pill">
+        postgres <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/productivity/" class="tag-pill">
+        productivity <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/promises/" class="tag-pill">
+        promises <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/python/" class="tag-pill">
+        python <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/queues/" class="tag-pill">
+        queues <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/redis/" class="tag-pill">
+        redis <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/responsive-design/" class="tag-pill">
+        responsive-design <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/scripting/" class="tag-pill">
+        scripting <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/search/" class="tag-pill">
+        search <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/setup/" class="tag-pill">
+        setup <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/sql/" class="tag-pill">
+        sql <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/syntax-highlighting/" class="tag-pill">
+        syntax-highlighting <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/terminal/" class="tag-pill">
+        terminal <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/theme/" class="tag-pill">
+        theme <span class="tag-cloud__count">(5)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/threejs/" class="tag-pill">
+        threejs <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/timeline/" class="tag-pill">
+        timeline <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/tooling/" class="tag-pill">
+        tooling <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/turborepo/" class="tag-pill">
+        turborepo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/typography/" class="tag-pill">
+        typography <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/uv/" class="tag-pill">
+        uv <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/ux/" class="tag-pill">
+        ux <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/version-control/" class="tag-pill">
+        version-control <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/video/" class="tag-pill">
+        video <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/webgl/" class="tag-pill">
+        webgl <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/workflow/" class="tag-pill">
+        workflow <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/writing/" class="tag-pill">
+        writing <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/zsh/" class="tag-pill">
+        zsh <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+  </div>
+</div>
+
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Archives</p>
+  <ul class="sidebar-widget__list">
+    
+    
+      <li>
+        <a href="/coldnight-demo/archives/2026">
+          <span>2026</span>
+          <span class="sidebar-widget__count">19</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/archives/2025">
+          <span>2025</span>
+          <span class="sidebar-widget__count">4</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/archives/2024">
+          <span>2024</span>
+          <span class="sidebar-widget__count">5</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+    
+  
+    
+      
+        
+
+<div class="sidebar-widget widget-about">
+  <p class="sidebar-widget__title">About</p>
+  
+  
+    <p class="widget-about__name">Cracksoldier</p>
+  
+  
+    <p class="widget-about__bio">A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.</p>
+  
+  <div class="widget-about__social">
+    
+    
+  </div>
+</div>
+
+
+      
+    
+  
+</aside>
+
+  
+
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <ul class="footer-links">
+      
+      
+      
+        <li><a href="/coldnight-demo/atom.xml">RSS</a></li>
+      
+    </ul>
+    <span>&copy; 2026 Cracksoldier. Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> &middot; coldnight v1.9.1</span>
+  </div>
+</footer>
+
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+<script src="/coldnight-demo/js/back-to-top.js" defer></script>
+
+<script src="/coldnight-demo/js/search.js" data-search-url="/coldnight-demo/search.json" defer></script>
+
+
+<div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+
+
+
+<button class="toc-fab" id="toc-drawer-btn"
+        aria-label="Open table of contents"
+        aria-expanded="false"
+        aria-controls="toc-drawer">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <line x1="3" y1="6"  x2="21" y2="6"/>
+    <line x1="3" y1="12" x2="15" y2="12"/>
+    <line x1="3" y1="18" x2="18" y2="18"/>
+  </svg>
+</button>
+<div class="toc-drawer" id="toc-drawer" hidden
+     role="dialog" aria-modal="true" aria-label="Table of contents">
+  <div class="toc-drawer__overlay" id="toc-drawer-overlay"></div>
+  <div class="toc-drawer__panel">
+    <div class="toc-drawer__header">
+      <span class="toc-drawer__title">Contents</span>
+      <button class="toc-drawer__close" id="toc-drawer-close"
+              aria-label="Close table of contents">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="18" y1="6"  x2="6"  y2="18"/>
+          <line x1="6"  y1="6"  x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="toc-drawer__body" aria-label="Table of contents">
+      <ol class="toc-list">
+<li class="toc-item toc-item--h2"><a href="#JavaScript" class="toc-link">JavaScript</a></li>
+<li class="toc-item toc-item--h2"><a href="#TypeScript" class="toc-link">TypeScript</a></li>
+<li class="toc-item toc-item--h2"><a href="#Python" class="toc-link">Python</a></li>
+<li class="toc-item toc-item--h2"><a href="#CSS" class="toc-link">CSS</a></li>
+<li class="toc-item toc-item--h2"><a href="#JSON" class="toc-link">JSON</a></li>
+<li class="toc-item toc-item--h2"><a href="#Bash" class="toc-link">Bash</a></li>
+<li class="toc-item toc-item--h2"><a href="#YAML" class="toc-link">YAML</a></li>
+<li class="toc-item toc-item--h2"><a href="#SQL" class="toc-link">SQL</a></li>
+<li class="toc-item toc-item--h2"><a href="#Downloadable-filename-chip" class="toc-link">Downloadable filename chip</a></li>
+</ol>
+    </nav>
+  </div>
+</div>
+
+
+
+
+<script src="/coldnight-demo/js/nav.js" defer></script>
+<script src="/coldnight-demo/js/copy-code.js" data-collapse-lines="25" defer></script>
+
+<script src="/coldnight-demo/js/category-tooltip.js" defer></script>
+
+
+<script src="/coldnight-demo/js/toc.js" defer></script>
+<script src="/coldnight-demo/js/toc-drawer.js" defer></script>
+
+
+<script src="/coldnight-demo/js/post-title.js" defer></script>
+
+
+<script src="/coldnight-demo/js/reading-progress.js" defer></script>
+
+<script src="/coldnight-demo/js/post-nav-keys.js" defer></script>
+
+<script src="/coldnight-demo/vendor/jszip/jszip.min.js" defer></script>
+<script src="/coldnight-demo/js/epub-export.js" defer></script>
+
+
+<script src="/coldnight-demo/js/pdf-viewer.js" defer></script>
+
+
+
+  <script src="/coldnight-demo/vendor/lightgallery/lightgallery.umd.js" defer></script>
+  
+  <script src="/coldnight-demo/vendor/lightgallery/lg-zoom.umd.js" defer></script>
+  
+  
+  <script src="/coldnight-demo/vendor/lightgallery/lg-thumbnail.umd.js" defer></script>
+  
+  
+  <script src="/coldnight-demo/js/gallery.js" defer></script>
+  
+
+
+<script type="module">
+  import mermaid from '/coldnight-demo/vendor/mermaid/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+</script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Links | coldnight demo</title>
+<meta name="description" content="A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.">
+<meta name="author" content="Cracksoldier">
+
+
+<!-- Open Graph -->
+<meta property="og:title" content="Links">
+<meta property="og:description" content="A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cracksoldier.github.io/coldnight-demo/links/">
+<meta property="og:site_name" content="coldnight demo">
+<meta property="og:locale" content="en_US">
+
+<meta property="og:image" content="https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg">
+
+
+
+<link rel="canonical" href="https://cracksoldier.github.io/coldnight-demo/links/">
+
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Links">
+<meta name="twitter:description" content="A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.">
+
+
+<meta name="twitter:image" content="https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg">
+
+
+<!-- Favicon -->
+
+
+<link rel="icon" type="image/svg+xml" href="/coldnight-demo/favicon.svg">
+
+
+<!-- Fonts (self-hosted, latin + latin-ext) -->
+<link rel="preload" href="/coldnight-demo/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Theme stylesheet -->
+<link rel="stylesheet" href="/coldnight-demo/css/style.css">
+
+
+<!-- Cross-document View Transitions (progressive enhancement; inline because compiled SCSS can't read theme config) -->
+<style>@media not (prefers-reduced-motion: reduce){@view-transition{navigation:auto}}</style>
+
+
+<!-- LightGallery CSS — post pages only -->
+
+
+<!-- KaTeX CSS — post pages only -->
+
+
+<!-- RSS -->
+
+<link rel="alternate" type="application/rss+xml" title="coldnight demo" href="/coldnight-demo/atom.xml">
+
+
+<link rel="alternate" type="application/feed+json" title="coldnight demo" href="/coldnight-demo/feed.json">
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="navbar" role="banner">
+  <div class="navbar__inner">
+
+    <!-- Brand -->
+    <a href="/coldnight-demo/" class="navbar__brand" aria-label="My Blog — home">
+      
+      
+      <span class="navbar__brand-text navbar__brand-text--icon">
+        
+        <span class="navbar__logo navbar__logo--text" aria-hidden="true" style="color: #60a5fa">❄</span>
+        
+        <span class="navbar__title">My Blog</span>
+        
+      </span>
+      
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="navbar__nav" aria-label="Main navigation" id="main-nav">
+      
+        
+        <a href="/coldnight-demo/"
+           class="nav-link"
+           >
+          Home
+        </a>
+      
+        
+        <a href="/coldnight-demo/archives"
+           class="nav-link"
+           >
+          Archive
+        </a>
+      
+        
+        <a href="/coldnight-demo/stats"
+           class="nav-link"
+           >
+          Stats
+        </a>
+      
+        
+        <a href="/coldnight-demo/links"
+           class="nav-link active"
+           aria-current=&#34;page&#34;>
+          Links
+        </a>
+      
+        
+        <a href="/coldnight-demo/showroom"
+           class="nav-link"
+           >
+          Showroom
+        </a>
+      
+        
+        <a href="/coldnight-demo/about"
+           class="nav-link"
+           >
+          About
+        </a>
+      
+    </nav>
+
+    <!-- Actions -->
+    <div class="navbar__actions">
+      
+
+      <!-- GitHub -->
+      
+
+      
+      <div class="search-wrap navbar__search" id="search-wrap">
+        <input type="search"
+               role="combobox"
+               class="search-input"
+               id="search-input"
+               placeholder="Search…"
+               aria-label="Search posts"
+               aria-expanded="false"
+               aria-autocomplete="list"
+               aria-haspopup="listbox"
+               aria-controls="search-results"
+               autocomplete="off"
+               spellcheck="false">
+        <div class="search-results" id="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      
+
+      <!-- Mobile hamburger -->
+      <button class="btn btn--icon navbar__hamburger"
+              id="nav-toggle"
+              aria-expanded="false"
+              aria-controls="mobile-nav"
+              aria-label="Toggle navigation">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="2" y1="4.5" x2="16" y2="4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="13.5" x2="16" y2="13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile nav drawer -->
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+  
+  <div class="search-wrap mobile-nav__search" id="search-wrap-mobile">
+    <input type="search"
+           role="combobox"
+           class="search-input"
+           id="search-input-mobile"
+           placeholder="Search…"
+           aria-label="Search posts"
+           aria-expanded="false"
+           aria-autocomplete="list"
+           aria-haspopup="listbox"
+           aria-controls="search-results-mobile"
+           autocomplete="off"
+           spellcheck="false">
+    <div class="search-results" id="search-results-mobile" role="listbox" aria-label="Search results"></div>
+  </div>
+  
+  
+    
+    <a href="/coldnight-demo/"
+       class="nav-link"
+       >
+      Home
+    </a>
+  
+    
+    <a href="/coldnight-demo/archives"
+       class="nav-link"
+       >
+      Archive
+    </a>
+  
+    
+    <a href="/coldnight-demo/stats"
+       class="nav-link"
+       >
+      Stats
+    </a>
+  
+    
+    <a href="/coldnight-demo/links"
+       class="nav-link active"
+       aria-current=&#34;page&#34;>
+      Links
+    </a>
+  
+    
+    <a href="/coldnight-demo/showroom"
+       class="nav-link"
+       >
+      Showroom
+    </a>
+  
+    
+    <a href="/coldnight-demo/about"
+       class="nav-link"
+       >
+      About
+    </a>
+  
+</nav>
+
+
+
+
+<div class="archive-wrapper">
+  <main id="main-content" role="main">
+
+    <header class="page-header">
+      <h1>Links</h1>
+      
+        <p class="page-header__subtitle">Reference material worth keeping within reach.</p>
+      
+      <p class="page-header__meta" data-links-total="10">10 links</p>
+    </header>
+
+    
+    <div class="links-filters filter-bar" role="group" aria-label="Filter links by tag">
+      <button type="button" class="filter-chip filter-chip--active" data-filter-value="" aria-pressed="true">All</button>
+      
+        <button type="button" class="filter-chip" data-filter-value="architecture" aria-pressed="false">#architecture</button>
+      
+        <button type="button" class="filter-chip" data-filter-value="cli" aria-pressed="false">#cli</button>
+      
+        <button type="button" class="filter-chip" data-filter-value="css" aria-pressed="false">#css</button>
+      
+        <button type="button" class="filter-chip" data-filter-value="database" aria-pressed="false">#database</button>
+      
+        <button type="button" class="filter-chip" data-filter-value="docs" aria-pressed="false">#docs</button>
+      
+        <button type="button" class="filter-chip" data-filter-value="go" aria-pressed="false">#go</button>
+      
+        <button type="button" class="filter-chip" data-filter-value="learning" aria-pressed="false">#learning</button>
+      
+        <button type="button" class="filter-chip" data-filter-value="reference" aria-pressed="false">#reference</button>
+      
+        <button type="button" class="filter-chip" data-filter-value="tools" aria-pressed="false">#tools</button>
+      
+    </div>
+    
+
+    <div class="links-grid">
+      
+        <article class="link-card" data-tags="docs|tools">
+          
+          <div class="link-card__body">
+            <h2 class="link-card__title">Hexo Documentation</h2>
+            
+              <p class="link-card__subtitle">Static site generator</p>
+            
+            <p class="link-card__abstract">The official reference for Hexo — covers installation, configuration, deployment, theme development, and the plugin API.</p>
+            
+              <div class="link-card__tags">
+                
+                  <button type="button" class="link-card__tag" data-filter-value="docs">#docs</button>
+                
+                  <button type="button" class="link-card__tag" data-filter-value="tools">#tools</button>
+                
+              </div>
+            
+            <a class="link-card__url"
+               href="https://hexo.io/docs/"
+               target="_blank"
+               rel="noopener noreferrer">hexo.io ↗</a>
+          </div>
+        </article>
+      
+        <article class="link-card" data-tags="architecture">
+          
+          <div class="link-card__thumb">
+            <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+          </div>
+          
+          <div class="link-card__body">
+            <h2 class="link-card__title">The Twelve-Factor App</h2>
+            
+            <p class="link-card__abstract">A methodology for building software-as-a-service applications that are portable, scalable, and maintainable. Required reading for anyone deploying to the cloud.</p>
+            
+              <div class="link-card__tags">
+                
+                  <button type="button" class="link-card__tag" data-filter-value="architecture">#architecture</button>
+                
+              </div>
+            
+            <a class="link-card__url"
+               href="https://12factor.net/"
+               target="_blank"
+               rel="noopener noreferrer">12factor.net ↗</a>
+          </div>
+        </article>
+      
+        <article class="link-card" data-tags="tools">
+          
+          <div class="link-card__body">
+            <h2 class="link-card__title">Excalidraw</h2>
+            
+              <p class="link-card__subtitle">Virtual whiteboard</p>
+            
+            <p class="link-card__abstract">A hand-drawn-style collaborative whiteboard tool that runs entirely in the browser. Excellent for quick architecture sketches, flowcharts, and system diagrams.</p>
+            
+              <div class="link-card__tags">
+                
+                  <button type="button" class="link-card__tag" data-filter-value="tools">#tools</button>
+                
+              </div>
+            
+            <a class="link-card__url"
+               href="https://excalidraw.com/"
+               target="_blank"
+               rel="noopener noreferrer">excalidraw.com ↗</a>
+          </div>
+        </article>
+      
+        <article class="link-card" data-tags="cli|learning">
+          
+          <div class="link-card__thumb">
+            <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+          </div>
+          
+          <div class="link-card__body">
+            <h2 class="link-card__title">explainshell.com</h2>
+            
+            <p class="link-card__abstract">Paste any shell command and get an annotated breakdown of every flag, argument, and pipe. Invaluable when reading Makefiles or unfamiliar shell scripts.</p>
+            
+              <div class="link-card__tags">
+                
+                  <button type="button" class="link-card__tag" data-filter-value="cli">#cli</button>
+                
+                  <button type="button" class="link-card__tag" data-filter-value="learning">#learning</button>
+                
+              </div>
+            
+            <a class="link-card__url"
+               href="https://explainshell.com/"
+               target="_blank"
+               rel="noopener noreferrer">explainshell.com ↗</a>
+          </div>
+        </article>
+      
+        <article class="link-card" data-tags="css|reference">
+          
+          <div class="link-card__body">
+            <h2 class="link-card__title">CSS Tricks — A Complete Guide to Flexbox</h2>
+            
+              <p class="link-card__subtitle">css-tricks.com</p>
+            
+            <p class="link-card__abstract">The definitive visual reference for CSS Flexbox. Properties for both the container and child items, with diagrams for every value. Bookmarked permanently.</p>
+            
+              <div class="link-card__tags">
+                
+                  <button type="button" class="link-card__tag" data-filter-value="css">#css</button>
+                
+                  <button type="button" class="link-card__tag" data-filter-value="reference">#reference</button>
+                
+              </div>
+            
+            <a class="link-card__url"
+               href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/"
+               target="_blank"
+               rel="noopener noreferrer">css-tricks.com ↗</a>
+          </div>
+        </article>
+      
+        <article class="link-card" data-tags="cli|docs|reference">
+          
+          <div class="link-card__thumb">
+            <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+          </div>
+          
+          <div class="link-card__body">
+            <h2 class="link-card__title">jq Manual</h2>
+            
+            <p class="link-card__abstract">Full reference for jq, the command-line JSON processor. Once you know three or four patterns — select, map, group_by — it replaces a surprising amount of scripting.</p>
+            
+              <div class="link-card__tags">
+                
+                  <button type="button" class="link-card__tag" data-filter-value="cli">#cli</button>
+                
+                  <button type="button" class="link-card__tag" data-filter-value="docs">#docs</button>
+                
+                  <button type="button" class="link-card__tag" data-filter-value="reference">#reference</button>
+                
+              </div>
+            
+            <a class="link-card__url"
+               href="https://jqlang.github.io/jq/manual/"
+               target="_blank"
+               rel="noopener noreferrer">jqlang.github.io ↗</a>
+          </div>
+        </article>
+      
+        <article class="link-card" data-tags="database|docs">
+          
+          <div class="link-card__body">
+            <h2 class="link-card__title">PostgreSQL Documentation</h2>
+            
+              <p class="link-card__subtitle">Current stable release</p>
+            
+            <p class="link-card__abstract">The authoritative PostgreSQL manual. The indexing, query planning, and MVCC chapters are worth reading even if you only use Postgres at a surface level.</p>
+            
+              <div class="link-card__tags">
+                
+                  <button type="button" class="link-card__tag" data-filter-value="database">#database</button>
+                
+                  <button type="button" class="link-card__tag" data-filter-value="docs">#docs</button>
+                
+              </div>
+            
+            <a class="link-card__url"
+               href="https://www.postgresql.org/docs/current/"
+               target="_blank"
+               rel="noopener noreferrer">postgresql.org ↗</a>
+          </div>
+        </article>
+      
+        <article class="link-card" data-tags="go|learning">
+          
+          <div class="link-card__thumb">
+            <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+          </div>
+          
+          <div class="link-card__body">
+            <h2 class="link-card__title">Go Blog</h2>
+            
+            <p class="link-card__abstract">Official Go team blog. Covers language evolution, performance deep dives, tooling changes, and real-world patterns from the team that builds the language.</p>
+            
+              <div class="link-card__tags">
+                
+                  <button type="button" class="link-card__tag" data-filter-value="go">#go</button>
+                
+                  <button type="button" class="link-card__tag" data-filter-value="learning">#learning</button>
+                
+              </div>
+            
+            <a class="link-card__url"
+               href="https://go.dev/blog/"
+               target="_blank"
+               rel="noopener noreferrer">go.dev ↗</a>
+          </div>
+        </article>
+      
+        <article class="link-card" data-tags="">
+          
+          <div class="link-card__body">
+            <h2 class="link-card__title">Conventional Commits</h2>
+            
+              <p class="link-card__subtitle">Commit message specification</p>
+            
+            <p class="link-card__abstract">A lightweight specification for commit message structure. Enables automated changelogs, semantic versioning, and consistent history across teams.</p>
+            
+            <a class="link-card__url"
+               href="https://www.conventionalcommits.org/"
+               target="_blank"
+               rel="noopener noreferrer">conventionalcommits.org ↗</a>
+          </div>
+        </article>
+      
+        <article class="link-card" data-tags="learning">
+          
+          <div class="link-card__thumb">
+            <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+          </div>
+          
+          <div class="link-card__body">
+            <h2 class="link-card__title">roadmap.sh</h2>
+            
+            <p class="link-card__abstract">Community-maintained visual roadmaps for backend, frontend, DevOps, and more. Useful for finding gaps in your knowledge and discovering tools worth learning next.</p>
+            
+              <div class="link-card__tags">
+                
+                  <button type="button" class="link-card__tag" data-filter-value="learning">#learning</button>
+                
+              </div>
+            
+            <a class="link-card__url"
+               href="https://roadmap.sh/"
+               target="_blank"
+               rel="noopener noreferrer">roadmap.sh ↗</a>
+          </div>
+        </article>
+      
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <ul class="footer-links">
+      
+      
+      
+        <li><a href="/coldnight-demo/atom.xml">RSS</a></li>
+      
+    </ul>
+    <span>&copy; 2026 Cracksoldier. Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> &middot; coldnight v1.9.1</span>
+  </div>
+</footer>
+
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+<script src="/coldnight-demo/js/back-to-top.js" defer></script>
+
+<script src="/coldnight-demo/js/search.js" data-search-url="/coldnight-demo/search.json" defer></script>
+
+
+<div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+
+<script src="/coldnight-demo/js/nav.js" defer></script>
+<script src="/coldnight-demo/js/links-filter.js" defer></script>
+
+</body>
+</html>

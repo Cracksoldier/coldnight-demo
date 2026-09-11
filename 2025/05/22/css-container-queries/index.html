@@ -1,0 +1,1059 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>CSS Container Queries in Practice | coldnight demo</title>
+<meta name="description" content="Container queries let components respond to the size of their container rather than the viewport. After a year of using them in production, here&#39;s what actually">
+<meta name="author" content="Cracksoldier">
+
+<meta name="keywords" content="css, responsive-design, frontend">
+
+
+<!-- Open Graph -->
+<meta property="og:title" content="CSS Container Queries in Practice">
+<meta property="og:description" content="Container queries let components respond to the size of their container rather than the viewport. After a year of using them in production, here&#39;s what actually">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cracksoldier.github.io/coldnight-demo/2025/05/22/css-container-queries/">
+<meta property="og:site_name" content="coldnight demo">
+<meta property="og:locale" content="en_US">
+
+<meta property="og:image" content="https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg">
+
+
+<meta property="article:published_time" content="2025-05-22T09:00:00.000Z">
+<meta property="article:author" content="Cracksoldier">
+
+
+<link rel="canonical" href="https://cracksoldier.github.io/coldnight-demo/2025/05/22/css-container-queries/">
+
+
+<!-- Structured data -->
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"CSS Container Queries in Practice","datePublished":"2025-05-22T09:00:00.000Z","dateModified":"2025-05-22T09:00:00.000Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://cracksoldier.github.io/coldnight-demo/2025/05/22/css-container-queries/"},"description":"Container queries let components respond to the size of their container rather than the viewport. After a year of using them in production, here's what actually","author":{"@type":"Person","name":"Cracksoldier"},"publisher":{"@type":"Person","name":"Cracksoldier"},"image":"https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg","keywords":"css, responsive-design, frontend"}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cracksoldier.github.io/coldnight-demo/"},{"@type":"ListItem","position":2,"name":"Web","item":"https://cracksoldier.github.io/coldnight-demo/categories/Web/"},{"@type":"ListItem","position":3,"name":"CSS Container Queries in Practice"}]}</script>
+
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CSS Container Queries in Practice">
+<meta name="twitter:description" content="Container queries let components respond to the size of their container rather than the viewport. After a year of using them in production, here&#39;s what actually">
+
+
+<meta name="twitter:image" content="https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg">
+
+
+<!-- Favicon -->
+
+
+<link rel="icon" type="image/svg+xml" href="/coldnight-demo/favicon.svg">
+
+
+<!-- Fonts (self-hosted, latin + latin-ext) -->
+<link rel="preload" href="/coldnight-demo/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Theme stylesheet -->
+<link rel="stylesheet" href="/coldnight-demo/css/style.css">
+
+
+<!-- Cross-document View Transitions (progressive enhancement; inline because compiled SCSS can't read theme config) -->
+<style>@media not (prefers-reduced-motion: reduce){@view-transition{navigation:auto}}</style>
+
+
+<!-- LightGallery CSS — post pages only -->
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lightgallery.css">
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lg-zoom.css">
+
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lg-thumbnail.css">
+
+
+
+<!-- KaTeX CSS — post pages only -->
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/katex/katex.min.css">
+
+
+<!-- RSS -->
+
+<link rel="alternate" type="application/rss+xml" title="coldnight demo" href="/coldnight-demo/atom.xml">
+
+
+<link rel="alternate" type="application/feed+json" title="coldnight demo" href="/coldnight-demo/feed.json">
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+
+
+<div id="reading-progress" class="reading-progress" role="progressbar"
+     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="navbar" role="banner">
+  <div class="navbar__inner">
+
+    <!-- Brand -->
+    <a href="/coldnight-demo/" class="navbar__brand" aria-label="My Blog — home">
+      
+      
+      <span class="navbar__brand-text navbar__brand-text--icon">
+        
+        <span class="navbar__logo navbar__logo--text" aria-hidden="true" style="color: #60a5fa">❄</span>
+        
+        <span class="navbar__title">My Blog</span>
+        
+      </span>
+      
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="navbar__nav" aria-label="Main navigation" id="main-nav">
+      
+        
+        <a href="/coldnight-demo/"
+           class="nav-link"
+           >
+          Home
+        </a>
+      
+        
+        <a href="/coldnight-demo/archives"
+           class="nav-link"
+           >
+          Archive
+        </a>
+      
+        
+        <a href="/coldnight-demo/stats"
+           class="nav-link"
+           >
+          Stats
+        </a>
+      
+        
+        <a href="/coldnight-demo/links"
+           class="nav-link"
+           >
+          Links
+        </a>
+      
+        
+        <a href="/coldnight-demo/showroom"
+           class="nav-link"
+           >
+          Showroom
+        </a>
+      
+        
+        <a href="/coldnight-demo/about"
+           class="nav-link"
+           >
+          About
+        </a>
+      
+    </nav>
+
+    <!-- Actions -->
+    <div class="navbar__actions">
+      
+
+      <!-- GitHub -->
+      
+
+      
+      <div class="search-wrap navbar__search" id="search-wrap">
+        <input type="search"
+               role="combobox"
+               class="search-input"
+               id="search-input"
+               placeholder="Search…"
+               aria-label="Search posts"
+               aria-expanded="false"
+               aria-autocomplete="list"
+               aria-haspopup="listbox"
+               aria-controls="search-results"
+               autocomplete="off"
+               spellcheck="false">
+        <div class="search-results" id="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      
+
+      <!-- Mobile hamburger -->
+      <button class="btn btn--icon navbar__hamburger"
+              id="nav-toggle"
+              aria-expanded="false"
+              aria-controls="mobile-nav"
+              aria-label="Toggle navigation">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="2" y1="4.5" x2="16" y2="4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="13.5" x2="16" y2="13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile nav drawer -->
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+  
+  <div class="search-wrap mobile-nav__search" id="search-wrap-mobile">
+    <input type="search"
+           role="combobox"
+           class="search-input"
+           id="search-input-mobile"
+           placeholder="Search…"
+           aria-label="Search posts"
+           aria-expanded="false"
+           aria-autocomplete="list"
+           aria-haspopup="listbox"
+           aria-controls="search-results-mobile"
+           autocomplete="off"
+           spellcheck="false">
+    <div class="search-results" id="search-results-mobile" role="listbox" aria-label="Search results"></div>
+  </div>
+  
+  
+    
+    <a href="/coldnight-demo/"
+       class="nav-link"
+       >
+      Home
+    </a>
+  
+    
+    <a href="/coldnight-demo/archives"
+       class="nav-link"
+       >
+      Archive
+    </a>
+  
+    
+    <a href="/coldnight-demo/stats"
+       class="nav-link"
+       >
+      Stats
+    </a>
+  
+    
+    <a href="/coldnight-demo/links"
+       class="nav-link"
+       >
+      Links
+    </a>
+  
+    
+    <a href="/coldnight-demo/showroom"
+       class="nav-link"
+       >
+      Showroom
+    </a>
+  
+    
+    <a href="/coldnight-demo/about"
+       class="nav-link"
+       >
+      About
+    </a>
+  
+</nav>
+
+
+<div class="page-wrapper">
+
+  <main class="main-content post-page" id="main-content" role="main">
+
+    <article>
+
+      <header class="post-header">
+        <h1 class="post-title">CSS Container Queries in Practice</h1>
+
+        <div class="post-meta">
+          <time datetime="2025-05-22T09:00:00.000Z">
+            22.05.2025
+          </time>
+
+          
+
+          
+            <span>Cracksoldier</span>
+          
+
+          
+            <span>2 min read</span>
+          
+
+          
+            <span>381 words</span>
+          
+
+          
+            
+              <a href="/coldnight-demo/categories/Web/" class="tag-pill" data-category-desc="Browser platform features and frontend techniques.">Web</a>
+            
+          
+
+          
+
+          
+            <button class="btn btn--icon btn--sm post-permalink-btn"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2025/05/22/css-container-queries/"
+                    aria-label="Copy link to post"
+                    title="Copy permalink">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+                <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+              </svg>
+            </button>
+          
+          
+            <button class="btn btn--icon btn--sm epub-export-btn"
+                    data-title="CSS Container Queries in Practice"
+                    data-author="Cracksoldier"
+                    data-url="https://cracksoldier.github.io/coldnight-demo/2025/05/22/css-container-queries/"
+                    data-slug="css-container-queries"
+                    data-language="en"
+                    aria-label="Export as ePub"
+                    title="Download as ePub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/>
+              </svg>
+            </button>
+          
+        </div>
+      </header>
+
+      
+
+      
+
+      
+
+      
+
+      <div class="post-body prose">
+        <div class="note note-info" role="note"><span class="note-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span><div><p>This post has no <code>cover_image</code> in its <abbr class="glossary-term" title="The YAML block between --- markers at the top of a Markdown file holding page metadata.">front-matter</abbr> — the cover on its index card is the site-wide <code>cover.default</code> fallback (<code>/images/og-default.jpg</code>), which also serves as the <code>og:image</code> for social previews.</p>
+</div></div>
+
+<p>Container queries landed in all major browsers in late 2023. A year of using them in real projects has clarified where they genuinely help and where media queries are still the right tool.</p>
+<h2 id="The-problem-they-solve"><a href="#The-problem-they-solve" class="headerlink" title="The problem they solve"></a>The problem they solve</h2><p>Media queries couple a component’s layout to the viewport size. That works when a component always appears in the same position on the page, but breaks down when a component is reused in contexts of different widths — a card that appears at full width on mobile, in a two-column grid on tablet, and in a sidebar on desktop.</p>
+<p>With a media query you end up with something like:</p>
+<figure class="highlight css" data-lang="css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.card</span> &#123; <span class="hljs-comment">/* full width styles */</span> &#125;<br><br><span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">768px</span>) &#123; <span class="hljs-selector-class">.card</span> &#123; <span class="hljs-comment">/* two-column styles */</span> &#125; &#125;<br><span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">1024px</span>) &#123; <span class="hljs-selector-class">.main-content</span> <span class="hljs-selector-class">.card</span> &#123; <span class="hljs-comment">/* wide styles */</span> &#125; &#125;<br><span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">1024px</span>) &#123; <span class="hljs-selector-class">.sidebar</span> <span class="hljs-selector-class">.card</span> &#123; <span class="hljs-comment">/* narrow styles */</span> &#125; &#125;<br></code></pre></td></tr></table></figure>
+
+<p>The component’s layout is now tangled with knowledge of where it’s placed. Container queries decouple the two.</p>
+<h2 id="Basic-syntax"><a href="#Basic-syntax" class="headerlink" title="Basic syntax"></a>Basic syntax</h2><figure class="highlight css" data-lang="css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-comment">/* Establish a containment context */</span><br><span class="hljs-selector-class">.card-wrapper</span> &#123;<br>  <span class="hljs-attribute">container-type</span>: inline-size;<br>&#125;<br><br><span class="hljs-comment">/* Style the card based on its container&#x27;s width */</span><br><span class="hljs-selector-class">.card</span> &#123;<br>  <span class="hljs-attribute">display</span>: block;<br>&#125;<br><br><span class="hljs-keyword">@container</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">400px</span>) &#123;<br>  <span class="hljs-selector-class">.card</span> &#123;<br>    <span class="hljs-attribute">display</span>: grid;<br>    <span class="hljs-attribute">grid-template-columns</span>: <span class="hljs-number">200px</span> <span class="hljs-number">1</span>fr;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>The <code>.card</code> now switches layout at 400px of its <em>container</em>, not the viewport. Drop it in a narrow sidebar or a wide main area — it adapts correctly either way.</p>
+<h2 id="Named-containers"><a href="#Named-containers" class="headerlink" title="Named containers"></a>Named containers</h2><p>When components are nested, you can name containers to query a specific ancestor:</p>
+<figure class="highlight css" data-lang="css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.layout</span> &#123;<br>  <span class="hljs-attribute">container-type</span>: inline-size;<br>  <span class="hljs-attribute">container-name</span>: layout;<br>&#125;<br><br><span class="hljs-selector-class">.sidebar</span> &#123;<br>  <span class="hljs-attribute">container-type</span>: inline-size;<br>  <span class="hljs-attribute">container-name</span>: sidebar;<br>&#125;<br><br><span class="hljs-keyword">@container</span> layout (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">900px</span>) &#123;<br>  <span class="hljs-selector-class">.nav</span> &#123; <span class="hljs-attribute">flex-direction</span>: row; &#125;<br>&#125;<br><br><span class="hljs-keyword">@container</span> sidebar (<span class="hljs-attribute">max-width</span>: <span class="hljs-number">280px</span>) &#123;<br>  <span class="hljs-selector-class">.widget</span> &#123; <span class="hljs-attribute">font-size</span>: <span class="hljs-number">0.875rem</span>; &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Container-units"><a href="#Container-units" class="headerlink" title="Container units"></a>Container units</h2><p>Container queries come with their own unit set: <code>cqw</code> (1% of container width), <code>cqh</code>, <code>cqi</code> (inline), <code>cqb</code> (block), <code>cqmin</code>, <code>cqmax</code>.</p>
+<figure class="highlight css" data-lang="css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.card__title</span> &#123;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-built_in">clamp</span>(<span class="hljs-number">1rem</span>, <span class="hljs-number">4</span>cqi, <span class="hljs-number">1.5rem</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>The title scales with the container width, clamped between 1rem and 1.5rem. No JavaScript, no resize observer.</p>
+<h2 id="Where-media-queries-still-win"><a href="#Where-media-queries-still-win" class="headerlink" title="Where media queries still win"></a>Where media queries still win</h2><p>Container queries don’t replace media queries — they complement them. Use media queries for:</p>
+<ul>
+<li><strong>Page-level layout changes</strong> — switching from a single column to a sidebar layout</li>
+<li><strong>Global typography scaling</strong> — base font size relative to viewport</li>
+<li><strong>Anything that genuinely depends on screen size</strong> — print styles, orientation</li>
+</ul>
+<p>Container queries are for <strong>component-level adaptation</strong> — how a component looks given the space it has been given.</p>
+<h2 id="A-practical-example-a-stat-card"><a href="#A-practical-example-a-stat-card" class="headerlink" title="A practical example: a stat card"></a>A practical example: a stat card</h2><figure class="highlight css" data-lang="css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.stat-card-wrapper</span> &#123;<br>  <span class="hljs-attribute">container-type</span>: inline-size;<br>&#125;<br><br><span class="hljs-selector-class">.stat-card</span> &#123;<br>  <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span>;<br>&#125;<br><br><span class="hljs-selector-class">.stat-card__value</span> &#123;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.5rem</span>;<br>  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">700</span>;<br>&#125;<br><br><span class="hljs-selector-class">.stat-card__label</span> &#123;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">0.875rem</span>;<br>  <span class="hljs-attribute">color</span>: <span class="hljs-number">#666</span>;<br>&#125;<br><br><span class="hljs-comment">/* When the card has room, lay out value and label side by side */</span><br><span class="hljs-keyword">@container</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">240px</span>) &#123;<br>  <span class="hljs-selector-class">.stat-card</span> &#123;<br>    <span class="hljs-attribute">display</span>: flex;<br>    <span class="hljs-attribute">align-items</span>: baseline;<br>    <span class="hljs-attribute">gap</span>: <span class="hljs-number">0.75rem</span>;<br>  &#125;<br><br>  <span class="hljs-selector-class">.stat-card__value</span> &#123;<br>    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">2rem</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>This stat card stacks vertically in a narrow column and goes horizontal when it has the space — without any JavaScript or knowledge of where on the page it lives.</p>
+<h2 id="Browser-support"><a href="#Browser-support" class="headerlink" title="Browser support"></a>Browser support</h2><p>Container queries have full support in Chrome 105+, Safari 16+, and Firefox 110+. If you need to support older browsers, the <code>@container</code> block is safely ignored, so you can layer it on top of existing media query styles.</p>
+
+      </div>
+
+      <footer class="post-footer">
+
+        
+          <div class="post-tags">
+            
+              <a href="/coldnight-demo/tags/css/" class="tag-pill">#css</a>
+            
+              <a href="/coldnight-demo/tags/responsive-design/" class="tag-pill">#responsive-design</a>
+            
+              <a href="/coldnight-demo/tags/frontend/" class="tag-pill">#frontend</a>
+            
+          </div>
+        
+
+        
+        <div class="post-share">
+          <span class="post-share__label">Share</span>
+          <div class="post-share__btns">
+            <a class="btn btn--ghost btn--sm"
+               href="https://twitter.com/intent/tweet?text=CSS%20Container%20Queries%20in%20Practice&url=https%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2025%2F05%2F22%2Fcss-container-queries%2F"
+               target="_blank" rel="noopener noreferrer">X / Twitter</a>
+            <a class="btn btn--ghost btn--sm"
+               href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2025%2F05%2F22%2Fcss-container-queries%2F"
+               target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a class="btn btn--ghost btn--sm"
+               href="https://bsky.app/intent/compose?text=CSS%20Container%20Queries%20in%20Practice%0A%0Ahttps%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2025%2F05%2F22%2Fcss-container-queries%2F"
+               target="_blank" rel="noopener noreferrer">Bluesky</a>
+            <button class="btn btn--ghost btn--sm post-share-mastodon"
+                    data-title="CSS Container Queries in Practice"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2025/05/22/css-container-queries/">Mastodon</button>
+            <button class="btn btn--ghost btn--sm post-share-copy"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2025/05/22/css-container-queries/">Copy link</button>
+          </div>
+        </div>
+        
+
+        <nav class="post-nav" aria-label="Post navigation">
+          <div class="post-nav__item post-nav__item--prev">
+            
+              <span class="post-nav__label">← Previous</span>
+              <a href="/coldnight-demo/2025/08/19/personal-cli-toolkit/" class="post-nav__title">Building a Personal CLI Toolkit</a>
+            
+          </div>
+          <div class="post-nav__item post-nav__item--next">
+            
+              <span class="post-nav__label">Next →</span>
+              <a href="/coldnight-demo/2025/02/11/postgres-full-text-search/" class="post-nav__title">Postgres Full-Text Search Without the Overhead</a>
+            
+          </div>
+        </nav>
+
+      </footer>
+
+    </article>
+
+    
+
+    
+    <section class="related-posts" aria-labelledby="related-heading">
+      <h3 class="related-posts__heading" id="related-heading">You might also like</h3>
+      <div class="post-grid" style="--post-grid-cols: 1; --post-grid-cols-md: 1;">
+        
+          
+
+<article class="post-card fade-in">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/04/03/css-layout-techniques/" tabindex="-1" aria-hidden="true">
+      <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Design/" class="post-card__category" data-category-desc="Typography, layout and visual craft.">Design</a>
+      
+      
+        <span>1 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/04/03/css-layout-techniques/" class="post-card__title">
+      CSS Layout Techniques Worth Knowing
+    </a>
+
+    
+      <div class="post-card__excerpt">Grid, Flexbox, container queries, and logical properties — the layout tools that make responsive design feel natural rather than fought against.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-04-03T10:00:00.000Z">03.04.2026</time>
+      <a href="/coldnight-demo/2026/04/03/css-layout-techniques/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+        
+      </div>
+    </section>
+    
+
+  </main>
+
+  
+    
+
+
+<aside class="sidebar" role="complementary" aria-label="Sidebar">
+  
+    
+      
+        
+
+<div class="sidebar-widget widget-toc">
+  <button class="widget-toc__toggle" aria-expanded="true" aria-controls="toc-list">
+    <span class="sidebar-widget__title">Contents</span>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+  <nav id="toc-list" aria-label="Table of contents">
+    <ol class="toc-list">
+<li class="toc-item toc-item--h2"><a href="#The-problem-they-solve" class="toc-link">The problem they solve</a></li>
+<li class="toc-item toc-item--h2"><a href="#Basic-syntax" class="toc-link">Basic syntax</a></li>
+<li class="toc-item toc-item--h2"><a href="#Named-containers" class="toc-link">Named containers</a></li>
+<li class="toc-item toc-item--h2"><a href="#Container-units" class="toc-link">Container units</a></li>
+<li class="toc-item toc-item--h2"><a href="#Where-media-queries-still-win" class="toc-link">Where media queries still win</a></li>
+<li class="toc-item toc-item--h2"><a href="#A-practical-example-a-stat-card" class="toc-link">A practical example: a stat card</a></li>
+<li class="toc-item toc-item--h2"><a href="#Browser-support" class="toc-link">Browser support</a></li>
+</ol>
+  </nav>
+</div>
+
+
+      
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Recent Posts</p>
+  <ul class="sidebar-widget__list">
+    
+      <li>
+        <a href="/coldnight-demo/2026/08/23/chart-demo/">
+          <span>Build-Time SVG Charts</span>
+          <span class="sidebar-widget__count">23.08.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/07/11/video-embed-demo/">
+          <span>Video Embed Demo</span>
+          <span class="sidebar-widget__count">11.07.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/07/02/image-compare-demo/">
+          <span>Image Compare Slider Demo</span>
+          <span class="sidebar-widget__count">02.07.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/06/03/audio-player-demo/">
+          <span>Audio Player Demo</span>
+          <span class="sidebar-widget__count">03.06.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/06/01/3d-model-viewer-demo/">
+          <span>3D Model Viewer</span>
+          <span class="sidebar-widget__count">01.06.</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Tags</p>
+  <div class="tag-cloud">
+    
+      <a href="/coldnight-demo/tags/3d/" class="tag-pill">
+        3d <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/api-design/" class="tag-pill">
+        api-design <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/async/" class="tag-pill">
+        async <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/audio/" class="tag-pill">
+        audio <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/background-jobs/" class="tag-pill">
+        background-jobs <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/bash/" class="tag-pill">
+        bash <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/build-systems/" class="tag-pill">
+        build-systems <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/callouts/" class="tag-pill">
+        callouts <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/charts/" class="tag-pill">
+        charts <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/cli/" class="tag-pill">
+        cli <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/code/" class="tag-pill">
+        code <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/concurrency/" class="tag-pill">
+        concurrency <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/configuration/" class="tag-pill">
+        configuration <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/css/" class="tag-pill">
+        css <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/databases/" class="tag-pill">
+        databases <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/dataviz/" class="tag-pill">
+        dataviz <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/debugging/" class="tag-pill">
+        debugging <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/diagrams/" class="tag-pill">
+        diagrams <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/diff/" class="tag-pill">
+        diff <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/documentation/" class="tag-pill">
+        documentation <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/dotfiles/" class="tag-pill">
+        dotfiles <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/errors/" class="tag-pill">
+        errors <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/features/" class="tag-pill">
+        features <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/flexbox/" class="tag-pill">
+        flexbox <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/frontend/" class="tag-pill">
+        frontend <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/gallery/" class="tag-pill">
+        gallery <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/git/" class="tag-pill">
+        git <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/go/" class="tag-pill">
+        go <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/grid/" class="tag-pill">
+        grid <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/hexo/" class="tag-pill">
+        hexo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/images/" class="tag-pill">
+        images <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/infrastructure/" class="tag-pill">
+        infrastructure <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/javascript/" class="tag-pill">
+        javascript <span class="tag-cloud__count">(3)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/katex/" class="tag-pill">
+        katex <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/latex/" class="tag-pill">
+        latex <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/layout/" class="tag-pill">
+        layout <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/lightgallery/" class="tag-pill">
+        lightgallery <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/linux/" class="tag-pill">
+        linux <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/markdown/" class="tag-pill">
+        markdown <span class="tag-cloud__count">(3)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/math/" class="tag-pill">
+        math <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/memory/" class="tag-pill">
+        memory <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/mermaid/" class="tag-pill">
+        mermaid <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/monorepo/" class="tag-pill">
+        monorepo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/packaging/" class="tag-pill">
+        packaging <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/patterns/" class="tag-pill">
+        patterns <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/postgres/" class="tag-pill">
+        postgres <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/productivity/" class="tag-pill">
+        productivity <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/promises/" class="tag-pill">
+        promises <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/python/" class="tag-pill">
+        python <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/queues/" class="tag-pill">
+        queues <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/redis/" class="tag-pill">
+        redis <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/responsive-design/" class="tag-pill">
+        responsive-design <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/scripting/" class="tag-pill">
+        scripting <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/search/" class="tag-pill">
+        search <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/setup/" class="tag-pill">
+        setup <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/sql/" class="tag-pill">
+        sql <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/syntax-highlighting/" class="tag-pill">
+        syntax-highlighting <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/terminal/" class="tag-pill">
+        terminal <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/theme/" class="tag-pill">
+        theme <span class="tag-cloud__count">(5)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/threejs/" class="tag-pill">
+        threejs <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/timeline/" class="tag-pill">
+        timeline <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/tooling/" class="tag-pill">
+        tooling <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/turborepo/" class="tag-pill">
+        turborepo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/typography/" class="tag-pill">
+        typography <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/uv/" class="tag-pill">
+        uv <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/ux/" class="tag-pill">
+        ux <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/version-control/" class="tag-pill">
+        version-control <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/video/" class="tag-pill">
+        video <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/webgl/" class="tag-pill">
+        webgl <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/workflow/" class="tag-pill">
+        workflow <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/writing/" class="tag-pill">
+        writing <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/zsh/" class="tag-pill">
+        zsh <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+  </div>
+</div>
+
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Archives</p>
+  <ul class="sidebar-widget__list">
+    
+    
+      <li>
+        <a href="/coldnight-demo/archives/2026">
+          <span>2026</span>
+          <span class="sidebar-widget__count">19</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/archives/2025">
+          <span>2025</span>
+          <span class="sidebar-widget__count">4</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/archives/2024">
+          <span>2024</span>
+          <span class="sidebar-widget__count">5</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+    
+  
+    
+      
+        
+
+<div class="sidebar-widget widget-about">
+  <p class="sidebar-widget__title">About</p>
+  
+  
+    <p class="widget-about__name">Cracksoldier</p>
+  
+  
+    <p class="widget-about__bio">A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.</p>
+  
+  <div class="widget-about__social">
+    
+    
+  </div>
+</div>
+
+
+      
+    
+  
+</aside>
+
+  
+
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <ul class="footer-links">
+      
+      
+      
+        <li><a href="/coldnight-demo/atom.xml">RSS</a></li>
+      
+    </ul>
+    <span>&copy; 2026 Cracksoldier. Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> &middot; coldnight v1.9.1</span>
+  </div>
+</footer>
+
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+<script src="/coldnight-demo/js/back-to-top.js" defer></script>
+
+<script src="/coldnight-demo/js/search.js" data-search-url="/coldnight-demo/search.json" defer></script>
+
+
+<div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+
+
+
+<button class="toc-fab" id="toc-drawer-btn"
+        aria-label="Open table of contents"
+        aria-expanded="false"
+        aria-controls="toc-drawer">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <line x1="3" y1="6"  x2="21" y2="6"/>
+    <line x1="3" y1="12" x2="15" y2="12"/>
+    <line x1="3" y1="18" x2="18" y2="18"/>
+  </svg>
+</button>
+<div class="toc-drawer" id="toc-drawer" hidden
+     role="dialog" aria-modal="true" aria-label="Table of contents">
+  <div class="toc-drawer__overlay" id="toc-drawer-overlay"></div>
+  <div class="toc-drawer__panel">
+    <div class="toc-drawer__header">
+      <span class="toc-drawer__title">Contents</span>
+      <button class="toc-drawer__close" id="toc-drawer-close"
+              aria-label="Close table of contents">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="18" y1="6"  x2="6"  y2="18"/>
+          <line x1="6"  y1="6"  x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="toc-drawer__body" aria-label="Table of contents">
+      <ol class="toc-list">
+<li class="toc-item toc-item--h2"><a href="#The-problem-they-solve" class="toc-link">The problem they solve</a></li>
+<li class="toc-item toc-item--h2"><a href="#Basic-syntax" class="toc-link">Basic syntax</a></li>
+<li class="toc-item toc-item--h2"><a href="#Named-containers" class="toc-link">Named containers</a></li>
+<li class="toc-item toc-item--h2"><a href="#Container-units" class="toc-link">Container units</a></li>
+<li class="toc-item toc-item--h2"><a href="#Where-media-queries-still-win" class="toc-link">Where media queries still win</a></li>
+<li class="toc-item toc-item--h2"><a href="#A-practical-example-a-stat-card" class="toc-link">A practical example: a stat card</a></li>
+<li class="toc-item toc-item--h2"><a href="#Browser-support" class="toc-link">Browser support</a></li>
+</ol>
+    </nav>
+  </div>
+</div>
+
+
+
+
+<script src="/coldnight-demo/js/nav.js" defer></script>
+<script src="/coldnight-demo/js/copy-code.js" data-collapse-lines="25" defer></script>
+
+<script src="/coldnight-demo/js/category-tooltip.js" defer></script>
+
+
+<script src="/coldnight-demo/js/toc.js" defer></script>
+<script src="/coldnight-demo/js/toc-drawer.js" defer></script>
+
+
+<script src="/coldnight-demo/js/post-title.js" defer></script>
+
+
+<script src="/coldnight-demo/js/reading-progress.js" defer></script>
+
+<script src="/coldnight-demo/js/post-nav-keys.js" defer></script>
+
+<script src="/coldnight-demo/vendor/jszip/jszip.min.js" defer></script>
+<script src="/coldnight-demo/js/epub-export.js" defer></script>
+
+
+<script src="/coldnight-demo/js/pdf-viewer.js" defer></script>
+
+
+
+  <script src="/coldnight-demo/vendor/lightgallery/lightgallery.umd.js" defer></script>
+  
+  <script src="/coldnight-demo/vendor/lightgallery/lg-zoom.umd.js" defer></script>
+  
+  
+  <script src="/coldnight-demo/vendor/lightgallery/lg-thumbnail.umd.js" defer></script>
+  
+  
+  <script src="/coldnight-demo/js/gallery.js" defer></script>
+  
+
+
+<script type="module">
+  import mermaid from '/coldnight-demo/vendor/mermaid/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+</script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+# coldnight demo
+
+> A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.
+
+## Posts
+
+- [Build-Time SVG Charts](https://cracksoldier.github.io/coldnight-demo/2026/08/23/chart-demo/): The chart tag turns plain text into finished SVG at build time — no JavaScript, no library, and it still works with scripts disabled.
+- [Video Embed Demo](https://cracksoldier.github.io/coldnight-demo/2026/07/11/video-embed-demo/): Demonstrating the click-to-load video facade — no YouTube or Vimeo iframe loads until you press play.
+- [Image Compare Slider Demo](https://cracksoldier.github.io/coldnight-demo/2026/07/02/image-compare-demo/): Demonstrating the built-in before/after compare slider tag — drag, touch, or use arrow keys to reveal the difference.
+- [Audio Player Demo](https://cracksoldier.github.io/coldnight-demo/2026/06/03/audio-player-demo/): Demonstrating the built-in audio player tag — themed controls, seek bar, mute, and keyboard navigation.
+- [3D Model Viewer](https://cracksoldier.github.io/coldnight-demo/2026/06/01/3d-model-viewer-demo/): Embed interactive 3D models directly in posts using the {% model %} tag. Supports GLB, GLTF, and STL files — rendered with Three.js, no CDN required.
+- [Timelines — the timeline block tag](https://cracksoldier.github.io/coldnight-demo/2026/05/20/timeline-showcase/): The timeline block tag renders vertical timelines for changelogs, career histories, and project journals — all at build time, zero runtime JavaScript.
+- [Math Typesetting with KaTeX](https://cracksoldier.github.io/coldnight-demo/2026/05/20/katex-math-showcase/): Inline and display math rendered at build time by KaTeX — zero runtime JavaScript, crisp at any resolution. Covers inline expressions, display blocks, aligned systems, series, matrices, and more.
+- [Diagramming with Mermaid](https://cracksoldier.github.io/coldnight-demo/2026/05/20/mermaid-diagrams-showcase/): Embed flowcharts, sequence diagrams, ER diagrams, and more directly in Markdown using fenced mermaid code blocks — rendered as crisp SVGs at build time.
+- [Syntax Highlighting Showcase](https://cracksoldier.github.io/coldnight-demo/2026/05/15/syntax-highlighting-showcase/): A tour of syntax highlighting across JavaScript, TypeScript, Python, CSS, JSON, and Bash — all rendered by the built-in highlight.js processor.
+- [Typography & Prose Elements](https://cracksoldier.github.io/coldnight-demo/2026/05/08/typography-and-prose/): Every markdown element rendered through the coldnight prose stylesheet — headings, lists, tables, blockquotes, and more.
+- [Callout Blocks & Alerts](https://cracksoldier.github.io/coldnight-demo/2026/05/01/callout-blocks/): The four callout types — tip, info, warning, and danger — rendered with the coldnight colour palette and inline SVG icons.
+- [Image Galleries with LightGallery](https://cracksoldier.github.io/coldnight-demo/2026/04/24/image-gallery/): Two ways to add image galleries — the auto-mount feature on regular post images, and the explicit gallery tag for curated grids.
+- [Diff Highlighting & Marked Lines](https://cracksoldier.github.io/coldnight-demo/2026/04/17/diff-and-marked-lines/): Two advanced code block features — diff language for showing additions and deletions, and the mark option for highlighting specific lines.
+- [Modern JavaScript Async Patterns](https://cracksoldier.github.io/coldnight-demo/2026/04/10/javascript-async-patterns/): A practical reference for async/await, Promise combinators, AbortController, and async generators — with annotated examples.
+- [CSS Layout Techniques Worth Knowing](https://cracksoldier.github.io/coldnight-demo/2026/04/03/css-layout-techniques/): Grid, Flexbox, container queries, and logical properties — the layout tools that make responsive design feel natural rather than fought against.
+- [Python Tooling in 2026](https://cracksoldier.github.io/coldnight-demo/2026/03/27/python-tooling/): uv, ruff, pyproject.toml, and type annotations — the modern Python toolchain that makes dependency management and code quality feel effortless.
+- [Practical Bash Scripting](https://cracksoldier.github.io/coldnight-demo/2026/03/20/bash-scripting-guide/): Strict mode, argument parsing, logging helpers, and patterns for scripts that behave predictably and fail loudly.
+- [Configuring the Coldnight Theme](https://cracksoldier.github.io/coldnight-demo/2026/03/13/theme-configuration-guide/): Complete reference for every option in themes/coldnight/_config.yml — navbar, sidebar, grid, code blocks, math, diagrams, search, and all tag plugins.
+- [A Clean Git Workflow for Solo Developers](https://cracksoldier.github.io/coldnight-demo/2026/03/06/git-workflow/): Conventional commits, interactive rebase, useful aliases, and the few commands that make up 90% of daily git usage.
+- [Understanding Go's Memory Model](https://cracksoldier.github.io/coldnight-demo/2025/11/04/go-memory-model/): The Go memory model defines when one goroutine is guaranteed to see writes made by another. Getting this wrong leads to races that only show up in production under load.
+- [Building a Personal CLI Toolkit](https://cracksoldier.github.io/coldnight-demo/2025/08/19/personal-cli-toolkit/): The scripts and aliases that live in my dotfiles — small tools that each save a few seconds but add up over a day of terminal work.
+- [CSS Container Queries in Practice](https://cracksoldier.github.io/coldnight-demo/2025/05/22/css-container-queries/): Container queries let components respond to the size of their container rather than the viewport. After a year of using them in production, here's what actually changes about how you write CSS.
+- [Postgres Full-Text Search Without the Overhead](https://cracksoldier.github.io/coldnight-demo/2025/02/11/postgres-full-text-search/): Before reaching for Elasticsearch, try Postgres full-text search. For most applications it's fast enough, much simpler to operate, and already in your stack.
+- [Structuring Monorepos with Turborepo](https://cracksoldier.github.io/coldnight-demo/2024/10/08/monorepo-turborepo/): Turborepo brings incremental builds and remote caching to JavaScript monorepos without the complexity of Bazel or Nx. Here's how to structure one from scratch.
+- [Writing Useful Error Messages](https://cracksoldier.github.io/coldnight-demo/2024/07/15/writing-useful-error-messages/): Error messages are the interface between your code and the person debugging it, often at 2am under pressure. The difference between a helpful one and a useless one is mostly just care.
+- [Redis as a Job Queue](https://cracksoldier.github.io/coldnight-demo/2024/04/02/redis-job-queue/): Before standing up RabbitMQ or SQS, consider that Redis can serve as a reliable job queue for most workloads. Here's the pattern and its limits.
+- [My Terminal Setup in 2024](https://cracksoldier.github.io/coldnight-demo/2024/01/23/terminal-setup-2024/): The shell, prompt, and tooling that make up my terminal environment — what I use, why, and the bits that took the most iteration to get right.
+- [Hello World](https://cracksoldier.github.io/coldnight-demo/2024/01/01/hello-world/): Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.…
+
+## Projects
+
+- [Hexo Blog](https://cracksoldier.github.io/coldnight-demo/showroom/hexo-blog/): Static site powered by the coldnight theme
+- [Design System](https://cracksoldier.github.io/coldnight-demo/showroom/design-system/): Component library and visual language
+- [CLI Tool](https://cracksoldier.github.io/coldnight-demo/showroom/cli-tool/): Developer productivity scripts
+- [OG Image Generator](https://cracksoldier.github.io/coldnight-demo/showroom/open-graph-generator/): Automated social preview cards
+- [Markdown Editor](https://cracksoldier.github.io/coldnight-demo/showroom/markdown-editor/): Browser-based writing tool with live preview
+- [RSS Reader](https://cracksoldier.github.io/coldnight-demo/showroom/rss-reader/): Minimal feed aggregator
+- [Photo Gallery](https://cracksoldier.github.io/coldnight-demo/showroom/photo-gallery/): Static photography portfolio
+- [Budget Tracker](https://cracksoldier.github.io/coldnight-demo/showroom/budget-tracker/): Personal finance dashboard
+- [Keyboard Trainer](https://cracksoldier.github.io/coldnight-demo/showroom/keyboard-trainer/): Touch-typing practice with custom text
+- [Git Dashboard](https://cracksoldier.github.io/coldnight-demo/showroom/git-dashboard/): Local repository activity overview
+
+## Optional
+
+- [Links](https://cracksoldier.github.io/coldnight-demo/links/)
+- [About](https://cracksoldier.github.io/coldnight-demo/about/)

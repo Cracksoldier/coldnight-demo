@@ -1,0 +1,1100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Postgres Full-Text Search Without the Overhead | coldnight demo</title>
+<meta name="description" content="Before reaching for Elasticsearch, try Postgres full-text search. For most applications it&#39;s fast enough, much simpler to operate, and already in your stack.">
+<meta name="author" content="Cracksoldier">
+
+<meta name="keywords" content="postgres, sql, search, databases">
+
+
+<!-- Open Graph -->
+<meta property="og:title" content="Postgres Full-Text Search Without the Overhead">
+<meta property="og:description" content="Before reaching for Elasticsearch, try Postgres full-text search. For most applications it&#39;s fast enough, much simpler to operate, and already in your stack.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cracksoldier.github.io/coldnight-demo/2025/02/11/postgres-full-text-search/">
+<meta property="og:site_name" content="coldnight demo">
+<meta property="og:locale" content="en_US">
+
+<meta property="og:image" content="https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg">
+
+
+<meta property="article:published_time" content="2025-02-11T09:00:00.000Z">
+<meta property="article:author" content="Cracksoldier">
+
+
+<link rel="canonical" href="https://cracksoldier.github.io/coldnight-demo/2025/02/11/postgres-full-text-search/">
+
+
+<!-- Structured data -->
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Postgres Full-Text Search Without the Overhead","datePublished":"2025-02-11T09:00:00.000Z","dateModified":"2025-02-11T09:00:00.000Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://cracksoldier.github.io/coldnight-demo/2025/02/11/postgres-full-text-search/"},"description":"Before reaching for Elasticsearch, try Postgres full-text search. For most applications it's fast enough, much simpler to operate, and already in your stack.","author":{"@type":"Person","name":"Cracksoldier"},"publisher":{"@type":"Person","name":"Cracksoldier"},"image":"https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg","keywords":"postgres, sql, search, databases"}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cracksoldier.github.io/coldnight-demo/"},{"@type":"ListItem","position":2,"name":"Systems","item":"https://cracksoldier.github.io/coldnight-demo/categories/Systems/"},{"@type":"ListItem","position":3,"name":"Postgres Full-Text Search Without the Overhead"}]}</script>
+
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Postgres Full-Text Search Without the Overhead">
+<meta name="twitter:description" content="Before reaching for Elasticsearch, try Postgres full-text search. For most applications it&#39;s fast enough, much simpler to operate, and already in your stack.">
+
+
+<meta name="twitter:image" content="https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg">
+
+
+<!-- Favicon -->
+
+
+<link rel="icon" type="image/svg+xml" href="/coldnight-demo/favicon.svg">
+
+
+<!-- Fonts (self-hosted, latin + latin-ext) -->
+<link rel="preload" href="/coldnight-demo/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Theme stylesheet -->
+<link rel="stylesheet" href="/coldnight-demo/css/style.css">
+
+
+<!-- Cross-document View Transitions (progressive enhancement; inline because compiled SCSS can't read theme config) -->
+<style>@media not (prefers-reduced-motion: reduce){@view-transition{navigation:auto}}</style>
+
+
+<!-- LightGallery CSS — post pages only -->
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lightgallery.css">
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lg-zoom.css">
+
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lg-thumbnail.css">
+
+
+
+<!-- KaTeX CSS — post pages only -->
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/katex/katex.min.css">
+
+
+<!-- RSS -->
+
+<link rel="alternate" type="application/rss+xml" title="coldnight demo" href="/coldnight-demo/atom.xml">
+
+
+<link rel="alternate" type="application/feed+json" title="coldnight demo" href="/coldnight-demo/feed.json">
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+
+
+<div id="reading-progress" class="reading-progress" role="progressbar"
+     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="navbar" role="banner">
+  <div class="navbar__inner">
+
+    <!-- Brand -->
+    <a href="/coldnight-demo/" class="navbar__brand" aria-label="My Blog — home">
+      
+      
+      <span class="navbar__brand-text navbar__brand-text--icon">
+        
+        <span class="navbar__logo navbar__logo--text" aria-hidden="true" style="color: #60a5fa">❄</span>
+        
+        <span class="navbar__title">My Blog</span>
+        
+      </span>
+      
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="navbar__nav" aria-label="Main navigation" id="main-nav">
+      
+        
+        <a href="/coldnight-demo/"
+           class="nav-link"
+           >
+          Home
+        </a>
+      
+        
+        <a href="/coldnight-demo/archives"
+           class="nav-link"
+           >
+          Archive
+        </a>
+      
+        
+        <a href="/coldnight-demo/stats"
+           class="nav-link"
+           >
+          Stats
+        </a>
+      
+        
+        <a href="/coldnight-demo/links"
+           class="nav-link"
+           >
+          Links
+        </a>
+      
+        
+        <a href="/coldnight-demo/showroom"
+           class="nav-link"
+           >
+          Showroom
+        </a>
+      
+        
+        <a href="/coldnight-demo/about"
+           class="nav-link"
+           >
+          About
+        </a>
+      
+    </nav>
+
+    <!-- Actions -->
+    <div class="navbar__actions">
+      
+
+      <!-- GitHub -->
+      
+
+      
+      <div class="search-wrap navbar__search" id="search-wrap">
+        <input type="search"
+               role="combobox"
+               class="search-input"
+               id="search-input"
+               placeholder="Search…"
+               aria-label="Search posts"
+               aria-expanded="false"
+               aria-autocomplete="list"
+               aria-haspopup="listbox"
+               aria-controls="search-results"
+               autocomplete="off"
+               spellcheck="false">
+        <div class="search-results" id="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      
+
+      <!-- Mobile hamburger -->
+      <button class="btn btn--icon navbar__hamburger"
+              id="nav-toggle"
+              aria-expanded="false"
+              aria-controls="mobile-nav"
+              aria-label="Toggle navigation">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="2" y1="4.5" x2="16" y2="4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="13.5" x2="16" y2="13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile nav drawer -->
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+  
+  <div class="search-wrap mobile-nav__search" id="search-wrap-mobile">
+    <input type="search"
+           role="combobox"
+           class="search-input"
+           id="search-input-mobile"
+           placeholder="Search…"
+           aria-label="Search posts"
+           aria-expanded="false"
+           aria-autocomplete="list"
+           aria-haspopup="listbox"
+           aria-controls="search-results-mobile"
+           autocomplete="off"
+           spellcheck="false">
+    <div class="search-results" id="search-results-mobile" role="listbox" aria-label="Search results"></div>
+  </div>
+  
+  
+    
+    <a href="/coldnight-demo/"
+       class="nav-link"
+       >
+      Home
+    </a>
+  
+    
+    <a href="/coldnight-demo/archives"
+       class="nav-link"
+       >
+      Archive
+    </a>
+  
+    
+    <a href="/coldnight-demo/stats"
+       class="nav-link"
+       >
+      Stats
+    </a>
+  
+    
+    <a href="/coldnight-demo/links"
+       class="nav-link"
+       >
+      Links
+    </a>
+  
+    
+    <a href="/coldnight-demo/showroom"
+       class="nav-link"
+       >
+      Showroom
+    </a>
+  
+    
+    <a href="/coldnight-demo/about"
+       class="nav-link"
+       >
+      About
+    </a>
+  
+</nav>
+
+
+<div class="page-wrapper">
+
+  <main class="main-content post-page" id="main-content" role="main">
+
+    <article>
+
+      <header class="post-header">
+        <h1 class="post-title">Postgres Full-Text Search Without the Overhead</h1>
+
+        <div class="post-meta">
+          <time datetime="2025-02-11T09:00:00.000Z">
+            11.02.2025
+          </time>
+
+          
+
+          
+            <span>Cracksoldier</span>
+          
+
+          
+            <span>1 min read</span>
+          
+
+          
+            <span>276 words</span>
+          
+
+          
+            
+              <a href="/coldnight-demo/categories/Systems/" class="tag-pill" data-category-desc="Databases, infrastructure and how things behave under load.">Systems</a>
+            
+          
+
+          <span class="difficulty difficulty--level-3" role="img" aria-label="Difficulty: 3 of 5" title="Difficulty: 3 of 5"><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span></span>
+
+          
+            <button class="btn btn--icon btn--sm post-permalink-btn"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2025/02/11/postgres-full-text-search/"
+                    aria-label="Copy link to post"
+                    title="Copy permalink">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+                <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+              </svg>
+            </button>
+          
+          
+            <button class="btn btn--icon btn--sm epub-export-btn"
+                    data-title="Postgres Full-Text Search Without the Overhead"
+                    data-author="Cracksoldier"
+                    data-url="https://cracksoldier.github.io/coldnight-demo/2025/02/11/postgres-full-text-search/"
+                    data-slug="postgres-full-text-search"
+                    data-language="en"
+                    aria-label="Export as ePub"
+                    title="Download as ePub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/>
+              </svg>
+            </button>
+          
+        </div>
+      </header>
+
+      
+
+      
+
+      
+
+      
+
+      <div class="post-body prose">
+        <p>The typical path is: application needs search → reach for Elasticsearch or Typesense → spend two weeks on infrastructure. For most applications that’s the wrong trade-off. Postgres full-text search handles a surprising amount of load and costs nothing extra to operate.</p>
+<h2 id="How-it-works"><a href="#How-it-works" class="headerlink" title="How it works"></a>How it works</h2><p>Postgres converts text to a <code>tsvector</code> — a sorted list of normalised lexemes (word stems with position information stripped). Queries are expressed as <code>tsquery</code> values, which are boolean combinations of lexemes.</p>
+<figure class="highlight sql" data-lang="sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> to_tsvector(<span class="hljs-string">&#x27;english&#x27;</span>, <span class="hljs-string">&#x27;The quick brown fox jumped over the lazy dog&#x27;</span>);<br><span class="hljs-comment">-- &#x27;brown&#x27;:3 &#x27;dog&#x27;:9 &#x27;fox&#x27;:4 &#x27;jump&#x27;:5 &#x27;lazi&#x27;:8 &#x27;quick&#x27;:2</span><br><br><span class="hljs-keyword">SELECT</span> to_tsquery(<span class="hljs-string">&#x27;english&#x27;</span>, <span class="hljs-string">&#x27;jumping &amp; fox&#x27;</span>);<br><span class="hljs-comment">-- &#x27;jump&#x27; &amp; &#x27;fox&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>Note that <code>jumping</code> is normalised to <code>jump</code> and <code>The</code>, <code>over</code>, <code>the</code> are dropped as stop words. The query matches because both lexemes appear in the vector.</p>
+<h2 id="Basic-search"><a href="#Basic-search" class="headerlink" title="Basic search"></a>Basic search</h2><figure class="highlight sql" data-lang="sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> title, body<br><span class="hljs-keyword">FROM</span> posts<br><span class="hljs-keyword">WHERE</span> to_tsvector(<span class="hljs-string">&#x27;english&#x27;</span>, title <span class="hljs-operator">||</span> <span class="hljs-string">&#x27; &#x27;</span> <span class="hljs-operator">||</span> body) @@ to_tsquery(<span class="hljs-string">&#x27;english&#x27;</span>, <span class="hljs-string">&#x27;postgres &amp; search&#x27;</span>)<br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> ts_rank(<br>  to_tsvector(<span class="hljs-string">&#x27;english&#x27;</span>, title <span class="hljs-operator">||</span> <span class="hljs-string">&#x27; &#x27;</span> <span class="hljs-operator">||</span> body),<br>  to_tsquery(<span class="hljs-string">&#x27;english&#x27;</span>, <span class="hljs-string">&#x27;postgres &amp; search&#x27;</span>)<br>) <span class="hljs-keyword">DESC</span>;<br></code></pre></td></tr></table></figure>
+
+<p><code>@@</code> is the match operator. <code>ts_rank</code> scores matches by how frequently and prominently the terms appear.</p>
+<h2 id="Adding-an-index"><a href="#Adding-an-index" class="headerlink" title="Adding an index"></a>Adding an index</h2><p>Computing <code>to_tsvector</code> on every query is slow. Store it in a generated column and index it.</p>
+<figure class="highlight sql" data-lang="sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER TABLE</span> posts<br>  <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">COLUMN</span> search_vector tsvector<br>  GENERATED ALWAYS <span class="hljs-keyword">AS</span> (<br>    setweight(to_tsvector(<span class="hljs-string">&#x27;english&#x27;</span>, <span class="hljs-built_in">coalesce</span>(title, <span class="hljs-string">&#x27;&#x27;</span>)), <span class="hljs-string">&#x27;A&#x27;</span>) <span class="hljs-operator">||</span><br>    setweight(to_tsvector(<span class="hljs-string">&#x27;english&#x27;</span>, <span class="hljs-built_in">coalesce</span>(body, <span class="hljs-string">&#x27;&#x27;</span>)), <span class="hljs-string">&#x27;B&#x27;</span>)<br>  ) STORED;<br><br><span class="hljs-keyword">CREATE</span> INDEX posts_search_idx <span class="hljs-keyword">ON</span> posts <span class="hljs-keyword">USING</span> GIN (search_vector);<br></code></pre></td></tr></table></figure>
+
+<p><code>setweight</code> assigns label <code>A</code> (highest) to title matches and <code>B</code> to body matches. This makes title matches rank higher than body matches. The GIN index makes lookups fast.</p>
+<p>Now the query simplifies to:</p>
+<figure class="highlight sql" data-lang="sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> title, ts_rank(search_vector, query) <span class="hljs-keyword">AS</span> rank<br><span class="hljs-keyword">FROM</span> posts, to_tsquery(<span class="hljs-string">&#x27;english&#x27;</span>, <span class="hljs-string">&#x27;postgres &amp; search&#x27;</span>) query<br><span class="hljs-keyword">WHERE</span> search_vector @@ query<br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> rank <span class="hljs-keyword">DESC</span><br>LIMIT <span class="hljs-number">20</span>;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Phrase-search-and-prefix-matching"><a href="#Phrase-search-and-prefix-matching" class="headerlink" title="Phrase search and prefix matching"></a>Phrase search and prefix matching</h2><p>Phrase search uses the <code>&lt;-&gt;</code> distance operator:</p>
+<figure class="highlight sql" data-lang="sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- matches &quot;full text&quot; as adjacent words</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> posts <span class="hljs-keyword">WHERE</span> search_vector @@ to_tsquery(<span class="hljs-string">&#x27;english&#x27;</span>, <span class="hljs-string">&#x27;full &lt;-&gt; text&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>Prefix matching (for autocomplete) uses <code>:*</code>:</p>
+<figure class="highlight sql" data-lang="sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- matches &quot;postgres&quot;, &quot;postgresql&quot;, &quot;postgreSQL&quot;</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> posts <span class="hljs-keyword">WHERE</span> search_vector @@ to_tsquery(<span class="hljs-string">&#x27;english&#x27;</span>, <span class="hljs-string">&#x27;postgr:*&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<h2 id="Highlighting-results"><a href="#Highlighting-results" class="headerlink" title="Highlighting results"></a>Highlighting results</h2><p><code>ts_headline</code> wraps matched terms in HTML for display:</p>
+<figure class="highlight sql" data-lang="sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span><br>  title,<br>  ts_headline(<br>    <span class="hljs-string">&#x27;english&#x27;</span>,<br>    body,<br>    to_tsquery(<span class="hljs-string">&#x27;english&#x27;</span>, <span class="hljs-string">&#x27;postgres &amp; search&#x27;</span>),<br>    <span class="hljs-string">&#x27;MaxWords=30, MinWords=15, StartSel=&lt;mark&gt;, StopSel=&lt;/mark&gt;&#x27;</span><br>  ) <span class="hljs-keyword">AS</span> excerpt<br><span class="hljs-keyword">FROM</span> posts<br><span class="hljs-keyword">WHERE</span> search_vector @@ to_tsquery(<span class="hljs-string">&#x27;english&#x27;</span>, <span class="hljs-string">&#x27;postgres &amp; search&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<h2 id="When-to-graduate-to-a-dedicated-search-engine"><a href="#When-to-graduate-to-a-dedicated-search-engine" class="headerlink" title="When to graduate to a dedicated search engine"></a>When to graduate to a dedicated search engine</h2><p>Postgres full-text search is not the right tool when:</p>
+<ul>
+<li>You need fuzzy matching (typo tolerance) — <code>pg_trgm</code> helps but dedicated engines do this better</li>
+<li>Your search index spans multiple tables or services</li>
+<li>You need faceted search with aggregations at scale</li>
+<li>Query latency becomes a bottleneck and you’ve exhausted index tuning</li>
+</ul>
+<p>For a single-service application with a few million rows, Postgres is almost certainly sufficient and dramatically simpler to operate than a separate search cluster.</p>
+
+      </div>
+
+      <footer class="post-footer">
+
+        
+          <div class="post-tags">
+            
+              <a href="/coldnight-demo/tags/postgres/" class="tag-pill">#postgres</a>
+            
+              <a href="/coldnight-demo/tags/sql/" class="tag-pill">#sql</a>
+            
+              <a href="/coldnight-demo/tags/search/" class="tag-pill">#search</a>
+            
+              <a href="/coldnight-demo/tags/databases/" class="tag-pill">#databases</a>
+            
+          </div>
+        
+
+        
+        <div class="post-share">
+          <span class="post-share__label">Share</span>
+          <div class="post-share__btns">
+            <a class="btn btn--ghost btn--sm"
+               href="https://twitter.com/intent/tweet?text=Postgres%20Full-Text%20Search%20Without%20the%20Overhead&url=https%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2025%2F02%2F11%2Fpostgres-full-text-search%2F"
+               target="_blank" rel="noopener noreferrer">X / Twitter</a>
+            <a class="btn btn--ghost btn--sm"
+               href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2025%2F02%2F11%2Fpostgres-full-text-search%2F"
+               target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a class="btn btn--ghost btn--sm"
+               href="https://bsky.app/intent/compose?text=Postgres%20Full-Text%20Search%20Without%20the%20Overhead%0A%0Ahttps%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2025%2F02%2F11%2Fpostgres-full-text-search%2F"
+               target="_blank" rel="noopener noreferrer">Bluesky</a>
+            <button class="btn btn--ghost btn--sm post-share-mastodon"
+                    data-title="Postgres Full-Text Search Without the Overhead"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2025/02/11/postgres-full-text-search/">Mastodon</button>
+            <button class="btn btn--ghost btn--sm post-share-copy"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2025/02/11/postgres-full-text-search/">Copy link</button>
+          </div>
+        </div>
+        
+
+        <nav class="post-nav" aria-label="Post navigation">
+          <div class="post-nav__item post-nav__item--prev">
+            
+              <span class="post-nav__label">← Previous</span>
+              <a href="/coldnight-demo/2025/05/22/css-container-queries/" class="post-nav__title">CSS Container Queries in Practice</a>
+            
+          </div>
+          <div class="post-nav__item post-nav__item--next">
+            
+              <span class="post-nav__label">Next →</span>
+              <a href="/coldnight-demo/2024/10/08/monorepo-turborepo/" class="post-nav__title">Structuring Monorepos with Turborepo</a>
+            
+          </div>
+        </nav>
+
+      </footer>
+
+    </article>
+
+    
+
+    
+    <section class="related-posts" aria-labelledby="related-heading">
+      <h3 class="related-posts__heading" id="related-heading">You might also like</h3>
+      <div class="post-grid" style="--post-grid-cols: 2; --post-grid-cols-md: 2;">
+        
+          
+
+<article class="post-card fade-in">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2025/11/04/go-memory-model/" tabindex="-1" aria-hidden="true">
+      <img src="/coldnight-demo/images/og-default.jpg" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Systems/" class="post-card__category" data-category-desc="Databases, infrastructure and how things behave under load.">Systems</a>
+      
+      
+        <span>2 min read</span>
+      
+      <span class="difficulty difficulty--level-5" role="img" aria-label="Effort: 5 of 5" title="Effort: 5 of 5"><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span></span>
+    </div>
+
+    <a href="/coldnight-demo/2025/11/04/go-memory-model/" class="post-card__title">
+      Understanding Go&#39;s Memory Model
+    </a>
+
+    
+      <div class="post-card__excerpt">The Go memory model defines when one goroutine is guaranteed to see writes made by another. Getting this wrong leads to races that only show up in production under load.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2025-11-04T09:00:00.000Z">04.11.2025</time>
+      <a href="/coldnight-demo/2025/11/04/go-memory-model/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+        
+          
+
+<article class="post-card fade-in">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2024/04/02/redis-job-queue/" tabindex="-1" aria-hidden="true">
+      <img src="/coldnight-demo/images/og-default.jpg" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Systems/" class="post-card__category" data-category-desc="Databases, infrastructure and how things behave under load.">Systems</a>
+      
+      
+        <span>2 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2024/04/02/redis-job-queue/" class="post-card__title">
+      Redis as a Job Queue
+    </a>
+
+    
+      <div class="post-card__excerpt">Before standing up RabbitMQ or SQS, consider that Redis can serve as a reliable job queue for most workloads. Here's the pattern and its limits.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2024-04-02T09:00:00.000Z">02.04.2024</time>
+      <a href="/coldnight-demo/2024/04/02/redis-job-queue/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+        
+      </div>
+    </section>
+    
+
+  </main>
+
+  
+    
+
+
+<aside class="sidebar" role="complementary" aria-label="Sidebar">
+  
+    
+      
+        
+
+<div class="sidebar-widget widget-toc">
+  <button class="widget-toc__toggle" aria-expanded="true" aria-controls="toc-list">
+    <span class="sidebar-widget__title">Contents</span>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+  <nav id="toc-list" aria-label="Table of contents">
+    <ol class="toc-list">
+<li class="toc-item toc-item--h2"><a href="#How-it-works" class="toc-link">How it works</a></li>
+<li class="toc-item toc-item--h2"><a href="#Basic-search" class="toc-link">Basic search</a></li>
+<li class="toc-item toc-item--h2"><a href="#Adding-an-index" class="toc-link">Adding an index</a></li>
+<li class="toc-item toc-item--h2"><a href="#Phrase-search-and-prefix-matching" class="toc-link">Phrase search and prefix matching</a></li>
+<li class="toc-item toc-item--h2"><a href="#Highlighting-results" class="toc-link">Highlighting results</a></li>
+<li class="toc-item toc-item--h2"><a href="#When-to-graduate-to-a-dedicated-search-engine" class="toc-link">When to graduate to a dedicated search engine</a></li>
+</ol>
+  </nav>
+</div>
+
+
+      
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Recent Posts</p>
+  <ul class="sidebar-widget__list">
+    
+      <li>
+        <a href="/coldnight-demo/2026/08/23/chart-demo/">
+          <span>Build-Time SVG Charts</span>
+          <span class="sidebar-widget__count">23.08.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/07/11/video-embed-demo/">
+          <span>Video Embed Demo</span>
+          <span class="sidebar-widget__count">11.07.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/07/02/image-compare-demo/">
+          <span>Image Compare Slider Demo</span>
+          <span class="sidebar-widget__count">02.07.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/06/03/audio-player-demo/">
+          <span>Audio Player Demo</span>
+          <span class="sidebar-widget__count">03.06.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/06/01/3d-model-viewer-demo/">
+          <span>3D Model Viewer</span>
+          <span class="sidebar-widget__count">01.06.</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Tags</p>
+  <div class="tag-cloud">
+    
+      <a href="/coldnight-demo/tags/3d/" class="tag-pill">
+        3d <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/api-design/" class="tag-pill">
+        api-design <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/async/" class="tag-pill">
+        async <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/audio/" class="tag-pill">
+        audio <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/background-jobs/" class="tag-pill">
+        background-jobs <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/bash/" class="tag-pill">
+        bash <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/build-systems/" class="tag-pill">
+        build-systems <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/callouts/" class="tag-pill">
+        callouts <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/charts/" class="tag-pill">
+        charts <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/cli/" class="tag-pill">
+        cli <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/code/" class="tag-pill">
+        code <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/concurrency/" class="tag-pill">
+        concurrency <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/configuration/" class="tag-pill">
+        configuration <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/css/" class="tag-pill">
+        css <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/databases/" class="tag-pill">
+        databases <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/dataviz/" class="tag-pill">
+        dataviz <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/debugging/" class="tag-pill">
+        debugging <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/diagrams/" class="tag-pill">
+        diagrams <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/diff/" class="tag-pill">
+        diff <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/documentation/" class="tag-pill">
+        documentation <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/dotfiles/" class="tag-pill">
+        dotfiles <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/errors/" class="tag-pill">
+        errors <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/features/" class="tag-pill">
+        features <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/flexbox/" class="tag-pill">
+        flexbox <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/frontend/" class="tag-pill">
+        frontend <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/gallery/" class="tag-pill">
+        gallery <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/git/" class="tag-pill">
+        git <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/go/" class="tag-pill">
+        go <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/grid/" class="tag-pill">
+        grid <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/hexo/" class="tag-pill">
+        hexo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/images/" class="tag-pill">
+        images <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/infrastructure/" class="tag-pill">
+        infrastructure <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/javascript/" class="tag-pill">
+        javascript <span class="tag-cloud__count">(3)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/katex/" class="tag-pill">
+        katex <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/latex/" class="tag-pill">
+        latex <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/layout/" class="tag-pill">
+        layout <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/lightgallery/" class="tag-pill">
+        lightgallery <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/linux/" class="tag-pill">
+        linux <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/markdown/" class="tag-pill">
+        markdown <span class="tag-cloud__count">(3)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/math/" class="tag-pill">
+        math <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/memory/" class="tag-pill">
+        memory <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/mermaid/" class="tag-pill">
+        mermaid <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/monorepo/" class="tag-pill">
+        monorepo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/packaging/" class="tag-pill">
+        packaging <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/patterns/" class="tag-pill">
+        patterns <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/postgres/" class="tag-pill">
+        postgres <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/productivity/" class="tag-pill">
+        productivity <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/promises/" class="tag-pill">
+        promises <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/python/" class="tag-pill">
+        python <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/queues/" class="tag-pill">
+        queues <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/redis/" class="tag-pill">
+        redis <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/responsive-design/" class="tag-pill">
+        responsive-design <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/scripting/" class="tag-pill">
+        scripting <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/search/" class="tag-pill">
+        search <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/setup/" class="tag-pill">
+        setup <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/sql/" class="tag-pill">
+        sql <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/syntax-highlighting/" class="tag-pill">
+        syntax-highlighting <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/terminal/" class="tag-pill">
+        terminal <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/theme/" class="tag-pill">
+        theme <span class="tag-cloud__count">(5)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/threejs/" class="tag-pill">
+        threejs <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/timeline/" class="tag-pill">
+        timeline <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/tooling/" class="tag-pill">
+        tooling <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/turborepo/" class="tag-pill">
+        turborepo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/typography/" class="tag-pill">
+        typography <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/uv/" class="tag-pill">
+        uv <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/ux/" class="tag-pill">
+        ux <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/version-control/" class="tag-pill">
+        version-control <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/video/" class="tag-pill">
+        video <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/webgl/" class="tag-pill">
+        webgl <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/workflow/" class="tag-pill">
+        workflow <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/writing/" class="tag-pill">
+        writing <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/zsh/" class="tag-pill">
+        zsh <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+  </div>
+</div>
+
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Archives</p>
+  <ul class="sidebar-widget__list">
+    
+    
+      <li>
+        <a href="/coldnight-demo/archives/2026">
+          <span>2026</span>
+          <span class="sidebar-widget__count">19</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/archives/2025">
+          <span>2025</span>
+          <span class="sidebar-widget__count">4</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/archives/2024">
+          <span>2024</span>
+          <span class="sidebar-widget__count">5</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+    
+  
+    
+      
+        
+
+<div class="sidebar-widget widget-about">
+  <p class="sidebar-widget__title">About</p>
+  
+  
+    <p class="widget-about__name">Cracksoldier</p>
+  
+  
+    <p class="widget-about__bio">A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.</p>
+  
+  <div class="widget-about__social">
+    
+    
+  </div>
+</div>
+
+
+      
+    
+  
+</aside>
+
+  
+
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <ul class="footer-links">
+      
+      
+      
+        <li><a href="/coldnight-demo/atom.xml">RSS</a></li>
+      
+    </ul>
+    <span>&copy; 2026 Cracksoldier. Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> &middot; coldnight v1.9.1</span>
+  </div>
+</footer>
+
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+<script src="/coldnight-demo/js/back-to-top.js" defer></script>
+
+<script src="/coldnight-demo/js/search.js" data-search-url="/coldnight-demo/search.json" defer></script>
+
+
+<div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+
+
+
+<button class="toc-fab" id="toc-drawer-btn"
+        aria-label="Open table of contents"
+        aria-expanded="false"
+        aria-controls="toc-drawer">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <line x1="3" y1="6"  x2="21" y2="6"/>
+    <line x1="3" y1="12" x2="15" y2="12"/>
+    <line x1="3" y1="18" x2="18" y2="18"/>
+  </svg>
+</button>
+<div class="toc-drawer" id="toc-drawer" hidden
+     role="dialog" aria-modal="true" aria-label="Table of contents">
+  <div class="toc-drawer__overlay" id="toc-drawer-overlay"></div>
+  <div class="toc-drawer__panel">
+    <div class="toc-drawer__header">
+      <span class="toc-drawer__title">Contents</span>
+      <button class="toc-drawer__close" id="toc-drawer-close"
+              aria-label="Close table of contents">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="18" y1="6"  x2="6"  y2="18"/>
+          <line x1="6"  y1="6"  x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="toc-drawer__body" aria-label="Table of contents">
+      <ol class="toc-list">
+<li class="toc-item toc-item--h2"><a href="#How-it-works" class="toc-link">How it works</a></li>
+<li class="toc-item toc-item--h2"><a href="#Basic-search" class="toc-link">Basic search</a></li>
+<li class="toc-item toc-item--h2"><a href="#Adding-an-index" class="toc-link">Adding an index</a></li>
+<li class="toc-item toc-item--h2"><a href="#Phrase-search-and-prefix-matching" class="toc-link">Phrase search and prefix matching</a></li>
+<li class="toc-item toc-item--h2"><a href="#Highlighting-results" class="toc-link">Highlighting results</a></li>
+<li class="toc-item toc-item--h2"><a href="#When-to-graduate-to-a-dedicated-search-engine" class="toc-link">When to graduate to a dedicated search engine</a></li>
+</ol>
+    </nav>
+  </div>
+</div>
+
+
+
+
+<script src="/coldnight-demo/js/nav.js" defer></script>
+<script src="/coldnight-demo/js/copy-code.js" data-collapse-lines="25" defer></script>
+
+<script src="/coldnight-demo/js/category-tooltip.js" defer></script>
+
+
+<script src="/coldnight-demo/js/toc.js" defer></script>
+<script src="/coldnight-demo/js/toc-drawer.js" defer></script>
+
+
+<script src="/coldnight-demo/js/post-title.js" defer></script>
+
+
+<script src="/coldnight-demo/js/reading-progress.js" defer></script>
+
+<script src="/coldnight-demo/js/post-nav-keys.js" defer></script>
+
+<script src="/coldnight-demo/vendor/jszip/jszip.min.js" defer></script>
+<script src="/coldnight-demo/js/epub-export.js" defer></script>
+
+
+<script src="/coldnight-demo/js/pdf-viewer.js" defer></script>
+
+
+
+  <script src="/coldnight-demo/vendor/lightgallery/lightgallery.umd.js" defer></script>
+  
+  <script src="/coldnight-demo/vendor/lightgallery/lg-zoom.umd.js" defer></script>
+  
+  
+  <script src="/coldnight-demo/vendor/lightgallery/lg-thumbnail.umd.js" defer></script>
+  
+  
+  <script src="/coldnight-demo/js/gallery.js" defer></script>
+  
+
+
+<script type="module">
+  import mermaid from '/coldnight-demo/vendor/mermaid/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+</script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Build-Time SVG Charts | coldnight demo</title>
+<meta name="description" content="The chart tag turns plain text into finished SVG at build time — no JavaScript, no library, and it still works with scripts disabled.">
+<meta name="author" content="Cracksoldier">
+
+<meta name="keywords" content="theme, charts, dataviz">
+
+
+<!-- Open Graph -->
+<meta property="og:title" content="Build-Time SVG Charts">
+<meta property="og:description" content="The chart tag turns plain text into finished SVG at build time — no JavaScript, no library, and it still works with scripts disabled.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cracksoldier.github.io/coldnight-demo/2026/08/23/chart-demo/">
+<meta property="og:site_name" content="coldnight demo">
+<meta property="og:locale" content="en_US">
+
+<meta property="og:image" content="https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg">
+
+
+<meta property="article:published_time" content="2026-08-23T00:00:00.000Z">
+<meta property="article:author" content="Cracksoldier">
+
+
+<link rel="canonical" href="https://cracksoldier.github.io/coldnight-demo/2026/08/23/chart-demo/">
+
+
+<!-- Structured data -->
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Build-Time SVG Charts","datePublished":"2026-08-23T00:00:00.000Z","dateModified":"2026-08-23T00:00:00.000Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://cracksoldier.github.io/coldnight-demo/2026/08/23/chart-demo/"},"description":"The chart tag turns plain text into finished SVG at build time — no JavaScript, no library, and it still works with scripts disabled.","author":{"@type":"Person","name":"Cracksoldier"},"publisher":{"@type":"Person","name":"Cracksoldier"},"image":"https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg","keywords":"theme, charts, dataviz"}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cracksoldier.github.io/coldnight-demo/"},{"@type":"ListItem","position":2,"name":"Demo","item":"https://cracksoldier.github.io/coldnight-demo/categories/Demo/"},{"@type":"ListItem","position":3,"name":"Build-Time SVG Charts"}]}</script>
+
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build-Time SVG Charts">
+<meta name="twitter:description" content="The chart tag turns plain text into finished SVG at build time — no JavaScript, no library, and it still works with scripts disabled.">
+
+
+<meta name="twitter:image" content="https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg">
+
+
+<!-- Favicon -->
+
+
+<link rel="icon" type="image/svg+xml" href="/coldnight-demo/favicon.svg">
+
+
+<!-- Fonts (self-hosted, latin + latin-ext) -->
+<link rel="preload" href="/coldnight-demo/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Theme stylesheet -->
+<link rel="stylesheet" href="/coldnight-demo/css/style.css">
+
+
+<!-- Cross-document View Transitions (progressive enhancement; inline because compiled SCSS can't read theme config) -->
+<style>@media not (prefers-reduced-motion: reduce){@view-transition{navigation:auto}}</style>
+
+
+<!-- LightGallery CSS — post pages only -->
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lightgallery.css">
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lg-zoom.css">
+
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/lightgallery/lg-thumbnail.css">
+
+
+
+<!-- KaTeX CSS — post pages only -->
+
+<link rel="stylesheet" href="/coldnight-demo/vendor/katex/katex.min.css">
+
+
+<!-- RSS -->
+
+<link rel="alternate" type="application/rss+xml" title="coldnight demo" href="/coldnight-demo/atom.xml">
+
+
+<link rel="alternate" type="application/feed+json" title="coldnight demo" href="/coldnight-demo/feed.json">
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+
+
+<div id="reading-progress" class="reading-progress" role="progressbar"
+     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="navbar" role="banner">
+  <div class="navbar__inner">
+
+    <!-- Brand -->
+    <a href="/coldnight-demo/" class="navbar__brand" aria-label="My Blog — home">
+      
+      
+      <span class="navbar__brand-text navbar__brand-text--icon">
+        
+        <span class="navbar__logo navbar__logo--text" aria-hidden="true" style="color: #60a5fa">❄</span>
+        
+        <span class="navbar__title">My Blog</span>
+        
+      </span>
+      
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="navbar__nav" aria-label="Main navigation" id="main-nav">
+      
+        
+        <a href="/coldnight-demo/"
+           class="nav-link"
+           >
+          Home
+        </a>
+      
+        
+        <a href="/coldnight-demo/archives"
+           class="nav-link"
+           >
+          Archive
+        </a>
+      
+        
+        <a href="/coldnight-demo/stats"
+           class="nav-link"
+           >
+          Stats
+        </a>
+      
+        
+        <a href="/coldnight-demo/links"
+           class="nav-link"
+           >
+          Links
+        </a>
+      
+        
+        <a href="/coldnight-demo/showroom"
+           class="nav-link"
+           >
+          Showroom
+        </a>
+      
+        
+        <a href="/coldnight-demo/about"
+           class="nav-link"
+           >
+          About
+        </a>
+      
+    </nav>
+
+    <!-- Actions -->
+    <div class="navbar__actions">
+      
+
+      <!-- GitHub -->
+      
+
+      
+      <div class="search-wrap navbar__search" id="search-wrap">
+        <input type="search"
+               role="combobox"
+               class="search-input"
+               id="search-input"
+               placeholder="Search…"
+               aria-label="Search posts"
+               aria-expanded="false"
+               aria-autocomplete="list"
+               aria-haspopup="listbox"
+               aria-controls="search-results"
+               autocomplete="off"
+               spellcheck="false">
+        <div class="search-results" id="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      
+
+      <!-- Mobile hamburger -->
+      <button class="btn btn--icon navbar__hamburger"
+              id="nav-toggle"
+              aria-expanded="false"
+              aria-controls="mobile-nav"
+              aria-label="Toggle navigation">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="2" y1="4.5" x2="16" y2="4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="13.5" x2="16" y2="13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile nav drawer -->
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+  
+  <div class="search-wrap mobile-nav__search" id="search-wrap-mobile">
+    <input type="search"
+           role="combobox"
+           class="search-input"
+           id="search-input-mobile"
+           placeholder="Search…"
+           aria-label="Search posts"
+           aria-expanded="false"
+           aria-autocomplete="list"
+           aria-haspopup="listbox"
+           aria-controls="search-results-mobile"
+           autocomplete="off"
+           spellcheck="false">
+    <div class="search-results" id="search-results-mobile" role="listbox" aria-label="Search results"></div>
+  </div>
+  
+  
+    
+    <a href="/coldnight-demo/"
+       class="nav-link"
+       >
+      Home
+    </a>
+  
+    
+    <a href="/coldnight-demo/archives"
+       class="nav-link"
+       >
+      Archive
+    </a>
+  
+    
+    <a href="/coldnight-demo/stats"
+       class="nav-link"
+       >
+      Stats
+    </a>
+  
+    
+    <a href="/coldnight-demo/links"
+       class="nav-link"
+       >
+      Links
+    </a>
+  
+    
+    <a href="/coldnight-demo/showroom"
+       class="nav-link"
+       >
+      Showroom
+    </a>
+  
+    
+    <a href="/coldnight-demo/about"
+       class="nav-link"
+       >
+      About
+    </a>
+  
+</nav>
+
+
+<div class="page-wrapper">
+
+  <main class="main-content post-page" id="main-content" role="main">
+
+    <article>
+
+      <header class="post-header">
+        <h1 class="post-title">Build-Time SVG Charts</h1>
+
+        <div class="post-meta">
+          <time datetime="2026-08-23T00:00:00.000Z">
+            23.08.2026
+          </time>
+
+          
+
+          
+            <span>Cracksoldier</span>
+          
+
+          
+            <span>2 min read</span>
+          
+
+          
+            <span>318 words</span>
+          
+
+          
+            
+              <a href="/coldnight-demo/categories/Demo/" class="tag-pill" data-category-desc="Live demonstrations of the theme's tag plugins and widgets.">Demo</a>
+            
+          
+
+          <span class="difficulty difficulty--level-2" role="img" aria-label="Difficulty: 2 of 5" title="Difficulty: 2 of 5"><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar difficulty__bar--filled" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span><span class="difficulty__bar" aria-hidden="true"></span></span>
+
+          
+            <button class="btn btn--icon btn--sm post-permalink-btn"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2026/08/23/chart-demo/"
+                    aria-label="Copy link to post"
+                    title="Copy permalink">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+                <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+              </svg>
+            </button>
+          
+          
+            <button class="btn btn--icon btn--sm epub-export-btn"
+                    data-title="Build-Time SVG Charts"
+                    data-author="Cracksoldier"
+                    data-url="https://cracksoldier.github.io/coldnight-demo/2026/08/23/chart-demo/"
+                    data-slug="chart-demo"
+                    data-language="en"
+                    aria-label="Export as ePub"
+                    title="Download as ePub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/>
+              </svg>
+            </button>
+          
+        </div>
+      </header>
+
+      
+
+      
+
+      
+
+      
+
+      <div class="post-body prose">
+        <p>The <code>{% chart %}</code> tag renders bar, line, and pie charts <strong>at build time</strong>. The output is a plain <code>&lt;svg&gt;</code> element — there is no charting library, no runtime, and nothing to download. Charts survive printing, the ePub export, and readers who browse with JavaScript turned off.</p>
+<!-- more -->
+
+<h2 id="Bar-charts"><a href="#Bar-charts" class="headerlink" title="Bar charts"></a>Bar charts</h2><p>One value per line gives a single series, and the row labels become the category axis.</p>
+<figure class="chart chart--bar"><figcaption class="chart__title">Lines of code by language</figcaption><svg class="chart__svg" viewBox="0 0 640 320" role="img" preserveAspectRatio="xMidYMid meet" aria-labelledby="chart-1-t chart-1-d"><title id="chart-1-t">Lines of code by language</title><desc id="chart-1-d">Bar chart. Rust 4200, Go 3100, Python 2700, Shell 640.</desc><g class="chart__grid"><line class="chart__gridline" x1="56" y1="276.0" x2="624" y2="276.0"/><line class="chart__gridline" x1="56" y1="211.0" x2="624" y2="211.0"/><line class="chart__gridline" x1="56" y1="146.0" x2="624" y2="146.0"/><line class="chart__gridline" x1="56" y1="81.0" x2="624" y2="81.0"/><line class="chart__gridline" x1="56" y1="16.0" x2="624" y2="16.0"/><line class="chart__axisline" x1="56" y1="276" x2="624" y2="276"/></g><g class="chart__labels"><text class="chart__tick" x="48" y="276.0" text-anchor="end" dominant-baseline="middle">0</text><text class="chart__tick" x="48" y="211.0" text-anchor="end" dominant-baseline="middle">1250</text><text class="chart__tick" x="48" y="146.0" text-anchor="end" dominant-baseline="middle">2500</text><text class="chart__tick" x="48" y="81.0" text-anchor="end" dominant-baseline="middle">3750</text><text class="chart__tick" x="48" y="16.0" text-anchor="end" dominant-baseline="middle">5000</text><text class="chart__tick chart__tick--cat" x="127.0" y="294" text-anchor="middle">Rust</text><text class="chart__tick chart__tick--cat" x="269.0" y="294" text-anchor="middle">Go</text><text class="chart__tick chart__tick--cat" x="411.0" y="294" text-anchor="middle">Python</text><text class="chart__tick chart__tick--cat" x="553.0" y="294" text-anchor="middle">Shell</text></g><g class="chart__series chart__series--1"><rect x="77.3" y="57.6" width="97.4" height="218.4"><title>Rust: 4200</title></rect><rect x="219.3" y="114.8" width="97.4" height="161.2"><title>Go: 3100</title></rect><rect x="361.3" y="135.6" width="97.4" height="140.4"><title>Python: 2700</title></rect><rect x="503.3" y="242.7" width="97.4" height="33.3"><title>Shell: 640</title></rect></g></svg><table class="chart__data"><caption>Lines of code by language</caption><thead><tr><th scope="col"></th><th scope="col">Rust</th><th scope="col">Go</th><th scope="col">Python</th><th scope="col">Shell</th></tr></thead><tbody><tr><th scope="row">Value</th><td>4200</td><td>3100</td><td>2700</td><td>640</td></tr></tbody></table></figure>
+
+
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&#123;% chart bar title=&quot;Lines of code by language&quot; %&#125;<br>Rust: 4200<br>Go: 3100<br>Python: 2700<br>Shell: 640<br>&#123;% endchart %&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p>Add <code>x</code> to plot several values per row instead. Each row then becomes its own series, drawn as a grouped bar.</p>
+<figure class="chart chart--bar"><figcaption class="chart__title">Posts published</figcaption><svg class="chart__svg" viewBox="0 0 640 320" role="img" preserveAspectRatio="xMidYMid meet" aria-labelledby="chart-2-t chart-2-d"><title id="chart-2-t">Posts published</title><desc id="chart-2-d">Bar chart. Guides: 2024 12, 2025 19, 2026 23. Notes: 2024 8, 2025 14, 2026 16. Talks: 2024 2, 2025 3, 2026 7.</desc><g class="chart__grid"><line class="chart__gridline" x1="56" y1="276.0" x2="624" y2="276.0"/><line class="chart__gridline" x1="56" y1="211.0" x2="624" y2="211.0"/><line class="chart__gridline" x1="56" y1="146.0" x2="624" y2="146.0"/><line class="chart__gridline" x1="56" y1="81.0" x2="624" y2="81.0"/><line class="chart__gridline" x1="56" y1="16.0" x2="624" y2="16.0"/><line class="chart__axisline" x1="56" y1="276" x2="624" y2="276"/></g><g class="chart__labels"><text class="chart__tick" x="48" y="276.0" text-anchor="end" dominant-baseline="middle">0</text><text class="chart__tick" x="48" y="211.0" text-anchor="end" dominant-baseline="middle">6.25</text><text class="chart__tick" x="48" y="146.0" text-anchor="end" dominant-baseline="middle">12.5</text><text class="chart__tick" x="48" y="81.0" text-anchor="end" dominant-baseline="middle">18.75</text><text class="chart__tick" x="48" y="16.0" text-anchor="end" dominant-baseline="middle">25</text><text class="chart__tick chart__tick--cat" x="150.7" y="294" text-anchor="middle">2024</text><text class="chart__tick chart__tick--cat" x="340.0" y="294" text-anchor="middle">2025</text><text class="chart__tick chart__tick--cat" x="529.3" y="294" text-anchor="middle">2026</text></g><g class="chart__series chart__series--1"><rect x="84.4" y="151.2" width="42.2" height="124.8"><title>Guides — 2024: 12</title></rect><rect x="273.7" y="78.4" width="42.2" height="197.6"><title>Guides — 2025: 19</title></rect><rect x="463.1" y="36.8" width="42.2" height="239.2"><title>Guides — 2026: 23</title></rect></g><g class="chart__series chart__series--2"><rect x="128.6" y="192.8" width="42.2" height="83.2"><title>Notes — 2024: 8</title></rect><rect x="317.9" y="130.4" width="42.2" height="145.6"><title>Notes — 2025: 14</title></rect><rect x="507.2" y="109.6" width="42.2" height="166.4"><title>Notes — 2026: 16</title></rect></g><g class="chart__series chart__series--3"><rect x="172.8" y="255.2" width="42.2" height="20.8"><title>Talks — 2024: 2</title></rect><rect x="362.1" y="244.8" width="42.2" height="31.2"><title>Talks — 2025: 3</title></rect><rect x="551.4" y="203.2" width="42.2" height="72.8"><title>Talks — 2026: 7</title></rect></g></svg><ul class="chart__legend"><li class="chart__legend-item"><span class="chart__swatch chart__series--1"></span>Guides</li><li class="chart__legend-item"><span class="chart__swatch chart__series--2"></span>Notes</li><li class="chart__legend-item"><span class="chart__swatch chart__series--3"></span>Talks</li></ul><table class="chart__data"><caption>Posts published</caption><thead><tr><th scope="col"></th><th scope="col">2024</th><th scope="col">2025</th><th scope="col">2026</th></tr></thead><tbody><tr><th scope="row">Guides</th><td>12</td><td>19</td><td>23</td></tr><tr><th scope="row">Notes</th><td>8</td><td>14</td><td>16</td></tr><tr><th scope="row">Talks</th><td>2</td><td>3</td><td>7</td></tr></tbody></table></figure>
+
+<h2 id="Line-charts"><a href="#Line-charts" class="headerlink" title="Line charts"></a>Line charts</h2><p>Same data shape, different <code>type</code>. Use <code>unit</code> to suffix the axis labels.</p>
+<figure class="chart chart--line"><figcaption class="chart__title">p99 request latency</figcaption><svg class="chart__svg" viewBox="0 0 640 320" role="img" preserveAspectRatio="xMidYMid meet" aria-labelledby="chart-3-t chart-3-d"><title id="chart-3-t">p99 request latency</title><desc id="chart-3-d">Line chart. API: Jan 182ms, Feb 174ms, Mar 158ms, Apr 141ms, May 133ms, Jun 121ms. Worker: Jan 96ms, Feb 103ms, Mar 88ms, Apr 84ms, May 79ms, Jun 71ms.</desc><g class="chart__grid"><line class="chart__gridline" x1="56" y1="276.0" x2="624" y2="276.0"/><line class="chart__gridline" x1="56" y1="211.0" x2="624" y2="211.0"/><line class="chart__gridline" x1="56" y1="146.0" x2="624" y2="146.0"/><line class="chart__gridline" x1="56" y1="81.0" x2="624" y2="81.0"/><line class="chart__gridline" x1="56" y1="16.0" x2="624" y2="16.0"/><line class="chart__axisline" x1="56" y1="276" x2="624" y2="276"/></g><g class="chart__labels"><text class="chart__tick" x="48" y="276.0" text-anchor="end" dominant-baseline="middle">0ms</text><text class="chart__tick" x="48" y="211.0" text-anchor="end" dominant-baseline="middle">50ms</text><text class="chart__tick" x="48" y="146.0" text-anchor="end" dominant-baseline="middle">100ms</text><text class="chart__tick" x="48" y="81.0" text-anchor="end" dominant-baseline="middle">150ms</text><text class="chart__tick" x="48" y="16.0" text-anchor="end" dominant-baseline="middle">200ms</text><text class="chart__tick chart__tick--cat" x="103.3" y="294" text-anchor="middle">Jan</text><text class="chart__tick chart__tick--cat" x="198.0" y="294" text-anchor="middle">Feb</text><text class="chart__tick chart__tick--cat" x="292.7" y="294" text-anchor="middle">Mar</text><text class="chart__tick chart__tick--cat" x="387.3" y="294" text-anchor="middle">Apr</text><text class="chart__tick chart__tick--cat" x="482.0" y="294" text-anchor="middle">May</text><text class="chart__tick chart__tick--cat" x="576.7" y="294" text-anchor="middle">Jun</text></g><g class="chart__series chart__series--line chart__series--1"><polyline points="103.3,39.4 198.0,49.8 292.7,70.6 387.3,92.7 482.0,103.1 576.7,118.7"/><circle cx="103.3" cy="39.4" r="3.5"><title>API — Jan: 182ms</title></circle><circle cx="198.0" cy="49.8" r="3.5"><title>API — Feb: 174ms</title></circle><circle cx="292.7" cy="70.6" r="3.5"><title>API — Mar: 158ms</title></circle><circle cx="387.3" cy="92.7" r="3.5"><title>API — Apr: 141ms</title></circle><circle cx="482.0" cy="103.1" r="3.5"><title>API — May: 133ms</title></circle><circle cx="576.7" cy="118.7" r="3.5"><title>API — Jun: 121ms</title></circle></g><g class="chart__series chart__series--line chart__series--2"><polyline points="103.3,151.2 198.0,142.1 292.7,161.6 387.3,166.8 482.0,173.3 576.7,183.7"/><circle cx="103.3" cy="151.2" r="3.5"><title>Worker — Jan: 96ms</title></circle><circle cx="198.0" cy="142.1" r="3.5"><title>Worker — Feb: 103ms</title></circle><circle cx="292.7" cy="161.6" r="3.5"><title>Worker — Mar: 88ms</title></circle><circle cx="387.3" cy="166.8" r="3.5"><title>Worker — Apr: 84ms</title></circle><circle cx="482.0" cy="173.3" r="3.5"><title>Worker — May: 79ms</title></circle><circle cx="576.7" cy="183.7" r="3.5"><title>Worker — Jun: 71ms</title></circle></g></svg><ul class="chart__legend"><li class="chart__legend-item"><span class="chart__swatch chart__series--1"></span>API</li><li class="chart__legend-item"><span class="chart__swatch chart__series--2"></span>Worker</li></ul><table class="chart__data"><caption>p99 request latency</caption><thead><tr><th scope="col"></th><th scope="col">Jan</th><th scope="col">Feb</th><th scope="col">Mar</th><th scope="col">Apr</th><th scope="col">May</th><th scope="col">Jun</th></tr></thead><tbody><tr><th scope="row">API</th><td>182ms</td><td>174ms</td><td>158ms</td><td>141ms</td><td>133ms</td><td>121ms</td></tr><tr><th scope="row">Worker</th><td>96ms</td><td>103ms</td><td>88ms</td><td>84ms</td><td>79ms</td><td>71ms</td></tr></tbody></table><figcaption class="chart__caption">Lower is better. Measured against the staging cluster.</figcaption></figure>
+
+<h2 id="Pie-charts"><a href="#Pie-charts" class="headerlink" title="Pie charts"></a>Pie charts</h2><p>Pie always treats each line as one slice, and percentages are computed for you.</p>
+<figure class="chart chart--pie"><figcaption class="chart__title">Traffic sources</figcaption><svg class="chart__svg" viewBox="0 0 640 320" role="img" preserveAspectRatio="xMidYMid meet" aria-labelledby="chart-4-t chart-4-d"><title id="chart-4-t">Traffic sources</title><desc id="chart-4-d">Pie chart. Direct 55, Search 128, Social 34, Referral 19.</desc><g class="chart__series chart__series--1"><path d="M 320 160 L 320.00 28.00 A 132 132 0 0 1 451.25 145.97 Z"><title>Direct: 55 (23%)</title></path><text class="chart__slice-label" x="377.4" y="96.2" text-anchor="middle" dominant-baseline="middle">23%</text></g><g class="chart__series chart__series--2"><path d="M 320 160 L 451.25 145.97 A 132 132 0 1 1 189.68 139.00 Z"><title>Search: 128 (54%)</title></path><text class="chart__slice-label" x="317.7" y="245.8" text-anchor="middle" dominant-baseline="middle">54%</text></g><g class="chart__series chart__series--3"><path d="M 320 160 L 189.68 139.00 A 132 132 0 0 1 256.04 44.53 Z"><title>Social: 34 (14%)</title></path><text class="chart__slice-label" x="249.8" y="110.7" text-anchor="middle" dominant-baseline="middle">14%</text></g><g class="chart__series chart__series--4"><path d="M 320 160 L 256.04 44.53 A 132 132 0 0 1 320.00 28.00 Z"><title>Referral: 19 (8%)</title></path><text class="chart__slice-label" x="298.5" y="76.9" text-anchor="middle" dominant-baseline="middle">8%</text></g></svg><ul class="chart__legend"><li class="chart__legend-item"><span class="chart__swatch chart__series--1"></span>Direct</li><li class="chart__legend-item"><span class="chart__swatch chart__series--2"></span>Search</li><li class="chart__legend-item"><span class="chart__swatch chart__series--3"></span>Social</li><li class="chart__legend-item"><span class="chart__swatch chart__series--4"></span>Referral</li></ul><table class="chart__data"><caption>Traffic sources</caption><thead><tr><th scope="col"></th><th scope="col">Direct</th><th scope="col">Search</th><th scope="col">Social</th><th scope="col">Referral</th></tr></thead><tbody><tr><th scope="row">Value</th><td>55</td><td>128</td><td>34</td><td>19</td></tr></tbody></table></figure>
+
+<h2 id="Pulling-from-a-data-file"><a href="#Pulling-from-a-data-file" class="headerlink" title="Pulling from a data file"></a>Pulling from a data file</h2><p>Rather than repeating figures across posts, put them in <code>source/_data/</code> and reference the file by name. This chart reads <code>source/_data/benchmarks.yml</code>:</p>
+<figure class="chart chart--line"><figcaption class="chart__title">Parse time by payload size</figcaption><svg class="chart__svg" viewBox="0 0 640 320" role="img" preserveAspectRatio="xMidYMid meet" aria-labelledby="chart-5-t chart-5-d"><title id="chart-5-t">Parse time by payload size</title><desc id="chart-5-d">Line chart. Rust: 1 KB 0.8ms, 10 KB 1.9ms, 100 KB 12.4ms, 1 MB 108ms, 10 MB 1120ms. Go: 1 KB 1.1ms, 10 KB 2.6ms, 100 KB 17.8ms, 1 MB 154ms, 10 MB 1610ms. Python: 1 KB 4.7ms, 10 KB 11.2ms, 100 KB 78.3ms, 1 MB 690ms, 10 MB 7240ms.</desc><g class="chart__grid"><line class="chart__gridline" x1="56" y1="276.0" x2="624" y2="276.0"/><line class="chart__gridline" x1="56" y1="211.0" x2="624" y2="211.0"/><line class="chart__gridline" x1="56" y1="146.0" x2="624" y2="146.0"/><line class="chart__gridline" x1="56" y1="81.0" x2="624" y2="81.0"/><line class="chart__gridline" x1="56" y1="16.0" x2="624" y2="16.0"/><line class="chart__axisline" x1="56" y1="276" x2="624" y2="276"/></g><g class="chart__labels"><text class="chart__tick" x="48" y="276.0" text-anchor="end" dominant-baseline="middle">0ms</text><text class="chart__tick" x="48" y="211.0" text-anchor="end" dominant-baseline="middle">2500ms</text><text class="chart__tick" x="48" y="146.0" text-anchor="end" dominant-baseline="middle">5000ms</text><text class="chart__tick" x="48" y="81.0" text-anchor="end" dominant-baseline="middle">7500ms</text><text class="chart__tick" x="48" y="16.0" text-anchor="end" dominant-baseline="middle">10000ms</text><text class="chart__tick chart__tick--cat" x="112.8" y="294" text-anchor="middle">1 KB</text><text class="chart__tick chart__tick--cat" x="226.4" y="294" text-anchor="middle">10 KB</text><text class="chart__tick chart__tick--cat" x="340.0" y="294" text-anchor="middle">100 KB</text><text class="chart__tick chart__tick--cat" x="453.6" y="294" text-anchor="middle">1 MB</text><text class="chart__tick chart__tick--cat" x="567.2" y="294" text-anchor="middle">10 MB</text></g><g class="chart__series chart__series--line chart__series--1"><polyline points="112.8,276.0 226.4,276.0 340.0,275.7 453.6,273.2 567.2,246.9"/><circle cx="112.8" cy="276.0" r="3.5"><title>Rust — 1 KB: 0.8ms</title></circle><circle cx="226.4" cy="276.0" r="3.5"><title>Rust — 10 KB: 1.9ms</title></circle><circle cx="340.0" cy="275.7" r="3.5"><title>Rust — 100 KB: 12.4ms</title></circle><circle cx="453.6" cy="273.2" r="3.5"><title>Rust — 1 MB: 108ms</title></circle><circle cx="567.2" cy="246.9" r="3.5"><title>Rust — 10 MB: 1120ms</title></circle></g><g class="chart__series chart__series--line chart__series--2"><polyline points="112.8,276.0 226.4,275.9 340.0,275.5 453.6,272.0 567.2,234.1"/><circle cx="112.8" cy="276.0" r="3.5"><title>Go — 1 KB: 1.1ms</title></circle><circle cx="226.4" cy="275.9" r="3.5"><title>Go — 10 KB: 2.6ms</title></circle><circle cx="340.0" cy="275.5" r="3.5"><title>Go — 100 KB: 17.8ms</title></circle><circle cx="453.6" cy="272.0" r="3.5"><title>Go — 1 MB: 154ms</title></circle><circle cx="567.2" cy="234.1" r="3.5"><title>Go — 10 MB: 1610ms</title></circle></g><g class="chart__series chart__series--line chart__series--3"><polyline points="112.8,275.9 226.4,275.7 340.0,274.0 453.6,258.1 567.2,87.8"/><circle cx="112.8" cy="275.9" r="3.5"><title>Python — 1 KB: 4.7ms</title></circle><circle cx="226.4" cy="275.7" r="3.5"><title>Python — 10 KB: 11.2ms</title></circle><circle cx="340.0" cy="274.0" r="3.5"><title>Python — 100 KB: 78.3ms</title></circle><circle cx="453.6" cy="258.1" r="3.5"><title>Python — 1 MB: 690ms</title></circle><circle cx="567.2" cy="87.8" r="3.5"><title>Python — 10 MB: 7240ms</title></circle></g></svg><ul class="chart__legend"><li class="chart__legend-item"><span class="chart__swatch chart__series--1"></span>Rust</li><li class="chart__legend-item"><span class="chart__swatch chart__series--2"></span>Go</li><li class="chart__legend-item"><span class="chart__swatch chart__series--3"></span>Python</li></ul><table class="chart__data"><caption>Parse time by payload size</caption><thead><tr><th scope="col"></th><th scope="col">1 KB</th><th scope="col">10 KB</th><th scope="col">100 KB</th><th scope="col">1 MB</th><th scope="col">10 MB</th></tr></thead><tbody><tr><th scope="row">Rust</th><td>0.8ms</td><td>1.9ms</td><td>12.4ms</td><td>108ms</td><td>1120ms</td></tr><tr><th scope="row">Go</th><td>1.1ms</td><td>2.6ms</td><td>17.8ms</td><td>154ms</td><td>1610ms</td></tr><tr><th scope="row">Python</th><td>4.7ms</td><td>11.2ms</td><td>78.3ms</td><td>690ms</td><td>7240ms</td></tr></tbody></table><figcaption class="chart__caption">Sourced from source/_data/benchmarks.yml</figcaption></figure>
+
+<p>The YAML mirrors the inline format — <code>x</code> is the category axis, every other key is a series:</p>
+<figure class="highlight yaml" data-lang="yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">x:</span> [<span class="hljs-number">1</span> <span class="hljs-string">KB</span>, <span class="hljs-number">10</span> <span class="hljs-string">KB</span>, <span class="hljs-number">100</span> <span class="hljs-string">KB</span>, <span class="hljs-number">1</span> <span class="hljs-string">MB</span>, <span class="hljs-number">10</span> <span class="hljs-string">MB</span>]<br><span class="hljs-attr">Rust:</span> [<span class="hljs-number">0.8</span>, <span class="hljs-number">1.9</span>, <span class="hljs-number">12.4</span>, <span class="hljs-number">108</span>, <span class="hljs-number">1120</span>]<br><span class="hljs-attr">Go:</span> [<span class="hljs-number">1.1</span>, <span class="hljs-number">2.6</span>, <span class="hljs-number">17.8</span>, <span class="hljs-number">154</span>, <span class="hljs-number">1610</span>]<br><span class="hljs-attr">Python:</span> [<span class="hljs-number">4.7</span>, <span class="hljs-number">11.2</span>, <span class="hljs-number">78.3</span>, <span class="hljs-number">690</span>, <span class="hljs-number">7240</span>]<br></code></pre></td></tr></table></figure>
+
+<p>An inline body always wins over <code>data</code>, so you can override a shared file for one post without editing it.</p>
+<h2 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a>Parameters</h2><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>no</td>
+<td>First bare word: <code>bar</code>, <code>line</code>, or <code>pie</code>. Defaults to <code>bar</code></td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>no</td>
+<td>Comma-separated category labels; switches rows to multi-point series</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>no</td>
+<td>Key into <code>source/_data/&lt;name&gt;.yml</code>; ignored when the body is non-empty</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>no</td>
+<td>Heading above the chart, also the SVG accessible name</td>
+</tr>
+<tr>
+<td><code>caption</code></td>
+<td>no</td>
+<td>Muted text below the chart</td>
+</tr>
+<tr>
+<td><code>unit</code></td>
+<td>no</td>
+<td>Suffix appended to axis and table values, e.g. <code>ms</code> or <code>%</code></td>
+</tr>
+<tr>
+<td><code>max</code></td>
+<td>no</td>
+<td>Y-axis ceiling; defaults to a rounded value above the largest data point</td>
+</tr>
+</tbody></table>
+<p>Blank lines and lines starting with <code>#</code> are ignored, so you can comment a dataset inline.</p>
+<h2 id="Accessibility"><a href="#Accessibility" class="headerlink" title="Accessibility"></a>Accessibility</h2><p>Every chart carries a <code>role=&quot;img&quot;</code> with a generated description listing each value, and ships a visually hidden data table alongside the SVG. Screen readers get the real numbers rather than an unlabelled graphic, and that same table is what appears when the page is printed.</p>
+
+      </div>
+
+      <footer class="post-footer">
+
+        
+          <div class="post-tags">
+            
+              <a href="/coldnight-demo/tags/theme/" class="tag-pill">#theme</a>
+            
+              <a href="/coldnight-demo/tags/charts/" class="tag-pill">#charts</a>
+            
+              <a href="/coldnight-demo/tags/dataviz/" class="tag-pill">#dataviz</a>
+            
+          </div>
+        
+
+        
+        <div class="post-share">
+          <span class="post-share__label">Share</span>
+          <div class="post-share__btns">
+            <a class="btn btn--ghost btn--sm"
+               href="https://twitter.com/intent/tweet?text=Build-Time%20SVG%20Charts&url=https%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2026%2F08%2F23%2Fchart-demo%2F"
+               target="_blank" rel="noopener noreferrer">X / Twitter</a>
+            <a class="btn btn--ghost btn--sm"
+               href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2026%2F08%2F23%2Fchart-demo%2F"
+               target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a class="btn btn--ghost btn--sm"
+               href="https://bsky.app/intent/compose?text=Build-Time%20SVG%20Charts%0A%0Ahttps%3A%2F%2Fcracksoldier.github.io%2Fcoldnight-demo%2F2026%2F08%2F23%2Fchart-demo%2F"
+               target="_blank" rel="noopener noreferrer">Bluesky</a>
+            <button class="btn btn--ghost btn--sm post-share-mastodon"
+                    data-title="Build-Time SVG Charts"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2026/08/23/chart-demo/">Mastodon</button>
+            <button class="btn btn--ghost btn--sm post-share-copy"
+                    data-permalink="https://cracksoldier.github.io/coldnight-demo/2026/08/23/chart-demo/">Copy link</button>
+          </div>
+        </div>
+        
+
+        <nav class="post-nav" aria-label="Post navigation">
+          <div class="post-nav__item post-nav__item--prev">
+            
+          </div>
+          <div class="post-nav__item post-nav__item--next">
+            
+              <span class="post-nav__label">Next →</span>
+              <a href="/coldnight-demo/2026/07/11/video-embed-demo/" class="post-nav__title">Video Embed Demo</a>
+            
+          </div>
+        </nav>
+
+      </footer>
+
+    </article>
+
+    
+
+    
+    <section class="related-posts" aria-labelledby="related-heading">
+      <h3 class="related-posts__heading" id="related-heading">You might also like</h3>
+      <div class="post-grid" style="--post-grid-cols: 2; --post-grid-cols-md: 2;">
+        
+          
+
+<article class="post-card fade-in" style="--card-border: #f43f5e; --card-bg: #2a0d16">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/07/11/video-embed-demo/" tabindex="-1" aria-hidden="true">
+      <img src="/coldnight-demo/images/og-default.jpg" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Demo/" class="post-card__category" data-category-desc="Live demonstrations of the theme's tag plugins and widgets.">Demo</a>
+      
+      
+        <span>1 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/07/11/video-embed-demo/" class="post-card__title">
+      Video Embed Demo
+    </a>
+
+    
+      <div class="post-card__excerpt">Demonstrating the click-to-load video facade — no YouTube or Vimeo iframe loads until you press play.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-07-11T00:00:00.000Z">11.07.2026</time>
+      <a href="/coldnight-demo/2026/07/11/video-embed-demo/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+        
+          
+
+<article class="post-card fade-in post-card--large" style="--card-border: #2dd4bf">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/07/02/image-compare-demo/" tabindex="-1" aria-hidden="true">
+      <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Demo/" class="post-card__category" data-category-desc="Live demonstrations of the theme's tag plugins and widgets.">Demo</a>
+      
+      
+        <span>1 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/07/02/image-compare-demo/" class="post-card__title">
+      Image Compare Slider Demo
+    </a>
+
+    
+      <div class="post-card__excerpt">Demonstrating the built-in before/after compare slider tag — drag, touch, or use arrow keys to reveal the difference.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-07-02T00:00:00.000Z">02.07.2026</time>
+      <a href="/coldnight-demo/2026/07/02/image-compare-demo/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+        
+          
+
+<article class="post-card fade-in" style="--card-bg: #1b1033">
+
+  
+    <a class="post-card__cover" href="/coldnight-demo/2026/06/03/audio-player-demo/" tabindex="-1" aria-hidden="true">
+      <img src="https://picsum.photos/800/450" alt="" loading="lazy">
+    </a>
+  
+
+  <div class="post-card__body">
+
+    <div class="post-card__meta">
+      
+        <a href="/coldnight-demo/categories/Demo/" class="post-card__category" data-category-desc="Live demonstrations of the theme's tag plugins and widgets.">Demo</a>
+      
+      
+        <span>1 min read</span>
+      
+      
+    </div>
+
+    <a href="/coldnight-demo/2026/06/03/audio-player-demo/" class="post-card__title">
+      Audio Player Demo
+    </a>
+
+    
+      <div class="post-card__excerpt">Demonstrating the built-in audio player tag — themed controls, seek bar, mute, and keyboard navigation.</div>
+    
+
+    <div class="post-card__footer">
+      <time datetime="2026-06-03T00:00:00.000Z">03.06.2026</time>
+      <a href="/coldnight-demo/2026/06/03/audio-player-demo/" class="post-card__read-more" aria-hidden="true" tabindex="-1">Read more →</a>
+    </div>
+
+  </div>
+</article>
+
+        
+      </div>
+    </section>
+    
+
+  </main>
+
+  
+    
+
+
+<aside class="sidebar" role="complementary" aria-label="Sidebar">
+  
+    
+      
+        
+
+<div class="sidebar-widget widget-toc">
+  <button class="widget-toc__toggle" aria-expanded="true" aria-controls="toc-list">
+    <span class="sidebar-widget__title">Contents</span>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+  <nav id="toc-list" aria-label="Table of contents">
+    <ol class="toc-list">
+<li class="toc-item toc-item--h2"><a href="#Bar-charts" class="toc-link">Bar charts</a></li>
+<li class="toc-item toc-item--h2"><a href="#Line-charts" class="toc-link">Line charts</a></li>
+<li class="toc-item toc-item--h2"><a href="#Pie-charts" class="toc-link">Pie charts</a></li>
+<li class="toc-item toc-item--h2"><a href="#Pulling-from-a-data-file" class="toc-link">Pulling from a data file</a></li>
+<li class="toc-item toc-item--h2"><a href="#Parameters" class="toc-link">Parameters</a></li>
+<li class="toc-item toc-item--h2"><a href="#Accessibility" class="toc-link">Accessibility</a></li>
+</ol>
+  </nav>
+</div>
+
+
+      
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Recent Posts</p>
+  <ul class="sidebar-widget__list">
+    
+      <li>
+        <a href="/coldnight-demo/2026/08/23/chart-demo/">
+          <span>Build-Time SVG Charts</span>
+          <span class="sidebar-widget__count">23.08.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/07/11/video-embed-demo/">
+          <span>Video Embed Demo</span>
+          <span class="sidebar-widget__count">11.07.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/07/02/image-compare-demo/">
+          <span>Image Compare Slider Demo</span>
+          <span class="sidebar-widget__count">02.07.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/06/03/audio-player-demo/">
+          <span>Audio Player Demo</span>
+          <span class="sidebar-widget__count">03.06.</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/2026/06/01/3d-model-viewer-demo/">
+          <span>3D Model Viewer</span>
+          <span class="sidebar-widget__count">01.06.</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Tags</p>
+  <div class="tag-cloud">
+    
+      <a href="/coldnight-demo/tags/3d/" class="tag-pill">
+        3d <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/api-design/" class="tag-pill">
+        api-design <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/async/" class="tag-pill">
+        async <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/audio/" class="tag-pill">
+        audio <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/background-jobs/" class="tag-pill">
+        background-jobs <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/bash/" class="tag-pill">
+        bash <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/build-systems/" class="tag-pill">
+        build-systems <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/callouts/" class="tag-pill">
+        callouts <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/charts/" class="tag-pill">
+        charts <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/cli/" class="tag-pill">
+        cli <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/code/" class="tag-pill">
+        code <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/concurrency/" class="tag-pill">
+        concurrency <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/configuration/" class="tag-pill">
+        configuration <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/css/" class="tag-pill">
+        css <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/databases/" class="tag-pill">
+        databases <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/dataviz/" class="tag-pill">
+        dataviz <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/debugging/" class="tag-pill">
+        debugging <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/diagrams/" class="tag-pill">
+        diagrams <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/diff/" class="tag-pill">
+        diff <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/documentation/" class="tag-pill">
+        documentation <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/dotfiles/" class="tag-pill">
+        dotfiles <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/errors/" class="tag-pill">
+        errors <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/features/" class="tag-pill">
+        features <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/flexbox/" class="tag-pill">
+        flexbox <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/frontend/" class="tag-pill">
+        frontend <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/gallery/" class="tag-pill">
+        gallery <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/git/" class="tag-pill">
+        git <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/go/" class="tag-pill">
+        go <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/grid/" class="tag-pill">
+        grid <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/hexo/" class="tag-pill">
+        hexo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/images/" class="tag-pill">
+        images <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/infrastructure/" class="tag-pill">
+        infrastructure <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/javascript/" class="tag-pill">
+        javascript <span class="tag-cloud__count">(3)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/katex/" class="tag-pill">
+        katex <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/latex/" class="tag-pill">
+        latex <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/layout/" class="tag-pill">
+        layout <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/lightgallery/" class="tag-pill">
+        lightgallery <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/linux/" class="tag-pill">
+        linux <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/markdown/" class="tag-pill">
+        markdown <span class="tag-cloud__count">(3)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/math/" class="tag-pill">
+        math <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/memory/" class="tag-pill">
+        memory <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/mermaid/" class="tag-pill">
+        mermaid <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/monorepo/" class="tag-pill">
+        monorepo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/packaging/" class="tag-pill">
+        packaging <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/patterns/" class="tag-pill">
+        patterns <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/postgres/" class="tag-pill">
+        postgres <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/productivity/" class="tag-pill">
+        productivity <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/promises/" class="tag-pill">
+        promises <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/python/" class="tag-pill">
+        python <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/queues/" class="tag-pill">
+        queues <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/redis/" class="tag-pill">
+        redis <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/responsive-design/" class="tag-pill">
+        responsive-design <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/scripting/" class="tag-pill">
+        scripting <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/search/" class="tag-pill">
+        search <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/setup/" class="tag-pill">
+        setup <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/sql/" class="tag-pill">
+        sql <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/syntax-highlighting/" class="tag-pill">
+        syntax-highlighting <span class="tag-cloud__count">(2)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/terminal/" class="tag-pill">
+        terminal <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/theme/" class="tag-pill">
+        theme <span class="tag-cloud__count">(5)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/threejs/" class="tag-pill">
+        threejs <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/timeline/" class="tag-pill">
+        timeline <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/tooling/" class="tag-pill">
+        tooling <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/turborepo/" class="tag-pill">
+        turborepo <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/typography/" class="tag-pill">
+        typography <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/uv/" class="tag-pill">
+        uv <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/ux/" class="tag-pill">
+        ux <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/version-control/" class="tag-pill">
+        version-control <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/video/" class="tag-pill">
+        video <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/webgl/" class="tag-pill">
+        webgl <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/workflow/" class="tag-pill">
+        workflow <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/writing/" class="tag-pill">
+        writing <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+      <a href="/coldnight-demo/tags/zsh/" class="tag-pill">
+        zsh <span class="tag-cloud__count">(1)</span>
+      </a>
+    
+  </div>
+</div>
+
+    
+  
+    
+      <div class="sidebar-widget">
+  <p class="sidebar-widget__title">Archives</p>
+  <ul class="sidebar-widget__list">
+    
+    
+      <li>
+        <a href="/coldnight-demo/archives/2026">
+          <span>2026</span>
+          <span class="sidebar-widget__count">19</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/archives/2025">
+          <span>2025</span>
+          <span class="sidebar-widget__count">4</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/coldnight-demo/archives/2024">
+          <span>2024</span>
+          <span class="sidebar-widget__count">5</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+    
+  
+    
+      
+        
+
+<div class="sidebar-widget widget-about">
+  <p class="sidebar-widget__title">About</p>
+  
+  
+    <p class="widget-about__name">Cracksoldier</p>
+  
+  
+    <p class="widget-about__bio">A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.</p>
+  
+  <div class="widget-about__social">
+    
+    
+  </div>
+</div>
+
+
+      
+    
+  
+</aside>
+
+  
+
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <ul class="footer-links">
+      
+      
+      
+        <li><a href="/coldnight-demo/atom.xml">RSS</a></li>
+      
+    </ul>
+    <span>&copy; 2026 Cracksoldier. Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> &middot; coldnight v1.9.1</span>
+  </div>
+</footer>
+
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+<script src="/coldnight-demo/js/back-to-top.js" defer></script>
+
+<script src="/coldnight-demo/js/search.js" data-search-url="/coldnight-demo/search.json" defer></script>
+
+
+<div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+
+
+
+<button class="toc-fab" id="toc-drawer-btn"
+        aria-label="Open table of contents"
+        aria-expanded="false"
+        aria-controls="toc-drawer">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <line x1="3" y1="6"  x2="21" y2="6"/>
+    <line x1="3" y1="12" x2="15" y2="12"/>
+    <line x1="3" y1="18" x2="18" y2="18"/>
+  </svg>
+</button>
+<div class="toc-drawer" id="toc-drawer" hidden
+     role="dialog" aria-modal="true" aria-label="Table of contents">
+  <div class="toc-drawer__overlay" id="toc-drawer-overlay"></div>
+  <div class="toc-drawer__panel">
+    <div class="toc-drawer__header">
+      <span class="toc-drawer__title">Contents</span>
+      <button class="toc-drawer__close" id="toc-drawer-close"
+              aria-label="Close table of contents">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="18" y1="6"  x2="6"  y2="18"/>
+          <line x1="6"  y1="6"  x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="toc-drawer__body" aria-label="Table of contents">
+      <ol class="toc-list">
+<li class="toc-item toc-item--h2"><a href="#Bar-charts" class="toc-link">Bar charts</a></li>
+<li class="toc-item toc-item--h2"><a href="#Line-charts" class="toc-link">Line charts</a></li>
+<li class="toc-item toc-item--h2"><a href="#Pie-charts" class="toc-link">Pie charts</a></li>
+<li class="toc-item toc-item--h2"><a href="#Pulling-from-a-data-file" class="toc-link">Pulling from a data file</a></li>
+<li class="toc-item toc-item--h2"><a href="#Parameters" class="toc-link">Parameters</a></li>
+<li class="toc-item toc-item--h2"><a href="#Accessibility" class="toc-link">Accessibility</a></li>
+</ol>
+    </nav>
+  </div>
+</div>
+
+
+
+
+<script src="/coldnight-demo/js/nav.js" defer></script>
+<script src="/coldnight-demo/js/copy-code.js" data-collapse-lines="25" defer></script>
+
+<script src="/coldnight-demo/js/category-tooltip.js" defer></script>
+
+
+<script src="/coldnight-demo/js/toc.js" defer></script>
+<script src="/coldnight-demo/js/toc-drawer.js" defer></script>
+
+
+<script src="/coldnight-demo/js/post-title.js" defer></script>
+
+
+<script src="/coldnight-demo/js/reading-progress.js" defer></script>
+
+<script src="/coldnight-demo/js/post-nav-keys.js" defer></script>
+
+<script src="/coldnight-demo/vendor/jszip/jszip.min.js" defer></script>
+<script src="/coldnight-demo/js/epub-export.js" defer></script>
+
+
+<script src="/coldnight-demo/js/pdf-viewer.js" defer></script>
+
+
+
+  <script src="/coldnight-demo/vendor/lightgallery/lightgallery.umd.js" defer></script>
+  
+  <script src="/coldnight-demo/vendor/lightgallery/lg-zoom.umd.js" defer></script>
+  
+  
+  <script src="/coldnight-demo/vendor/lightgallery/lg-thumbnail.umd.js" defer></script>
+  
+  
+  <script src="/coldnight-demo/js/gallery.js" defer></script>
+  
+
+
+<script type="module">
+  import mermaid from '/coldnight-demo/vendor/mermaid/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+</script>
+
+
+
+
+
+
+</body>
+</html>
