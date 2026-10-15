@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>coldnight demo</title>
+<meta name="description" content="A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.">
+<meta name="author" content="Cracksoldier">
+
+
+<!-- Open Graph -->
+<meta property="og:title" content="coldnight demo">
+<meta property="og:description" content="A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cracksoldier.github.io/coldnight-demo/archives/2026/">
+<meta property="og:site_name" content="coldnight demo">
+<meta property="og:locale" content="en_US">
+
+<meta property="og:image" content="https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg">
+
+
+
+<link rel="canonical" href="https://cracksoldier.github.io/coldnight-demo/archives/2026/">
+
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="coldnight demo">
+<meta name="twitter:description" content="A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.">
+
+
+<meta name="twitter:image" content="https://cracksoldier.github.io/coldnight-demo/images/og-default.jpg">
+
+
+<!-- Favicon -->
+
+
+<link rel="icon" type="image/svg+xml" href="/coldnight-demo/favicon.svg">
+
+
+<!-- Fonts (self-hosted, latin + latin-ext) -->
+<link rel="preload" href="/coldnight-demo/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Theme stylesheet -->
+<link rel="stylesheet" href="/coldnight-demo/css/style.css">
+
+
+<!-- Cross-document View Transitions (progressive enhancement; inline because compiled SCSS can't read theme config) -->
+<style>@media not (prefers-reduced-motion: reduce){@view-transition{navigation:auto}}</style>
+
+
+<!-- LightGallery CSS — post pages only -->
+
+
+<!-- KaTeX CSS — post pages only -->
+
+
+<!-- RSS -->
+
+<link rel="alternate" type="application/rss+xml" title="coldnight demo" href="/coldnight-demo/atom.xml">
+
+
+<link rel="alternate" type="application/feed+json" title="coldnight demo" href="/coldnight-demo/feed.json">
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="navbar" role="banner">
+  <div class="navbar__inner">
+
+    <!-- Brand -->
+    <a href="/coldnight-demo/" class="navbar__brand" aria-label="My Blog — home">
+      
+      
+      <span class="navbar__brand-text navbar__brand-text--icon">
+        
+        <span class="navbar__logo navbar__logo--text" aria-hidden="true" style="color: #60a5fa">❄</span>
+        
+        <span class="navbar__title">My Blog</span>
+        
+      </span>
+      
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="navbar__nav" aria-label="Main navigation" id="main-nav">
+      
+        
+        <a href="/coldnight-demo/"
+           class="nav-link"
+           >
+          Home
+        </a>
+      
+        
+        <a href="/coldnight-demo/archives"
+           class="nav-link"
+           >
+          Archive
+        </a>
+      
+        
+        <a href="/coldnight-demo/stats"
+           class="nav-link"
+           >
+          Stats
+        </a>
+      
+        
+        <a href="/coldnight-demo/links"
+           class="nav-link"
+           >
+          Links
+        </a>
+      
+        
+        <a href="/coldnight-demo/showroom"
+           class="nav-link"
+           >
+          Showroom
+        </a>
+      
+        
+        <a href="/coldnight-demo/about"
+           class="nav-link"
+           >
+          About
+        </a>
+      
+    </nav>
+
+    <!-- Actions -->
+    <div class="navbar__actions">
+      
+
+      <!-- GitHub -->
+      
+
+      
+      <div class="search-wrap navbar__search" id="search-wrap">
+        <input type="search"
+               role="combobox"
+               class="search-input"
+               id="search-input"
+               placeholder="Search…"
+               aria-label="Search posts"
+               aria-expanded="false"
+               aria-autocomplete="list"
+               aria-haspopup="listbox"
+               aria-controls="search-results"
+               autocomplete="off"
+               spellcheck="false">
+        <div class="search-results" id="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      
+
+      <!-- Mobile hamburger -->
+      <button class="btn btn--icon navbar__hamburger"
+              id="nav-toggle"
+              aria-expanded="false"
+              aria-controls="mobile-nav"
+              aria-label="Toggle navigation">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="2" y1="4.5" x2="16" y2="4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="13.5" x2="16" y2="13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile nav drawer -->
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+  
+  <div class="search-wrap mobile-nav__search" id="search-wrap-mobile">
+    <input type="search"
+           role="combobox"
+           class="search-input"
+           id="search-input-mobile"
+           placeholder="Search…"
+           aria-label="Search posts"
+           aria-expanded="false"
+           aria-autocomplete="list"
+           aria-haspopup="listbox"
+           aria-controls="search-results-mobile"
+           autocomplete="off"
+           spellcheck="false">
+    <div class="search-results" id="search-results-mobile" role="listbox" aria-label="Search results"></div>
+  </div>
+  
+  
+    
+    <a href="/coldnight-demo/"
+       class="nav-link"
+       >
+      Home
+    </a>
+  
+    
+    <a href="/coldnight-demo/archives"
+       class="nav-link"
+       >
+      Archive
+    </a>
+  
+    
+    <a href="/coldnight-demo/stats"
+       class="nav-link"
+       >
+      Stats
+    </a>
+  
+    
+    <a href="/coldnight-demo/links"
+       class="nav-link"
+       >
+      Links
+    </a>
+  
+    
+    <a href="/coldnight-demo/showroom"
+       class="nav-link"
+       >
+      Showroom
+    </a>
+  
+    
+    <a href="/coldnight-demo/about"
+       class="nav-link"
+       >
+      About
+    </a>
+  
+</nav>
+
+
+<div class="archive-wrapper">
+  <main id="main-content" role="main">
+
+    <header class="page-header">
+      <h1>Archive</h1>
+      <p class="page-header__meta">19 posts</p>
+    </header>
+
+    
+
+    
+    
+    
+
+    
+    <div class="archive-filters" role="group" aria-label="Filter posts">
+      <button class="archive-filter-chip archive-filter-chip--active" data-filter-type="all" aria-pressed="true">All</button>
+      
+        <button class="archive-filter-chip" data-filter-type="category" data-filter-value="Demo" aria-pressed="false">Demo</button>
+      
+        <button class="archive-filter-chip" data-filter-type="category" data-filter-value="Design" aria-pressed="false">Design</button>
+      
+        <button class="archive-filter-chip" data-filter-type="category" data-filter-value="Development" aria-pressed="false">Development</button>
+      
+        <button class="archive-filter-chip" data-filter-type="category" data-filter-value="Documentation" aria-pressed="false">Documentation</button>
+      
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="3d" aria-pressed="false">#3d</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="async" aria-pressed="false">#async</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="audio" aria-pressed="false">#audio</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="bash" aria-pressed="false">#bash</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="callouts" aria-pressed="false">#callouts</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="charts" aria-pressed="false">#charts</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="cli" aria-pressed="false">#cli</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="code" aria-pressed="false">#code</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="configuration" aria-pressed="false">#configuration</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="css" aria-pressed="false">#css</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="dataviz" aria-pressed="false">#dataviz</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="diagrams" aria-pressed="false">#diagrams</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="diff" aria-pressed="false">#diff</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="documentation" aria-pressed="false">#documentation</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="features" aria-pressed="false">#features</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="flexbox" aria-pressed="false">#flexbox</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="frontend" aria-pressed="false">#frontend</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="gallery" aria-pressed="false">#gallery</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="git" aria-pressed="false">#git</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="grid" aria-pressed="false">#grid</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="hexo" aria-pressed="false">#hexo</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="images" aria-pressed="false">#images</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="javascript" aria-pressed="false">#javascript</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="katex" aria-pressed="false">#katex</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="latex" aria-pressed="false">#latex</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="layout" aria-pressed="false">#layout</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="lightgallery" aria-pressed="false">#lightgallery</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="linux" aria-pressed="false">#linux</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="markdown" aria-pressed="false">#markdown</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="math" aria-pressed="false">#math</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="mermaid" aria-pressed="false">#mermaid</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="packaging" aria-pressed="false">#packaging</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="patterns" aria-pressed="false">#patterns</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="promises" aria-pressed="false">#promises</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="python" aria-pressed="false">#python</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="scripting" aria-pressed="false">#scripting</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="setup" aria-pressed="false">#setup</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="syntax-highlighting" aria-pressed="false">#syntax-highlighting</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="theme" aria-pressed="false">#theme</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="threejs" aria-pressed="false">#threejs</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="timeline" aria-pressed="false">#timeline</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="tooling" aria-pressed="false">#tooling</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="typography" aria-pressed="false">#typography</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="uv" aria-pressed="false">#uv</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="version-control" aria-pressed="false">#version-control</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="video" aria-pressed="false">#video</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="webgl" aria-pressed="false">#webgl</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="workflow" aria-pressed="false">#workflow</button>
+      
+        <button class="archive-filter-chip" data-filter-type="tag" data-filter-value="writing" aria-pressed="false">#writing</button>
+      
+    </div>
+    
+
+    
+      <section class="archive-year-group">
+        <h2 class="archive-year">2026</h2>
+        <ul class="archive-items">
+          
+            <li class="archive-item"
+                data-category="Demo"
+                data-tags="theme|charts|dataviz">
+              <time class="archive-item__date" datetime="2026-08-23">
+                23.08.
+              </time>
+              <a href="/coldnight-demo/2026/08/23/chart-demo/" class="archive-item__title">Build-Time SVG Charts</a>
+              <span class="archive-item__meta">
+                
+                  Demo &middot; 2 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Demo"
+                data-tags="theme|video">
+              <time class="archive-item__date" datetime="2026-07-11">
+                11.07.
+              </time>
+              <a href="/coldnight-demo/2026/07/11/video-embed-demo/" class="archive-item__title">Video Embed Demo</a>
+              <span class="archive-item__meta">
+                
+                  Demo &middot; 1 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Demo"
+                data-tags="theme|images">
+              <time class="archive-item__date" datetime="2026-07-02">
+                02.07.
+              </time>
+              <a href="/coldnight-demo/2026/07/02/image-compare-demo/" class="archive-item__title">Image Compare Slider Demo</a>
+              <span class="archive-item__meta">
+                
+                  Demo &middot; 1 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Demo"
+                data-tags="audio|theme">
+              <time class="archive-item__date" datetime="2026-06-03">
+                03.06.
+              </time>
+              <a href="/coldnight-demo/2026/06/03/audio-player-demo/" class="archive-item__title">Audio Player Demo</a>
+              <span class="archive-item__meta">
+                
+                  Demo &middot; 1 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Demo"
+                data-tags="3d|webgl|threejs">
+              <time class="archive-item__date" datetime="2026-06-01">
+                01.06.
+              </time>
+              <a href="/coldnight-demo/2026/06/01/3d-model-viewer-demo/" class="archive-item__title">3D Model Viewer</a>
+              <span class="archive-item__meta">
+                
+                  Demo &middot; 1 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Documentation"
+                data-tags="markdown|features|timeline">
+              <time class="archive-item__date" datetime="2026-05-20">
+                20.05.
+              </time>
+              <a href="/coldnight-demo/2026/05/20/timeline-showcase/" class="archive-item__title">Timelines — the timeline block tag</a>
+              <span class="archive-item__meta">
+                
+                  Documentation &middot; 3 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Development"
+                data-tags="math|katex|latex">
+              <time class="archive-item__date" datetime="2026-05-20">
+                20.05.
+              </time>
+              <a href="/coldnight-demo/2026/05/20/katex-math-showcase/" class="archive-item__title">Math Typesetting with KaTeX</a>
+              <span class="archive-item__meta">
+                
+                  Development &middot; 2 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Development"
+                data-tags="mermaid|diagrams|documentation">
+              <time class="archive-item__date" datetime="2026-05-20">
+                20.05.
+              </time>
+              <a href="/coldnight-demo/2026/05/20/mermaid-diagrams-showcase/" class="archive-item__title">Diagramming with Mermaid</a>
+              <span class="archive-item__meta">
+                
+                  Development &middot; 1 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Development"
+                data-tags="code|syntax-highlighting|javascript|python">
+              <time class="archive-item__date" datetime="2026-05-15">
+                15.05.
+              </time>
+              <a href="/coldnight-demo/2026/05/15/syntax-highlighting-showcase/" class="archive-item__title">Syntax Highlighting Showcase</a>
+              <span class="archive-item__meta">
+                
+                  Development &middot; 1 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Design"
+                data-tags="markdown|typography|writing">
+              <time class="archive-item__date" datetime="2026-05-08">
+                08.05.
+              </time>
+              <a href="/coldnight-demo/2026/05/08/typography-and-prose/" class="archive-item__title">Typography &amp; Prose Elements</a>
+              <span class="archive-item__meta">
+                
+                  Design &middot; 1 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Documentation"
+                data-tags="callouts|markdown|features">
+              <time class="archive-item__date" datetime="2026-05-01">
+                01.05.
+              </time>
+              <a href="/coldnight-demo/2026/05/01/callout-blocks/" class="archive-item__title">Callout Blocks &amp; Alerts</a>
+              <span class="archive-item__meta">
+                
+                  Documentation &middot; 1 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Design"
+                data-tags="images|gallery|lightgallery">
+              <time class="archive-item__date" datetime="2026-04-24">
+                24.04.
+              </time>
+              <a href="/coldnight-demo/2026/04/24/image-gallery/" class="archive-item__title">Image Galleries with LightGallery</a>
+              <span class="archive-item__meta">
+                
+                  Design &middot; 1 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Development"
+                data-tags="git|diff|code|syntax-highlighting">
+              <time class="archive-item__date" datetime="2026-04-17">
+                17.04.
+              </time>
+              <a href="/coldnight-demo/2026/04/17/diff-and-marked-lines/" class="archive-item__title">Diff Highlighting &amp; Marked Lines</a>
+              <span class="archive-item__meta">
+                
+                  Development &middot; 1 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Development"
+                data-tags="javascript|async|promises|patterns">
+              <time class="archive-item__date" datetime="2026-04-10">
+                10.04.
+              </time>
+              <a href="/coldnight-demo/2026/04/10/javascript-async-patterns/" class="archive-item__title">Modern JavaScript Async Patterns</a>
+              <span class="archive-item__meta">
+                
+                  Development &middot; 1 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Design"
+                data-tags="css|frontend|layout|grid|flexbox">
+              <time class="archive-item__date" datetime="2026-04-03">
+                03.04.
+              </time>
+              <a href="/coldnight-demo/2026/04/03/css-layout-techniques/" class="archive-item__title">CSS Layout Techniques Worth Knowing</a>
+              <span class="archive-item__meta">
+                
+                  Design &middot; 1 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Development"
+                data-tags="python|tooling|packaging|uv">
+              <time class="archive-item__date" datetime="2026-03-27">
+                27.03.
+              </time>
+              <a href="/coldnight-demo/2026/03/27/python-tooling/" class="archive-item__title">Python Tooling in 2026</a>
+              <span class="archive-item__meta">
+                
+                  Development &middot; 1 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Development"
+                data-tags="bash|cli|scripting|linux">
+              <time class="archive-item__date" datetime="2026-03-20">
+                20.03.
+              </time>
+              <a href="/coldnight-demo/2026/03/20/bash-scripting-guide/" class="archive-item__title">Practical Bash Scripting</a>
+              <span class="archive-item__meta">
+                
+                  Development &middot; 1 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Documentation"
+                data-tags="theme|hexo|configuration|setup">
+              <time class="archive-item__date" datetime="2026-03-13">
+                13.03.
+              </time>
+              <a href="/coldnight-demo/2026/03/13/theme-configuration-guide/" class="archive-item__title">Configuring the Coldnight Theme</a>
+              <span class="archive-item__meta">
+                
+                  Documentation &middot; 11 min read
+                
+              </span>
+            </li>
+          
+            <li class="archive-item"
+                data-category="Development"
+                data-tags="git|workflow|version-control">
+              <time class="archive-item__date" datetime="2026-03-06">
+                06.03.
+              </time>
+              <a href="/coldnight-demo/2026/03/06/git-workflow/" class="archive-item__title">A Clean Git Workflow for Solo Developers</a>
+              <span class="archive-item__meta">
+                
+                  Development &middot; 1 min read
+                
+              </span>
+            </li>
+          
+        </ul>
+      </section>
+    
+
+  </main>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <ul class="footer-links">
+      
+      
+      
+        <li><a href="/coldnight-demo/atom.xml">RSS</a></li>
+      
+    </ul>
+    <span>&copy; 2026 Cracksoldier. Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> &middot; coldnight v1.9.1</span>
+  </div>
+</footer>
+
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+<script src="/coldnight-demo/js/back-to-top.js" defer></script>
+
+<script src="/coldnight-demo/js/search.js" data-search-url="/coldnight-demo/search.json" defer></script>
+
+
+<div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+
+<script src="/coldnight-demo/js/nav.js" defer></script>
+<script src="/coldnight-demo/js/archive-filter.js" defer></script>
+
+</body>
+</html>

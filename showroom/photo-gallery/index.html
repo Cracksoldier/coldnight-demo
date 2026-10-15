@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Photo Gallery | coldnight demo</title>
+<meta name="description" content="A performance-focused photography portfolio generated from a folder of RAW&amp;#x2F;JPEG files. The build pipeline converts each image to WebP, generates LQIP place">
+<meta name="author" content="Cracksoldier">
+
+
+<!-- Open Graph -->
+<meta property="og:title" content="Photo Gallery">
+<meta property="og:description" content="A performance-focused photography portfolio generated from a folder of RAW&amp;#x2F;JPEG files. The build pipeline converts each image to WebP, generates LQIP place">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cracksoldier.github.io/coldnight-demo/showroom/photo-gallery/">
+<meta property="og:site_name" content="coldnight demo">
+<meta property="og:locale" content="en_US">
+
+<meta property="og:image" content="https://cracksoldier.github.io/coldnight-demo/images/showroom/photo-gallery.png">
+
+
+
+<link rel="canonical" href="https://cracksoldier.github.io/coldnight-demo/showroom/photo-gallery/">
+
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Photo Gallery">
+<meta name="twitter:description" content="A performance-focused photography portfolio generated from a folder of RAW&amp;#x2F;JPEG files. The build pipeline converts each image to WebP, generates LQIP place">
+
+
+<meta name="twitter:image" content="https://cracksoldier.github.io/coldnight-demo/images/showroom/photo-gallery.png">
+
+
+<!-- Favicon -->
+
+
+<link rel="icon" type="image/svg+xml" href="/coldnight-demo/favicon.svg">
+
+
+<!-- Fonts (self-hosted, latin + latin-ext) -->
+<link rel="preload" href="/coldnight-demo/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Theme stylesheet -->
+<link rel="stylesheet" href="/coldnight-demo/css/style.css">
+
+
+<!-- Cross-document View Transitions (progressive enhancement; inline because compiled SCSS can't read theme config) -->
+<style>@media not (prefers-reduced-motion: reduce){@view-transition{navigation:auto}}</style>
+
+
+<!-- LightGallery CSS — post pages only -->
+
+
+<!-- KaTeX CSS — post pages only -->
+
+
+<!-- RSS -->
+
+<link rel="alternate" type="application/rss+xml" title="coldnight demo" href="/coldnight-demo/atom.xml">
+
+
+<link rel="alternate" type="application/feed+json" title="coldnight demo" href="/coldnight-demo/feed.json">
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="navbar" role="banner">
+  <div class="navbar__inner">
+
+    <!-- Brand -->
+    <a href="/coldnight-demo/" class="navbar__brand" aria-label="My Blog — home">
+      
+      
+      <span class="navbar__brand-text navbar__brand-text--icon">
+        
+        <span class="navbar__logo navbar__logo--text" aria-hidden="true" style="color: #60a5fa">❄</span>
+        
+        <span class="navbar__title">My Blog</span>
+        
+      </span>
+      
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="navbar__nav" aria-label="Main navigation" id="main-nav">
+      
+        
+        <a href="/coldnight-demo/"
+           class="nav-link"
+           >
+          Home
+        </a>
+      
+        
+        <a href="/coldnight-demo/archives"
+           class="nav-link"
+           >
+          Archive
+        </a>
+      
+        
+        <a href="/coldnight-demo/stats"
+           class="nav-link"
+           >
+          Stats
+        </a>
+      
+        
+        <a href="/coldnight-demo/links"
+           class="nav-link"
+           >
+          Links
+        </a>
+      
+        
+        <a href="/coldnight-demo/showroom"
+           class="nav-link"
+           >
+          Showroom
+        </a>
+      
+        
+        <a href="/coldnight-demo/about"
+           class="nav-link"
+           >
+          About
+        </a>
+      
+    </nav>
+
+    <!-- Actions -->
+    <div class="navbar__actions">
+      
+
+      <!-- GitHub -->
+      
+
+      
+      <div class="search-wrap navbar__search" id="search-wrap">
+        <input type="search"
+               role="combobox"
+               class="search-input"
+               id="search-input"
+               placeholder="Search…"
+               aria-label="Search posts"
+               aria-expanded="false"
+               aria-autocomplete="list"
+               aria-haspopup="listbox"
+               aria-controls="search-results"
+               autocomplete="off"
+               spellcheck="false">
+        <div class="search-results" id="search-results" role="listbox" aria-label="Search results"></div>
+      </div>
+      
+
+      <!-- Mobile hamburger -->
+      <button class="btn btn--icon navbar__hamburger"
+              id="nav-toggle"
+              aria-expanded="false"
+              aria-controls="mobile-nav"
+              aria-label="Toggle navigation">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <line x1="2" y1="4.5" x2="16" y2="4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="2" y1="13.5" x2="16" y2="13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile nav drawer -->
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+  
+  <div class="search-wrap mobile-nav__search" id="search-wrap-mobile">
+    <input type="search"
+           role="combobox"
+           class="search-input"
+           id="search-input-mobile"
+           placeholder="Search…"
+           aria-label="Search posts"
+           aria-expanded="false"
+           aria-autocomplete="list"
+           aria-haspopup="listbox"
+           aria-controls="search-results-mobile"
+           autocomplete="off"
+           spellcheck="false">
+    <div class="search-results" id="search-results-mobile" role="listbox" aria-label="Search results"></div>
+  </div>
+  
+  
+    
+    <a href="/coldnight-demo/"
+       class="nav-link"
+       >
+      Home
+    </a>
+  
+    
+    <a href="/coldnight-demo/archives"
+       class="nav-link"
+       >
+      Archive
+    </a>
+  
+    
+    <a href="/coldnight-demo/stats"
+       class="nav-link"
+       >
+      Stats
+    </a>
+  
+    
+    <a href="/coldnight-demo/links"
+       class="nav-link"
+       >
+      Links
+    </a>
+  
+    
+    <a href="/coldnight-demo/showroom"
+       class="nav-link"
+       >
+      Showroom
+    </a>
+  
+    
+    <a href="/coldnight-demo/about"
+       class="nav-link"
+       >
+      About
+    </a>
+  
+</nav>
+
+
+<div class="archive-wrapper">
+  <main id="main-content" role="main">
+
+    <a class="project-back" href="/coldnight-demo/showroom/">&#8592; Showroom</a>
+
+    
+      <div class="project-cover">
+        <img src="/coldnight-demo/images/showroom/photo-gallery.png" alt="Photo Gallery" loading="lazy">
+      </div>
+    
+
+    <h1>Photo Gallery</h1>
+    
+      <p class="project-subtitle">Static photography portfolio</p>
+    
+    
+
+    <div class="prose">
+      <p>A performance-focused photography portfolio generated from a folder of RAW&#x2F;JPEG files. The build pipeline converts each image to WebP, generates LQIP placeholders, and writes the gallery JSON. The frontend is pure HTML + CSS — no JavaScript until the lightbox is opened.</p>
+<h2 id="Build-pipeline"><a href="#Build-pipeline" class="headerlink" title="Build pipeline"></a>Build pipeline</h2><ol>
+<li><code>exiftool</code> extracts EXIF metadata (date, camera, lens, focal length)</li>
+<li><code>sharp</code> generates three sizes: <code>thumb</code>, <code>medium</code>, <code>full</code></li>
+<li><code>blurhash</code> computes a 4×3 hash for the LQIP placeholder</li>
+<li>A Node.js script writes <code>gallery.json</code> consumed by the HTML template</li>
+</ol>
+<h2 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h2><ul>
+<li>First Contentful Paint: &lt; 0.8s on a 4G connection</li>
+<li>Lighthouse Performance: 98</li>
+</ul>
+
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <ul class="footer-links">
+      
+      
+      
+        <li><a href="/coldnight-demo/atom.xml">RSS</a></li>
+      
+    </ul>
+    <span>&copy; 2026 Cracksoldier. Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> &middot; coldnight v1.9.1</span>
+  </div>
+</footer>
+
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+<script src="/coldnight-demo/js/back-to-top.js" defer></script>
+
+<script src="/coldnight-demo/js/search.js" data-search-url="/coldnight-demo/search.json" defer></script>
+
+
+<div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+
+<script src="/coldnight-demo/js/nav.js" defer></script>
+<script src="/coldnight-demo/js/copy-code.js" defer></script>
+
+</body>
+</html>

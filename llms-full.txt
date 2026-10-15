@@ -1,0 +1,3556 @@
+# coldnight demo
+
+> A demo site for the coldnight Hexo theme — clean, dark, and feature-rich.
+
+---
+
+# Build-Time SVG Charts
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/08/23/chart-demo/
+Date: 2026-08-23
+Tags: theme, charts, dataviz
+
+The `{% raw %}{% chart %}{% endraw %}` tag renders bar, line, and pie charts **at build time**. The output is a plain `<svg>` element — there is no charting library, no runtime, and nothing to download. Charts survive printing, the ePub export, and readers who browse with JavaScript turned off.
+
+
+
+## Bar charts
+
+One value per line gives a single series, and the row labels become the category axis.
+
+{% chart bar title="Lines of code by language" %}
+Rust: 4200
+Go: 3100
+Python: 2700
+Shell: 640
+{% endchart %}
+
+{% raw %}
+```
+{% chart bar title="Lines of code by language" %}
+Rust: 4200
+Go: 3100
+Python: 2700
+Shell: 640
+{% endchart %}
+```
+{% endraw %}
+
+Add `x` to plot several values per row instead. Each row then becomes its own series, drawn as a grouped bar.
+
+{% chart bar x="2024, 2025, 2026" title="Posts published" %}
+Guides: 12, 19, 23
+Notes: 8, 14, 16
+Talks: 2, 3, 7
+{% endchart %}
+
+## Line charts
+
+Same data shape, different `type`. Use `unit` to suffix the axis labels.
+
+{% chart line x="Jan, Feb, Mar, Apr, May, Jun" unit="ms" title="p99 request latency" caption="Lower is better. Measured against the staging cluster." %}
+API: 182, 174, 158, 141, 133, 121
+Worker: 96, 103, 88, 84, 79, 71
+{% endchart %}
+
+## Pie charts
+
+Pie always treats each line as one slice, and percentages are computed for you.
+
+{% chart pie title="Traffic sources" %}
+Direct: 55
+Search: 128
+Social: 34
+Referral: 19
+{% endchart %}
+
+## Pulling from a data file
+
+Rather than repeating figures across posts, put them in `source/_data/` and reference the file by name. This chart reads `source/_data/benchmarks.yml`:
+
+{% chart line data="benchmarks" unit="ms" title="Parse time by payload size" caption="Sourced from source/_data/benchmarks.yml" %}{% endchart %}
+
+The YAML mirrors the inline format — `x` is the category axis, every other key is a series:
+
+```yaml
+x: [1 KB, 10 KB, 100 KB, 1 MB, 10 MB]
+Rust: [0.8, 1.9, 12.4, 108, 1120]
+Go: [1.1, 2.6, 17.8, 154, 1610]
+Python: [4.7, 11.2, 78.3, 690, 7240]
+```
+
+An inline body always wins over `data`, so you can override a shared file for one post without editing it.
+
+## Parameters
+
+| Parameter | Required | Notes |
+|-----------|----------|-------|
+| type | no | First bare word: `bar`, `line`, or `pie`. Defaults to `bar` |
+| `x` | no | Comma-separated category labels; switches rows to multi-point series |
+| `data` | no | Key into `source/_data/<name>.yml`; ignored when the body is non-empty |
+| `title` | no | Heading above the chart, also the SVG accessible name |
+| `caption` | no | Muted text below the chart |
+| `unit` | no | Suffix appended to axis and table values, e.g. `ms` or `%` |
+| `max` | no | Y-axis ceiling; defaults to a rounded value above the largest data point |
+
+Blank lines and lines starting with `#` are ignored, so you can comment a dataset inline.
+
+## Accessibility
+
+Every chart carries a `role="img"` with a generated description listing each value, and ships a visually hidden data table alongside the SVG. Screen readers get the real numbers rather than an unlabelled graphic, and that same table is what appears when the page is printed.
+
+---
+
+# Video Embed Demo
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/07/11/video-embed-demo/
+Date: 2026-07-11
+Tags: theme, video
+
+The `{% raw %}{% video %}{% endraw %}` tag embeds YouTube and Vimeo videos behind a privacy-friendly click-to-load facade: the page makes no third-party player request until you actually press play. YouTube shows its cookie-free thumbnail; Vimeo gets a themed placeholder with zero external requests. Without JavaScript the facade is a plain link to the video page.
+
+
+
+## YouTube
+
+The thumbnail comes from `i.ytimg.com` (no cookies), and the player injected on click uses the `youtube-nocookie.com` domain.
+
+{% video https://www.youtube.com/watch?v=aqz-KE-bpKQ Big Buck Bunny — Blender Foundation %}
+
+## Vimeo
+
+Vimeo has no static thumbnail URL, so the facade shows a themed placeholder instead — not a single third-party request before the click.
+
+{% video https://vimeo.com/1084537 Big Buck Bunny on Vimeo %}
+
+## Parameters
+
+| Parameter | Required | Notes |
+|-----------|----------|-------|
+| URL | yes | YouTube watch/short URL, Vimeo URL, or a direct `.mp4`/`.webm`/`.ogv` file |
+| Caption | no | Everything after the URL; shown below the frame and used as the player title |
+
+Direct video files render a native `<video>` element (no facade needed — nothing third-party about them). Set `video_facade: false` in the theme config to restore eager iframes.
+
+---
+
+# Image Compare Slider Demo
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/07/02/image-compare-demo/
+Date: 2026-07-02
+Tags: theme, images
+
+The `{% raw %}{% compare %}{% endraw %}` tag renders two stacked images with a draggable divider. It's built on a native range input, so pointer, touch, and keyboard (arrow keys) all work out of the box — without JavaScript it falls back to a static 50/50 split.
+
+
+
+## Basic usage
+
+Only `before` and `after` are required. Labels default to "Before" and "After".
+
+{% compare before="/images/showroom/cli-tool.png" after="/images/showroom/design-system.png" %}
+
+## Custom labels and caption
+
+{% compare before="/images/showroom/hexo-blog.png" after="/images/showroom/og-generator.png" label_before="v1 palette" label_after="v2 palette" caption="Mock redesign comparison — drag the divider or focus the slider and use ← / →." %}
+
+## Parameters
+
+| Parameter | Required | Notes |
+|-----------|----------|-------|
+| `before` | yes | Image shown on the left of the divider |
+| `after` | yes | Image shown on the right of the divider |
+| `label_before` | no | Corner label, defaults to "Before" |
+| `label_after` | no | Corner label, defaults to "After" |
+| `caption` | no | Muted text rendered below the frame |
+
+Both images should share the same aspect ratio — the *after* image defines the frame size and the *before* image is clipped over it.
+
+---
+
+# Audio Player Demo
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/06/03/audio-player-demo/
+Date: 2026-06-03
+Tags: audio, theme
+
+The `{% raw %}{% audio %}{% endraw %}` tag embeds a styled audio player that matches the blog's dark theme. Controls are fully custom — no browser chrome — with a scrubable progress bar, mute toggle, and keyboard support.
+
+
+
+## Basic embed
+
+Minimal usage — just a `src`. The title falls back to the filename.
+
+{% audio src="/audio/sample.mp3" %}
+
+## With title and caption
+
+{% audio src="/audio/ambient.mp3" title="Ambient tone" caption="528 Hz sine wave — 8 seconds" %}
+
+## Multiple players
+
+Both players can exist on the same page. Starting one automatically pauses the other.
+
+{% audio src="/audio/sample.mp3" title="Track A — 440 Hz" %}
+
+{% audio src="/audio/ambient.mp3" title="Track B — 528 Hz" %}
+
+## Tag reference
+
+```
+{% audio src="/audio/file.mp3" %}
+{% audio src="/audio/file.mp3" title="Display name" caption="Optional caption below the player" %}
+```
+
+| Parameter | Required | Notes |
+|-----------|----------|-------|
+| `src`     | yes      | Path to audio file (`.mp3`, `.ogg`, `.wav`, `.flac`, `.m4a`) |
+| `title`   | no       | Player label; defaults to the filename |
+| `caption` | no       | Small muted text rendered below the player |
+
+**Keyboard controls:** focus the seek bar and use ← / → to jump ±5 seconds.
+
+To disable the player site-wide, set `audio_player: false` in your theme config.
+
+---
+
+# 3D Model Viewer
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/06/01/3d-model-viewer-demo/
+Date: 2026-06-01
+Tags: 3d, webgl, threejs
+
+The `{% model %}` tag embeds an interactive 3D viewer directly in a post. Three.js and the required loaders are self-hosted and only loaded on pages that use the tag — zero cost elsewhere.
+
+## Basic usage
+
+Drop a model file under `source/models/` and reference it by path:
+
+```
+{% model src="/models/cube.stl" %}
+```
+
+{% model src="/models/cube.stl" caption="A simple cube — drag to orbit, scroll to zoom" %}
+
+## Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `src` | — | Path to a `.glb`, `.gltf`, or `.stl` file (**required**) |
+| `height` | `400px` | Canvas height — `px`, `em`, `rem`, `vh`, `vw`, `%` |
+| `bg` | `#1a1a2e` | Canvas background colour |
+| `view` | `front` | Starting camera angle: `front` (Z-axis) or `iso` ((1,1,1) diagonal) |
+| `autorotate` | — | Any non-empty value (e.g. `"true"`) enables continuous spin |
+| `caption` | — | Plain-text caption rendered below the viewer |
+
+## Custom height and background
+
+```
+{% model src="/models/cube.stl" height="300px" bg="#0f2027" caption="Dark background" %}
+```
+
+{% model src="/models/cube.stl" height="300px" bg="#0f2027" caption="Dark background variant" %}
+
+```
+{% model src="/models/cube.stl" height="300px" bg="#f5f5f0" caption="Light background" %}
+```
+
+{% model src="/models/cube.stl" height="300px" bg="#f5f5f0" caption="Light background variant" %}
+
+## Camera view
+
+`view="iso"` positions the camera along the (1,1,1) diagonal — equal distance from all three axes — for a classic isometric perspective:
+
+```
+{% model src="/models/cube.stl" view="iso" caption="Isometric start" %}
+```
+
+{% model src="/models/cube.stl" view="iso" caption="Isometric start" %}
+
+The default (`view="front"`) keeps the camera on the Z-axis as before.
+
+## Auto-rotate
+
+`autorotate="true"` continuously spins the model around the Y-axis. Drag to orbit as normal — the rotation pauses during the drag and resumes on release:
+
+```
+{% model src="/models/cube.stl" autorotate="true" caption="Auto-rotate" %}
+```
+
+{% model src="/models/cube.stl" autorotate="true" caption="Auto-rotate" %}
+
+Combine both options:
+
+```
+{% model src="/models/cube.stl" view="iso" autorotate="true" caption="Iso + auto-rotate" %}
+```
+
+{% model src="/models/cube.stl" view="iso" autorotate="true" caption="Iso + auto-rotate" %}
+
+## Supported formats
+
+| Format | Notes |
+|--------|-------|
+| `.glb` | Binary GLTF — recommended for models with textures |
+| `.gltf` | Text GLTF with separate asset files |
+| `.stl` | Common 3D-printing format; rendered with a flat Phong material |
+
+## How it works
+
+Three.js r170 (ESM build) and the required loaders — `GLTFLoader`, `STLLoader`, `OrbitControls` — are vendored under `themes/coldnight/source/vendor/three/`. They are injected as a `<script type="module">` only on posts whose rendered HTML contains a model viewer element. The rAF render loop is paused via `IntersectionObserver` when the viewer scrolls out of the viewport, so off-screen viewers consume no CPU.
+
+---
+
+# Timelines — the timeline block tag
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/05/20/timeline-showcase/
+Date: 2026-05-20
+Tags: markdown, features, timeline
+
+The `timeline` block tag renders a vertical timeline directly in your post — build time only, zero runtime JavaScript. Wrap your entries in the opening and closing timeline tag. Each entry supports full Markdown in its body.
+
+## Basic syntax
+
+Each entry opens with an HTML comment marker and closes with `<!-- endentry -->`:
+
+| Element | Format |
+|---------|--------|
+| Entry start | `<!-- entry DATE :: Title -->` |
+| Entry body | Plain text or Markdown |
+| Entry end | `<!-- endentry -->` |
+
+The `::` separates the date label (left) from the title (right). Both are optional — you can have a date only, a title only, or neither. Order is author-controlled; entries are never auto-sorted.
+
+---
+
+## Changelog
+
+The most common use-case: documenting software releases in reverse-chronological order.
+
+{% timeline %}
+<!-- entry 2026-05-20 :: v1.3.0 -->
+- Added the `timeline` tag plugin for changelogs and career timelines
+- Added mobile TOC drawer — floating button slides up a bottom-sheet on `≤640px` viewports
+- Fixed `toc.js` load condition; scroll-spy now works when sidebar is hidden
+<!-- endentry -->
+<!-- entry 2026-03-01 :: v1.2.0 -->
+- KaTeX math rendering — `$...$` and `$$...$$` converted to HTML at build time
+- Mermaid diagram support — fenced ` ```mermaid ` blocks rendered to SVG
+- Series posts — `series:` front-matter groups posts into a numbered nav strip
+<!-- endentry -->
+<!-- entry 2026-01-10 :: v1.1.0 -->
+- Full-text search with lazy fetch, AND matching, and keyboard navigation
+- Reading progress bar and back-to-top button
+- Open Graph and Twitter Card meta tags
+- CSS-only multi-tab content blocks
+<!-- endentry -->
+<!-- entry 2025-11-20 :: v1.0.0 -->
+Initial public release.
+
+- 3-column responsive post grid with cover images
+- LightGallery v2 integration — auto-mount and explicit gallery tag
+- Archive, tag, and category pages with year-grouped lists
+- Sidebar with TOC, recent posts, tag cloud, and archive widgets
+<!-- endentry -->
+{% endtimeline %}
+
+---
+
+## Career history
+
+Works equally well for a CV-style timeline. The date label can be a range, a year, or any string.
+
+{% timeline %}
+<!-- entry 2024 – present :: Senior Engineer, Acme Corp -->
+Working on the platform team. Currently leading a migration from a monolithic Rails app to a set of Go microservices behind an API gateway.
+
+Key projects:
+- Zero-downtime database migration for a 200 M-row table
+- Replaced a hand-rolled job queue with Redis Streams — cut P99 processing latency from 4 s to 180 ms
+- Introduced ADR (Architecture Decision Records) across the engineering org
+<!-- endentry -->
+<!-- entry 2021 – 2024 :: Software Engineer, Startup Inc -->
+Full-stack engineer on a three-person product team. Wore every hat from backend to DevOps.
+
+```
+Stack: TypeScript · React · Node.js · PostgreSQL · AWS
+```
+
+Shipped the initial public product from scratch, grew it to 15 k MAU before acquisition.
+<!-- endentry -->
+<!-- entry 2019 – 2021 :: Junior Developer, Agency XYZ -->
+Built client sites and internal tooling. First real exposure to CI/CD, code review, and production incidents.
+<!-- endentry -->
+{% endtimeline %}
+
+---
+
+## Project milestones
+
+Good for tracking the history of a single project.
+
+{% timeline %}
+<!-- entry 2026-04-01 :: Public beta -->
+Opened access to the first 500 external testers. Onboarding funnel conversion held at 68%, above the 60% target.
+
+{% note info %}
+Feedback from the beta cohort drove 14 of the 22 items in the v1.0 backlog.
+{% endnote %}
+<!-- endentry -->
+<!-- entry 2026-02-14 :: Internal alpha -->
+First end-to-end working version deployed to staging. Core feature set complete; performance and polish work remaining.
+<!-- endentry -->
+<!-- entry 2025-12-01 :: Project kick-off -->
+Team assembled. Agreed on tech stack, design language, and a 16-week delivery timeline.
+<!-- endentry -->
+{% endtimeline %}
+
+---
+
+## Date-free and title-free entries
+
+Both the date and the title are optional. You can omit either, or omit both and let the body speak for itself.
+
+{% timeline %}
+<!-- entry :: Title only, no date -->
+This entry has a title but no date label. Useful when the exact date is unknown or irrelevant.
+<!-- endentry -->
+<!-- entry 2026-01-01 -->
+This entry has a date but no title. The content stands alone.
+<!-- endentry -->
+{% endtimeline %}
+
+---
+
+# Math Typesetting with KaTeX
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/05/20/katex-math-showcase/
+Date: 2026-05-20
+Tags: math, katex, latex
+
+KaTeX renders LaTeX math to HTML at build time. There is no JavaScript on the page — the equations are fully baked into the static HTML at `hexo generate` time. The only runtime asset is the KaTeX CSS file for fonts and layout.
+
+## Inline math
+
+Wrap an expression in `$...$` to render it inline with the surrounding text.
+
+Einstein's mass-energy equivalence, $E = mc^2$, is one of the most recognised equations in physics. The Pythagorean theorem states that $a^2 + b^2 = c^2$ for a right-angled triangle with legs $a$, $b$ and hypotenuse $c$.
+
+The quadratic formula solves $ax^2 + bx + c = 0$ for any real $a \neq 0$:
+
+$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+
+## Display blocks
+
+Wrap a standalone expression in `$$...$$` to render it centred on its own line.
+
+The Gaussian integral appears throughout probability and physics:
+
+$$\int_{-\infty}^{\infty} e^{-x^2}\, dx = \sqrt{\pi}$$
+
+Euler's identity connects the five most important constants in mathematics:
+
+$$e^{i\pi} + 1 = 0$$
+
+## Sums and products
+
+The Basel problem, solved by Euler in 1734:
+
+$$\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}$$
+
+The definition of $e$ as a limit:
+
+$$e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n = \sum_{k=0}^{\infty} \frac{1}{k!}$$
+
+## Aligned systems
+
+Use `\begin{aligned}` for multi-line derivations with vertically aligned equals signs.
+
+Polar to Cartesian conversion:
+
+$$\begin{aligned}
+x &= r\cos\theta \\
+y &= r\sin\theta \\
+r &= \sqrt{x^2 + y^2}
+\end{aligned}$$
+
+The Cauchy–Riemann equations for a holomorphic function $f = u + iv$:
+
+$$\begin{aligned}
+\frac{\partial u}{\partial x} &= \frac{\partial v}{\partial y} \\[4pt]
+\frac{\partial u}{\partial y} &= -\frac{\partial v}{\partial x}
+\end{aligned}$$
+
+## Matrices
+
+$$\begin{pmatrix} a & b \\ c & d \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} ax + by \\ cx + dy \end{pmatrix}$$
+
+The identity and rotation matrices in $\mathbb{R}^2$:
+
+$$I = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, \qquad R_\theta = \begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}$$
+
+## Calculus
+
+The fundamental theorem:
+
+$$\int_a^b f'(x)\, dx = f(b) - f(a)$$
+
+Taylor series for $\sin x$ around $x = 0$:
+
+$$\sin x = \sum_{n=0}^{\infty} \frac{(-1)^n}{(2n+1)!} x^{2n+1} = x - \frac{x^3}{6} + \frac{x^5}{120} - \cdots$$
+
+## Probability
+
+Bayes' theorem, the cornerstone of probabilistic inference:
+
+$$P(A \mid B) = \frac{P(B \mid A)\, P(A)}{P(B)}$$
+
+The normal distribution's probability density function with mean $\mu$ and standard deviation $\sigma$:
+
+$$f(x) = \frac{1}{\sigma\sqrt{2\pi}}\, \exp\!\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$$
+
+---
+
+Math inside a code block is **not** rendered — it stays as literal source:
+
+```text
+$E = mc^2$   ← this stays as text
+$$\int f\,dx$$ ← this too
+```
+
+## Avoiding false positives
+
+The `$...$` delimiter matches any two dollar signs on the same line, so prose containing currency can trigger the renderer unintentionally. For example, writing "costs $50 and saves $30" would render "50 and saves" as a math expression.
+
+To avoid this, either escape the dollar sign with a backslash (`\$50`) or rephrase to keep dollar signs on separate lines. Display blocks (`$$...$$`) are less prone to false positives since they require a blank line around them in most contexts.
+
+---
+
+# Diagramming with Mermaid
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/05/20/mermaid-diagrams-showcase/
+Date: 2026-05-20
+Tags: mermaid, diagrams, documentation
+
+Mermaid lets you describe diagrams as text and renders them as SVG in the browser. No image files, no external tools — just a fenced code block with the `mermaid` language tag.
+
+## Flowchart
+
+Decision flows and pipelines are the most common use case. Mermaid's `graph` syntax handles both simple and branching paths cleanly.
+
+```mermaid
+graph TD
+  A([User submits form]) --> B{Valid input?}
+  B -->|No| C[Show validation errors]
+  C --> A
+  B -->|Yes| D[Save to database]
+  D --> E{Send email?}
+  E -->|Yes| F[Queue welcome email]
+  E -->|No| G
+  F --> G([Redirect to dashboard])
+```
+
+## Sequence Diagram
+
+Sequence diagrams are ideal for documenting API flows, authentication handshakes, or any interaction between two or more actors.
+
+```mermaid
+sequenceDiagram
+  actor User
+  participant Browser
+  participant API
+  participant DB
+
+  User->>Browser: Click "Log in"
+  Browser->>API: POST /auth/login {email, password}
+  API->>DB: SELECT * FROM users WHERE email = ?
+  DB-->>API: user row
+  API->>API: bcrypt.compare(password, hash)
+  alt Invalid credentials
+    API-->>Browser: 401 Unauthorized
+    Browser-->>User: Show error message
+  else Valid credentials
+    API-->>Browser: 200 { token, expiresAt }
+    Browser->>Browser: Store token in localStorage
+    Browser-->>User: Redirect to dashboard
+  end
+```
+
+## Entity Relationship Diagram
+
+ER diagrams help document database schemas alongside the posts that describe them.
+
+```mermaid
+erDiagram
+  USER {
+    uuid id PK
+    string email UK
+    string password_hash
+    timestamp created_at
+  }
+  POST {
+    uuid id PK
+    uuid author_id FK
+    string title
+    string slug UK
+    text content
+    timestamp published_at
+  }
+  TAG {
+    uuid id PK
+    string name UK
+  }
+  POST_TAG {
+    uuid post_id FK
+    uuid tag_id FK
+  }
+
+  USER ||--o{ POST : "writes"
+  POST ||--o{ POST_TAG : "has"
+  TAG ||--o{ POST_TAG : "applied to"
+```
+
+## State Diagram
+
+State diagrams work well for documenting lifecycle models — order states, subscription tiers, connection states.
+
+```mermaid
+stateDiagram-v2
+  [*] --> Draft
+
+  Draft --> InReview : Submit for review
+  InReview --> Draft : Request changes
+  InReview --> Scheduled : Approve
+  Scheduled --> Published : Publish time reached
+  Published --> Archived : Archive
+
+  Draft --> Deleted : Delete
+  InReview --> Deleted : Delete
+
+  Archived --> [*]
+  Deleted --> [*]
+```
+
+## Git Graph
+
+The `gitGraph` diagram type is a natural fit for documenting branching strategies.
+
+```mermaid
+gitGraph
+  commit id: "Initial commit"
+  commit id: "Add project scaffold"
+
+  branch feature/auth
+  checkout feature/auth
+  commit id: "Add JWT middleware"
+  commit id: "Add login endpoint"
+  commit id: "Add refresh token"
+
+  checkout main
+  branch feature/posts
+  checkout feature/posts
+  commit id: "Add post model"
+  commit id: "Add CRUD endpoints"
+
+  checkout main
+  merge feature/auth id: "Merge auth"
+  merge feature/posts id: "Merge posts"
+  commit id: "v1.0.0"
+```
+
+---
+
+Toggle the feature off at any time by setting `mermaid.enabled: false` in `themes/coldnight/_config.yml` — the blocks revert to plain highlighted code.
+
+---
+
+# Syntax Highlighting Showcase
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/05/15/syntax-highlighting-showcase/
+Date: 2026-05-15
+Tags: code, syntax-highlighting, javascript, python
+
+Every code block on this blog is processed at build time by Hexo's highlight.js renderer. The output is static HTML — no runtime JS required for coloring.
+
+## JavaScript
+
+```javascript
+// Fibonacci with memoisation
+function fib(n, memo = {}) {
+  if (n in memo) return memo[n]
+  if (n <= 1) return n
+  memo[n] = fib(n - 1, memo) + fib(n - 2, memo)
+  return memo[n]
+}
+
+const results = Array.from({ length: 10 }, (_, i) => fib(i))
+console.log(results) // [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+```
+
+## TypeScript
+
+```typescript
+interface Post {
+  title: string
+  date: Date
+  tags: string[]
+  published: boolean
+}
+
+function formatPost(post: Post): string {
+  const tags = post.tags.map(t => `#${t}`).join(' ')
+  return `[${post.date.toISOString().slice(0, 10)}] ${post.title} — ${tags}`
+}
+
+const demo: Post = {
+  title: 'Syntax Highlighting Showcase',
+  date: new Date('2026-05-15'),
+  tags: ['code', 'hexo'],
+  published: true,
+}
+
+console.log(formatPost(demo))
+```
+
+## Python
+
+```python
+from dataclasses import dataclass, field
+from typing import Optional
+import re
+
+@dataclass
+class BlogPost:
+    title: str
+    slug: str
+    tags: list[str] = field(default_factory=list)
+    word_count: int = 0
+
+    @classmethod
+    def from_markdown(cls, raw: str) -> 'BlogPost':
+        title_match = re.search(r'^# (.+)$', raw, re.MULTILINE)
+        title = title_match.group(1) if title_match else 'Untitled'
+        slug = re.sub(r'\W+', '-', title.lower()).strip('-')
+        words = len(re.findall(r'\w+', raw))
+        return cls(title=title, slug=slug, word_count=words)
+
+post = BlogPost.from_markdown('# Hello World\n\nThis is a test.')
+print(f'{post.slug}: {post.word_count} words')
+```
+
+## CSS
+
+```css
+/* Card component with hover transition */
+.post-card {
+  background: #0f2040;
+  border: 1px solid #1e3a6e;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.post-card:hover {
+  border-color: #2563eb;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.post-card__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+```
+
+## JSON
+
+```json
+{
+  "name": "coldnight",
+  "version": "1.0.0",
+  "description": "Dark deep-navy Hexo blog theme",
+  "config": {
+    "navbar": {
+      "title": "My Blog",
+      "links": [
+        { "name": "Home", "url": "/" },
+        { "name": "Archive", "url": "/archives" }
+      ]
+    },
+    "lightgallery": {
+      "enabled": true,
+      "zoom": true,
+      "thumbnail": true
+    }
+  }
+}
+```
+
+## Bash
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+BLOG_DIR="${1:-$PWD}"
+OUTPUT_DIR="$BLOG_DIR/public"
+
+echo "Building blog at $BLOG_DIR..."
+cd "$BLOG_DIR"
+
+# Clean previous build
+hexo clean
+
+# Generate and count output files
+hexo generate 2>&1 | tee /tmp/hexo.log
+FILE_COUNT=$(find "$OUTPUT_DIR" -name '*.html' | wc -l)
+
+echo "Done — generated ${FILE_COUNT} HTML files"
+```
+
+## YAML
+
+```yaml
+# Theme configuration
+navbar:
+  title: "Coldnight"
+  links:
+    - name: Home
+      url: /
+    - name: Archive
+      url: /archives
+
+sidebar:
+  position: right
+  widgets:
+    - recent_posts
+    - tags
+    - archives
+
+lightgallery:
+  enabled: true
+  auto_mount: true
+  zoom: true
+  thumbnail: true
+```
+
+## SQL
+
+```sql
+-- Top 10 posts by view count in the last 30 days
+SELECT
+    p.slug,
+    p.title,
+    COUNT(v.id)        AS views,
+    COUNT(DISTINCT v.visitor_id) AS unique_visitors
+FROM posts p
+JOIN page_views v
+    ON v.post_id = p.id
+   AND v.viewed_at >= NOW() - INTERVAL '30 days'
+WHERE p.published = TRUE
+GROUP BY p.id, p.slug, p.title
+ORDER BY views DESC
+LIMIT 10;
+```
+
+## Downloadable filename chip
+
+A first-line `// filename: ...` comment (or `#`/`/* */` for other languages) tags a block with a source filename. It renders as a chip in the toolbar — click it to download the block's contents as that file.
+
+```javascript
+// filename: fib.js
+function fib(n, memo = {}) {
+  if (n in memo) return memo[n]
+  if (n <= 1) return n
+  memo[n] = fib(n - 1, memo) + fib(n - 2, memo)
+  return memo[n]
+}
+```
+
+---
+
+# Typography & Prose Elements
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/05/08/typography-and-prose/
+Date: 2026-05-08
+Tags: markdown, typography, writing
+
+This post renders every standard prose element so you can verify the typography styles in one place.
+
+## Headings
+
+# H1 — Page Title
+## H2 — Section
+### H3 — Subsection
+#### H4 — Detail
+
+---
+
+## Body Text
+
+Paragraph text is set at 16px with a line-height of 1.7, giving comfortable reading density. **Bold text** uses font-weight 600. *Italic text* is used for emphasis or foreign terms. `Inline code` renders in the mono stack with a subtle blue tint.
+
+You can also use ~~strikethrough~~ for corrections, and [links go to `accent-light` blue](#) with a hover transition.
+
+---
+
+## Lists
+
+### Unordered
+
+- First item at the top level
+- Second item
+  - Nested item A
+  - Nested item B
+    - Doubly nested
+- Third item
+
+### Ordered
+
+1. Clone the repository
+2. Install dependencies with `npm install`
+3. Copy `_config.example.yml` to `_config.yml`
+4. Run `hexo server` and open `http://localhost:4000`
+
+### Task list (via HTML)
+
+<ul>
+  <li>✅ Color tokens defined in _variables.styl</li>
+  <li>✅ Post grid — 3 columns, responsive</li>
+  <li>✅ LightGallery integration</li>
+  <li>✅ Syntax highlighting with language labels</li>
+  <li>☐ Comments system (optional)</li>
+</ul>
+
+---
+
+## Blockquotes
+
+> The best themes are the ones you don't notice. They get out of the way and let the content speak.
+
+Nested blockquote:
+
+> Premature optimisation is the root of all evil.
+>
+> — Donald Knuth
+
+---
+
+## Tables
+
+| Language | Paradigm | Typing | First Released |
+|----------|----------|--------|---------------|
+| JavaScript | Multi-paradigm | Dynamic | 1995 |
+| TypeScript | OOP / Functional | Static | 2012 |
+| Python | Multi-paradigm | Dynamic | 1991 |
+| Rust | Systems | Static | 2015 |
+| Go | Concurrent | Static | 2009 |
+
+Table cells can contain `inline code` and **bold** text without issue.
+
+---
+
+## Horizontal Rule
+
+Three or more dashes produce a rule:
+
+---
+
+## Images
+
+Standard markdown images get `border-radius: 6px` and are lazy-loaded. Clicking them opens the LightGallery lightbox.
+
+![A placeholder landscape photo](https://picsum.photos/800/400)
+
+![Abstract architecture](https://picsum.photos/800/400)
+
+---
+
+## Code in prose
+
+Referring to a CSS variable like `--lg-toolbar-background-color` or a file path like `themes/coldnight/source/css/_variables.styl` in running text is handled by inline code styling.
+
+Multi-word references such as `hexo.extend.filter.register` are readable thanks to the `accent-light` color on a subtle `bg-elevated` background.
+
+---
+
+# Callout Blocks & Alerts
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/05/01/callout-blocks/
+Date: 2026-05-01
+Tags: callouts, markdown, features
+
+Callout blocks draw the reader's eye to important information without interrupting the flow of prose. Use the `{% note type %}` tag plugin to insert them.
+
+## Tip
+
+{% note tip %}
+Use `` in a post to set the excerpt boundary. Everything before it appears on post cards; everything after is hidden until the reader clicks through.
+{% endnote %}
+
+## Info
+
+{% note info %}
+LightGallery is loaded from the jsDelivr CDN **only on post pages**. Index, archive, tag, and category pages do not request the library, keeping their page weight minimal.
+{% endnote %}
+
+## Warning
+
+{% note warning %}
+Changing `per_page` in `_config.yml` after publishing breaks existing pagination URLs like `/page/2/`. If you must change it, set up redirects for old paginated pages.
+{% endnote %}
+
+## Danger
+
+{% note danger %}
+Never commit your `_config.yml` if it contains a deploy `repository:` URL with embedded credentials. Use environment variables or a `.env` file excluded from git instead.
+{% endnote %}
+
+---
+
+## Multiple callouts together
+
+The four types are designed to sit next to each other without clashing.
+
+{% note tip %}
+**Tip:** This is a tip. Use it to suggest best practices or shortcuts.
+{% endnote %}
+
+{% note info %}
+**Info:** Background context the reader should know but doesn't need to act on right now.
+{% endnote %}
+
+{% note warning %}
+**Warning:** Something to watch out for — not immediately dangerous, but worth noting.
+{% endnote %}
+
+{% note danger %}
+**Danger:** Stop. Read this before proceeding. Irreversible consequences possible.
+{% endnote %}
+
+---
+
+## Callouts with code inside
+
+{% note info %}
+To create a new post, run:
+
+```bash
+hexo new post "My Post Title"
+```
+
+Hexo will create `source/_posts/my-post-title.md` pre-filled with the scaffold front-matter.
+{% endnote %}
+
+{% note warning %}
+The `gallery` tag requires each image to be on its own line inside the block. Putting multiple images on a single line will result in only the first image being parsed. Always use one `![alt](url)` per line.
+{% endnote %}
+
+---
+
+# Image Galleries with LightGallery
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/04/24/image-gallery/
+Date: 2026-04-24
+Tags: images, gallery, lightgallery
+
+The coldnight theme ships with [LightGallery v2](https://www.lightgalleryjs.com/) for full-screen image viewing. There are two ways to use it.
+
+## Auto-mount (click any post image)
+
+Any `<img>` tag inside a post body is automatically wired up. Click the image below to open it in the lightbox. Add `class="no-gallery"` to an image to opt out.
+
+![Mountain lake at dusk](https://picsum.photos/900/600)
+
+![Aerial view of a forest path](https://picsum.photos/900/600)
+
+![City skyline at night](https://picsum.photos/900/600)
+
+When you click any of the images above, LightGallery opens in full-screen with a thumbnail strip at the bottom. Use arrow keys or swipe to navigate. Press `Escape` or click the backdrop to close.
+
+---
+
+## Explicit gallery grid
+
+Use the `{% gallery %}` tag to create a curated grid. Images are arranged in a configurable number of columns and all open in the same lightbox session.
+
+### 3-column grid (default)
+
+{% gallery 3 %}
+![Abstract blue waves](https://picsum.photos/600/400)
+![Forest in fog](https://picsum.photos/600/400)
+![Desert dunes at sunset](https://picsum.photos/600/400)
+![Snowy mountain peak](https://picsum.photos/600/400)
+![Calm ocean horizon](https://picsum.photos/600/400)
+![Autumn leaves close-up](https://picsum.photos/600/400)
+{% endgallery %}
+
+### 2-column grid
+
+{% gallery 2 %}
+![Modern architecture](https://picsum.photos/800/600)
+![Bridge at sunset](https://picsum.photos/800/600)
+![Urban street art](https://picsum.photos/800/600)
+![Rainy city reflections](https://picsum.photos/800/600)
+{% endgallery %}
+
+---
+
+## Opt-out example
+
+This image uses `class="no-gallery"` so clicking it will not open the lightbox:
+
+<img src="https://picsum.photos/600/300" alt="This image is excluded from the gallery" class="no-gallery">
+
+---
+
+## How it works
+
+Both modes use the same LightGallery instance. The CDN scripts load **only on post pages**, controlled by `theme.lightgallery.enabled` in `themes/coldnight/_config.yml`. Setting it to `false` removes all CDN requests site-wide.
+
+---
+
+# Diff Highlighting & Marked Lines
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/04/17/diff-and-marked-lines/
+Date: 2026-04-17
+Tags: git, diff, code, syntax-highlighting
+
+Beyond standard token coloring, the theme supports two more code block modes that are useful in technical writing.
+
+## Diff blocks
+
+Use ` ```diff ` to show added and removed lines with green and red backgrounds.
+
+```diff
+- const API_URL = 'http://localhost:3000'
++ const API_URL = process.env.API_URL ?? 'http://localhost:3000'
+
+  function fetchPosts(page = 1) {
+-   return fetch(`${API_URL}/posts?page=${page}`)
++   return fetch(`${API_URL}/posts?page=${page}&per_page=9`)
+      .then(res => res.json())
+  }
+```
+
+Full function replacement:
+
+```diff
+- function formatDate(ts) {
+-   return new Date(ts).toLocaleDateString()
+- }
++ function formatDate(ts, locale = 'en-CA') {
++   return new Intl.DateTimeFormat(locale, {
++     year: 'numeric',
++     month: '2-digit',
++     day: '2-digit',
++   }).format(new Date(ts))
++ }
+```
+
+---
+
+## Marked lines
+
+Use the `{% codeblock %}` tag with `mark:` to highlight specific lines. Line numbers are 1-based; ranges use a hyphen.
+
+Mark a single line (line 5):
+
+{% codeblock javascript mark:5 %}
+function createServer(options = {}) {
+  const port = options.port ?? 4000
+  const host = options.host ?? 'localhost'
+
+  const server = http.createServer(requestHandler)
+
+  server.listen(port, host, () => {
+    console.log(`Server running at http://${host}:${port}`)
+  })
+
+  return server
+}
+{% endcodeblock %}
+
+Mark multiple lines and a range (lines 1, 4–6):
+
+{% codeblock python mark:1,4-6 %}
+import os
+import sys
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, 'public')
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
+def resolve(path):
+    return os.path.join(BASE_DIR, path)
+{% endcodeblock %}
+
+---
+
+## Combined: diff inside a codeblock context
+
+Real-world PR review scenario — here the diff shows what changed in a configuration file:
+
+```diff
+ # _config.yml
+ syntax_highlighter: highlight.js
+ highlight:
+   line_number: true
+   auto_detect: false
+-  wrap: false
+-  hljs: false
++  wrap: true
++  hljs: true
+```
+
+{% note tip %}
+Use diff blocks in tutorials when showing before/after code. They are clearer than two separate code blocks and take up less vertical space.
+{% endnote %}
+
+---
+
+# Modern JavaScript Async Patterns
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/04/10/javascript-async-patterns/
+Date: 2026-04-10
+Tags: javascript, async, promises, patterns
+
+Asynchronous JavaScript has evolved significantly. This post collects the patterns worth knowing in 2026.
+
+## async / await basics
+
+```javascript
+async function loadUser(id) {
+  const response = await fetch(`/api/users/${id}`)
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+  }
+
+  return response.json()
+}
+
+// Consuming it
+try {
+  const user = await loadUser(42)
+  console.log(user.name)
+} catch (err) {
+  console.error('Failed to load user:', err.message)
+}
+```
+
+## Promise.all — parallel independent requests
+
+```javascript
+async function loadDashboard(userId) {
+  const [user, posts, notifications] = await Promise.all([
+    fetch(`/api/users/${userId}`).then(r => r.json()),
+    fetch(`/api/posts?author=${userId}`).then(r => r.json()),
+    fetch(`/api/notifications?userId=${userId}`).then(r => r.json()),
+  ])
+
+  return { user, posts, notifications }
+}
+```
+
+## Promise.allSettled — tolerate partial failures
+
+```javascript
+async function syncAll(items) {
+  const results = await Promise.allSettled(
+    items.map(item => uploadItem(item))
+  )
+
+  const succeeded = results.filter(r => r.status === 'fulfilled').length
+  const failed = results
+    .filter(r => r.status === 'rejected')
+    .map(r => r.reason.message)
+
+  console.log(`${succeeded}/${items.length} succeeded`)
+  if (failed.length) console.warn('Failures:', failed)
+}
+```
+
+## AbortController — cancellable fetches
+
+```javascript
+function fetchWithTimeout(url, ms = 5000) {
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), ms)
+
+  return fetch(url, { signal: controller.signal })
+    .finally(() => clearTimeout(timer))
+}
+
+// Cancel on user action
+const controller = new AbortController()
+
+document.querySelector('#cancel').addEventListener('click', () => {
+  controller.abort()
+})
+
+const data = await fetch('/api/slow-endpoint', {
+  signal: controller.signal,
+})
+```
+
+## Async generators — streaming data
+
+```javascript
+async function* paginate(endpoint, pageSize = 20) {
+  let cursor = null
+
+  while (true) {
+    const url = cursor
+      ? `${endpoint}?cursor=${cursor}&limit=${pageSize}`
+      : `${endpoint}?limit=${pageSize}`
+
+    const { items, nextCursor } = await fetch(url).then(r => r.json())
+    yield* items
+
+    if (!nextCursor) break
+    cursor = nextCursor
+  }
+}
+
+// Consume all posts lazily
+for await (const post of paginate('/api/posts')) {
+  await indexPost(post) // process one at a time, no memory spike
+}
+```
+
+## Error boundaries with a retry wrapper
+
+```javascript
+async function withRetry(fn, { attempts = 3, delay = 500 } = {}) {
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return await fn()
+    } catch (err) {
+      if (i === attempts - 1) throw err
+      await new Promise(resolve => setTimeout(resolve, delay * 2 ** i))
+    }
+  }
+}
+
+const data = await withRetry(() => fetch('/api/unstable').then(r => r.json()))
+```
+
+{% note tip %}
+`withRetry` uses exponential backoff: delay doubles on each attempt (`delay * 2^i`). Pass `{ attempts: 5, delay: 200 }` for more aggressive retry strategies.
+{% endnote %}
+
+---
+
+# CSS Layout Techniques Worth Knowing
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/04/03/css-layout-techniques/
+Date: 2026-04-03
+Tags: css, frontend, layout, grid, flexbox
+
+CSS layout has come a long way. These are the techniques worth reaching for in 2026.
+
+## CSS Grid — the post card grid used on this blog
+
+```css
+/* The exact grid this theme uses for post index/archive pages */
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .post-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .post-grid {
+    grid-template-columns: 1fr;
+  }
+}
+```
+
+### auto-fill vs auto-fit
+
+```css
+/* auto-fill: keeps empty column tracks */
+.gallery-fill {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+/* auto-fit: collapses empty tracks — items stretch to fill */
+.gallery-fit {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+```
+
+---
+
+## Flexbox — the sidebar layout
+
+```css
+/* Two-column page shell: main content + sidebar */
+.page-wrapper {
+  display: flex;
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.main-content { flex: 1 1 65%; min-width: 0; }
+.sidebar      { flex: 0 0 calc(35% - 24px); }
+
+/* Stack vertically on mobile */
+@media (max-width: 640px) {
+  .page-wrapper { flex-direction: column; }
+  .sidebar      { display: none; }
+}
+```
+
+{% note warning %}
+Always set `min-width: 0` on flex children that contain text or code. Without it, the flex item won't shrink below its content's intrinsic size, causing overflow.
+{% endnote %}
+
+---
+
+## Container queries
+
+Container queries scope responsive rules to an element's own size rather than the viewport, making components truly portable.
+
+```css
+/* Define a containment context */
+.card-grid {
+  container-type: inline-size;
+  container-name: grid;
+}
+
+/* Respond to the container's width, not the viewport */
+@container grid (max-width: 480px) {
+  .card {
+    flex-direction: column;
+  }
+
+  .card__thumbnail {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+}
+```
+
+---
+
+## Logical properties
+
+Logical properties (`margin-inline`, `padding-block`, `border-inline-start`) adapt to writing direction automatically, making internationalisation free.
+
+```css
+/* Physical (writing-direction aware in LTR only) */
+.blockquote {
+  margin-left: 1rem;
+  border-left: 3px solid #2563eb;
+  padding-left: 1rem;
+}
+
+/* Logical (works in both LTR and RTL) */
+.blockquote {
+  margin-inline-start: 1rem;
+  border-inline-start: 3px solid #2563eb;
+  padding-inline-start: 1rem;
+}
+```
+
+---
+
+## :has() — the parent selector
+
+```css
+/* Style a form field differently when its input is focused */
+.field:has(input:focus) .field__label {
+  color: #60a5fa;
+}
+
+/* Hide the sidebar when the page has no aside element */
+.page-wrapper:not(:has(aside)) .main-content {
+  max-width: 780px;
+  margin-inline: auto;
+}
+```
+
+---
+
+## Subgrid
+
+```css
+.card-row {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 4; /* cover, title, excerpt, footer */
+}
+
+/* All cards in a row share the same row tracks,
+   so titles and footers line up regardless of content length */
+```
+
+{% note info %}
+Subgrid has broad support as of 2024. Check caniuse before using it in production without a fallback.
+{% endnote %}
+
+---
+
+# Python Tooling in 2026
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/03/27/python-tooling/
+Date: 2026-03-27
+Tags: python, tooling, packaging, uv
+
+Python's tooling story has improved dramatically. Here is what a modern setup looks like.
+
+## pyproject.toml — the single config file
+
+```toml
+[project]
+name = "my-project"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.27",
+    "pydantic>=2.7",
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.4",
+    "mypy>=1.10",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.mypy]
+strict = true
+python_version = "3.12"
+```
+
+## uv — fast package management
+
+```bash
+# Create a virtual environment and install deps in one step
+uv venv && uv pip install -e ".[dev]"
+
+# Run a script in an isolated environment
+uv run python scripts/generate_data.py
+
+# Add a dependency and update the lock file
+uv add httpx
+
+# Sync the environment to the lock file exactly
+uv sync
+```
+
+{% note tip %}
+`uv` resolves and downloads packages in parallel. On a cold install of a medium-sized project, it is typically 10–100× faster than `pip`.
+{% endnote %}
+
+## Type annotations — practical patterns
+
+```python
+from typing import TypeVar, Generic, Callable, Any
+from collections.abc import Iterator
+
+T = TypeVar('T')
+U = TypeVar('U')
+
+class Result(Generic[T]):
+    """A simple Result type — either Ok(value) or Err(message)."""
+
+    def __init__(self, value: T | None, error: str | None) -> None:
+        self._value = value
+        self._error = error
+
+    @classmethod
+    def ok(cls, value: T) -> 'Result[T]':
+        return cls(value, None)
+
+    @classmethod
+    def err(cls, message: str) -> 'Result[T]':
+        return cls(None, message)
+
+    def map(self, fn: Callable[[T], U]) -> 'Result[U]':
+        if self._error:
+            return Result.err(self._error)
+        return Result.ok(fn(self._value))  # type: ignore[arg-type]
+
+    def unwrap(self) -> T:
+        if self._error:
+            raise ValueError(self._error)
+        return self._value  # type: ignore[return-value]
+```
+
+## dataclasses with validation
+
+```python
+from dataclasses import dataclass, field
+from datetime import datetime
+
+@dataclass(frozen=True, slots=True)
+class Post:
+    title: str
+    slug: str
+    published_at: datetime
+    tags: tuple[str, ...] = field(default_factory=tuple)
+
+    def __post_init__(self) -> None:
+        if not self.title.strip():
+            raise ValueError('title cannot be blank')
+        if not self.slug.replace('-', '').isalnum():
+            raise ValueError(f'invalid slug: {self.slug!r}')
+
+    @property
+    def reading_time(self) -> int:
+        # Placeholder — real impl counts words
+        return 1
+```
+
+## pytest fixtures and parametrize
+
+```python
+import pytest
+from myapp.models import Post
+from datetime import datetime
+
+@pytest.fixture
+def sample_post() -> Post:
+    return Post(
+        title='Hello World',
+        slug='hello-world',
+        published_at=datetime(2026, 1, 1),
+        tags=('python', 'testing'),
+    )
+
+@pytest.mark.parametrize('slug,valid', [
+    ('hello-world', True),
+    ('Hello World', False),
+    ('hello_world', False),
+    ('hello-world-2', True),
+])
+def test_slug_validation(slug: str, valid: bool) -> None:
+    if valid:
+        Post(title='x', slug=slug, published_at=datetime.now())
+    else:
+        with pytest.raises(ValueError, match='invalid slug'):
+            Post(title='x', slug=slug, published_at=datetime.now())
+```
+
+---
+
+# Practical Bash Scripting
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/03/20/bash-scripting-guide/
+Date: 2026-03-20
+Tags: bash, cli, scripting, linux
+
+Shell scripts tend to accumulate tech debt faster than most code. These patterns keep them maintainable.
+
+## The strict-mode header
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# -e  exit immediately on non-zero exit code
+# -u  treat unset variables as errors
+# -o pipefail  pipeline fails if any command fails
+# IFS  safer word-splitting (spaces won't split filenames)
+```
+
+{% note warning %}
+`set -e` can interact unexpectedly with `if` statements and `||` chains. Test scripts thoroughly — or use `set -E` and trap `ERR` for more predictable error propagation.
+{% endnote %}
+
+## Argument parsing
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") [OPTIONS] <input-file>
+
+Options:
+  -o, --output FILE   Write output to FILE (default: stdout)
+  -v, --verbose       Enable verbose logging
+  -h, --help          Show this help message
+EOF
+}
+
+OUTPUT=""
+VERBOSE=false
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -o|--output)  OUTPUT="$2"; shift 2 ;;
+    -v|--verbose) VERBOSE=true; shift ;;
+    -h|--help)    usage; exit 0 ;;
+    --)           shift; break ;;
+    -*)           echo "Unknown option: $1" >&2; usage; exit 1 ;;
+    *)            break ;;
+  esac
+done
+
+INPUT="${1:-}"
+if [[ -z "$INPUT" ]]; then
+  echo "Error: input file required" >&2
+  usage
+  exit 1
+fi
+```
+
+## Logging helpers
+
+```bash
+# ANSI colours only when connected to a terminal
+if [[ -t 2 ]]; then
+  RED='\033[0;31m'; YELLOW='\033[0;33m'
+  GREEN='\033[0;32m'; RESET='\033[0m'
+else
+  RED=''; YELLOW=''; GREEN=''; RESET=''
+fi
+
+log_info()    { echo -e "${GREEN}INFO${RESET}  $*" >&2; }
+log_warn()    { echo -e "${YELLOW}WARN${RESET}  $*" >&2; }
+log_error()   { echo -e "${RED}ERROR${RESET} $*" >&2; }
+log_verbose() { [[ "$VERBOSE" == true ]] && echo "DEBUG $*" >&2 || true; }
+```
+
+## Temporary files and cleanup
+
+```bash
+# mktemp + trap ensures cleanup even on error or SIGINT
+TMPDIR=$(mktemp -d)
+trap 'rm -rf "$TMPDIR"' EXIT
+
+TMPFILE=$(mktemp "$TMPDIR/work.XXXXXX")
+log_verbose "Working in $TMPDIR"
+
+# Write to temp, then atomically replace
+process_data "$INPUT" > "$TMPFILE"
+mv "$TMPFILE" "${OUTPUT:-/dev/stdout}"
+```
+
+## Parallel processing with wait
+
+```bash
+MAX_JOBS=4
+running=0
+
+for file in source/_posts/*.md; do
+  process_post "$file" &
+  (( running++ ))
+
+  if (( running >= MAX_JOBS )); then
+    wait -n 2>/dev/null || wait  # wait for any child (bash 4.3+), fallback: wait all
+    (( running-- ))
+  fi
+done
+
+wait  # wait for remaining jobs
+log_info "All posts processed"
+```
+
+## Here-docs and heredocs as templates
+
+```bash
+generate_config() {
+  local site_url="$1"
+  local theme="$2"
+
+  cat <<EOF
+# Auto-generated — do not edit manually
+url: ${site_url}
+theme: ${theme}
+deploy:
+  type: git
+  repo: $(git remote get-url origin)
+  branch: gh-pages
+EOF
+}
+
+generate_config "https://example.com" "coldnight" > _config.local.yml
+```
+
+{% note tip %}
+Use `<<'EOF'` (single-quoted delimiter) when the heredoc should be treated literally with no variable expansion.
+{% endnote %}
+
+---
+
+# Configuring the Coldnight Theme
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/03/13/theme-configuration-guide/
+Date: 2026-03-13
+Tags: theme, hexo, configuration, setup
+
+All theme options live in `themes/coldnight/_config.yml`. You can override any of them in the root `_config.yml` under `theme_config:` without touching the theme source.
+
+## Navbar
+
+```yaml
+navbar:
+  title: "My Blog"
+  links:
+    - name: Home
+      url: /
+    - name: Archive
+      url: /archives
+    - name: About
+      url: /about
+```
+
+The active link is highlighted with `accent-light` text. A full-text search box is embedded in the navbar when `search.enabled: true`.
+
+## Sidebar
+
+```yaml
+sidebar:
+  position: right      # left | right | hidden
+  about: true          # false = hide the About widget
+  widgets:
+    - toc              # table of contents (post pages only)
+    - recent_posts     # last 5 posts by date
+    - tags             # all tags as pills
+    - archives         # posts grouped by year
+    - about            # author name, bio, avatar, social links
+```
+
+Set `position: hidden` to remove the sidebar entirely — the main content expands to fill the full width. The `toc` widget only renders on post pages and is suppressed when the post has no headings.
+
+Set `about: false` to drop just the About widget while keeping the rest of the sidebar — no need to re-declare the whole `widgets:` list in your `theme_config:`. The widget also hides itself when `author`, `description`, `avatar` and both social handles are empty, so a site that hasn't filled those in never shows an empty box.
+
+## Sponsor / coffee button
+
+```yaml
+sponsor:
+  enabled: true
+  label: "Buy me a coffee"
+  url: "https://ko-fi.com/yourname"
+```
+
+Renders as an amber-tinted button in the navbar. Uses a dedicated colour palette distinct from the blue accent so it stands out without clashing.
+
+## Social links
+
+```yaml
+social:
+  github: "yourname"    # appended to https://github.com/
+  twitter: "yourname"   # appended to https://twitter.com/
+  rss: true             # adds <link rel="alternate"> and an RSS link in the footer
+```
+
+Social links appear in the navbar (GitHub icon), the footer, and the About sidebar widget.
+
+## Index page grid
+
+```yaml
+grid:
+  columns: 1    # 1 = list view, 2–6 = card grid
+  rows: 3       # rows per page; per_page = columns × rows
+```
+
+`columns: 1` switches to list view (thumbnail left, text right). Any value ≥ 2 activates the card grid. `per_page` is computed automatically from `columns × rows`.
+
+## Reading time and word count
+
+```yaml
+reading_time: true    # "4 min read" on cards and post header
+word_count: true      # "1,240 words" in the post header
+```
+
+Both strip code blocks before counting so large snippets don't inflate the estimates.
+
+## Difficulty indicator
+
+```yaml
+difficulty: true    # set false to hide the meter everywhere
+```
+
+Posts and showroom projects can declare how demanding their topic is with `difficulty:` (or the `effort:` alias) in front-matter — an integer from 1 to 5. The theme renders it as a small signal-bar pill next to the other post metadata: green bars for levels 1–2, amber for 3, red for 4–5. This post sets `difficulty: 1`, so the meter is visible in the header above.
+
+The tooltip follows the key you used — `effort: 4` reads "Effort: 4 of 5" instead of "Difficulty". If both keys are set, `difficulty` wins. Values that aren't a whole number between 1 and 5 are silently ignored, and the pill simply doesn't render on posts that omit the key. On showroom cards it appears in the top-left corner of the cover, opposite the AI-assisted badge.
+
+## Table of contents
+
+```yaml
+toc:
+  enabled: true
+  max_depth: 3    # 2 = h2 only, 3 = h2 + h3
+```
+
+The TOC widget appears in the sidebar on post pages. It uses `IntersectionObserver` to highlight the heading currently in view. Set `enabled: false` to disable globally or omit the `toc` widget from `sidebar.widgets` to hide it without disabling the feature.
+
+## Reading progress bar
+
+```yaml
+progress_bar: true
+```
+
+A 3 px bar fixed to the top of the viewport on post pages. Animates as you scroll; `pointer-events: none` so it never intercepts clicks.
+
+## Search
+
+```yaml
+search:
+  enabled: true
+```
+
+Full-text search powered by `hexo-generator-search`. The index (`search.json`) is built at generate time. Requires the search plugin config in `_config.yml`:
+
+```yaml
+search:
+  path: search.json
+  field: post
+  content: true
+```
+
+Keyboard shortcuts: `/` focuses the search box; `↑`/`↓` navigate results; `Esc` closes the dropdown; `?` opens the shortcuts modal.
+
+## llms.txt
+
+```yaml
+llms_txt:
+  enabled: true   # opt-in — default is false
+  full: true      # also emit /llms-full.txt
+```
+
+Emits an [llms.txt](https://llmstxt.org) file at the site root — a markdown index (site title, description, and link lists for all posts, showroom projects, and pages) that LLMs and AI crawlers can consume without parsing HTML. With `full: true` a companion `/llms-full.txt` is also generated, containing the complete markdown body of every post and project along with its URL, date, and tags.
+
+Post descriptions in the index come from front-matter `description:`, falling back to the excerpt and then to the start of the body; projects use their `subtitle:`. Both files are built at generate time — zero runtime cost. This site has it enabled — both files live at the site root: `/llms.txt` and `/llms-full.txt`.
+
+To keep a specific post, project, or page out of both files — an unlisted page, or a post whose full text you don't want packaged for LLM ingestion — set `llms_txt: false` in its front-matter.
+
+## Related posts
+
+```yaml
+related_posts: true
+```
+
+Shows up to 3 "You might also like" cards at the bottom of each post. Scoring is purely build-time: +2 pts per shared tag, +1 pt for a shared category. Posts with score 0 are excluded.
+
+## Series navigation
+
+```yaml
+series: true
+```
+
+Posts with `series: "Series Name"` in their front-matter show a numbered nav strip above the post body. Parts are ordered by date (oldest = Part 1). The strip is suppressed when the series has only one post.
+
+## Code blocks
+
+```yaml
+code:
+  copy_button: true      # clipboard icon on each code block
+  language_label: true   # language chip in the top-right corner
+```
+
+{% note info %}
+The language label is injected at build time via a Hexo `after_render:html` filter that adds `data-lang` to every `<figure class="highlight <lang>">` element so the CSS `::before` rule can display it.
+{% endnote %}
+
+## Mermaid diagrams
+
+```yaml
+mermaid:
+  enabled: true     # convert ```mermaid blocks to rendered SVG
+  theme: dark       # default | dark | neutral | forest
+```
+
+Fenced ` ```mermaid ` blocks are converted to `<div class="mermaid">` at build time and rendered client-side by the vendored Mermaid JS library. All Mermaid assets are self-hosted under `vendor/mermaid/` — no CDN requests.
+
+````markdown
+```mermaid
+flowchart LR
+    A[Write Post] --> B{Has diagrams?}
+    B -- Yes --> C[Add mermaid block]
+    B -- No --> D[Publish]
+```
+````
+
+## Math (KaTeX)
+
+```yaml
+math:
+  enabled: true    # render $...$ and $$...$$ as KaTeX HTML
+```
+
+Math is rendered at `hexo generate` time by KaTeX's Node.js API — zero JavaScript on the page. Only the KaTeX CSS file is served to the browser. Output includes both visual HTML and a `<math>` element for screen readers.
+
+| Syntax | Usage |
+|--------|-------|
+| `$expr$` | Inline math within a sentence |
+| `$$expr$$` | Display block, centred on its own line |
+
+```markdown
+Einstein's equation, $E = mc^2$, is well known.
+
+$$\int_{-\infty}^{\infty} e^{-x^2}\, dx = \sqrt{\pi}$$
+```
+
+Math inside fenced code blocks is never processed — it stays as literal `$` text.
+
+**Avoiding false positives** — `$...$` matches any two dollar signs on the same line, so prose with currency amounts can trigger the renderer. Escape a literal dollar sign with a backslash: `\$50`. Display blocks (`$$...$$`) are less prone to this since they span their own line.
+
+## Image captions
+
+```yaml
+image_captions: true
+```
+
+Standalone images with non-empty `alt` text are automatically wrapped in `<figure><figcaption>` at build time. The alt text becomes the visible caption below the image.
+
+## PDF viewer
+
+```yaml
+pdf_viewer: true
+```
+
+Loads a lightweight PDF preview script on post pages. Use the `{% pdf %}` tag to embed a clickable card in a post — clicking it opens a modal that renders the document via PDF.js (loaded lazily from CDN on first click). Supports page navigation, zoom, and direct download. Set `false` to prevent the script from loading entirely.
+
+## External links
+
+```yaml
+external_links: true
+```
+
+Every link in a post body pointing to an external domain automatically receives `target="_blank" rel="noopener noreferrer"` and a small `↗` icon. Internal links and links with an existing `target` are left untouched.
+
+## Category tooltips
+
+```yaml
+category_descriptions:
+  Development: Programming, languages and day-to-day engineering practice.
+  Documentation: Reference guides for the coldnight theme and this demo site.
+```
+
+Give a category a one-line description and it appears as a small tooltip when the reader hovers or keyboard-focuses that category — on the pills in a post's metadata row and on the category label of every post card, including the pinned hero and the related-posts strip.
+
+There is no separate on/off switch: categories you don't list simply have no tooltip, and if the map is empty the feature adds nothing to the page at all — no markup, no stylesheet weight, no script. Names are matched case-insensitively, so `Development` in the config finds a post categorised as `development`.
+
+## Permalink button
+
+```yaml
+permalink_button: true
+```
+
+Adds a copy-to-clipboard icon next to the post date. Clicking it copies the full permalink to the clipboard and shows a brief toast confirmation.
+
+## LightGallery
+
+```yaml
+lightgallery:
+  enabled: true       # load LightGallery assets
+  auto_mount: true    # wire up all .post-body images automatically
+  zoom: true          # pinch-to-zoom and scroll zoom
+  thumbnail: true     # thumbnail strip at the bottom of the lightbox
+```
+
+Set `auto_mount: false` to opt out of automatic wiring and use only explicit gallery blocks. Add `class="no-gallery"` to individual images to exclude them from auto-mount. All LightGallery assets are self-hosted under `vendor/lightgallery/`.
+
+## Cover images
+
+```yaml
+cover:
+  default: ""          # fallback when no cover_image in front-matter
+  fallback: true       # false = no thumbnail instead of cover.default
+  large: false         # true = full-width thumbnail above the card body
+  aspect_ratio: "16/9"
+```
+
+Set `cover_image` in a post's front-matter to use a per-post image. If omitted, `cover.default` is used. If that is also empty, the card renders without a cover strip.
+
+A similar fallback chain feeds the `og:image` meta tag, so `cover.default` doubles as your site-wide social-preview image (1200×630 px recommended). This demo site sets it to `/images/og-default.jpg`.
+
+Thumbnails are entirely optional — two switches decouple them from the social-preview fallback:
+
+- `cover.fallback: false` — posts without a `cover_image` render no card or hero thumbnail at all, instead of falling back to `cover.default`.
+- `cover_image: false` in a post's front-matter (bare boolean, not `"false"`) — hides the thumbnail for that single post while the rest of the site keeps the fallback.
+
+In both cases `og:image` still uses `cover.default`, so social previews keep working for posts that opt out of the visible thumbnail.
+
+### Large thumbnails
+
+In list view (`grid.columns: 1`) a card's thumbnail normally sits in a fixed square panel to the left of the text. Large mode moves it above the body at full card width and a 16/9 ratio — worth it for image-led posts, where a 180px square doesn't do the picture justice. It is off by default and opts in at two levels:
+
+- `cover.large: true` in the theme config — every card and the pinned hero go large.
+- `cover_large: true` in a single post's front-matter — that post alone goes large.
+
+Front-matter wins over the config in **both** directions, so with `cover.large: true` site-wide, `cover_large: false` pulls one post back to the compact side layout. The value must be a bare boolean, not `"true"` in quotes.
+
+The pinned hero honors the same key: instead of its 45%-wide side cover it stacks the image above the text. Unlike the cards, the hero does this at **any** column count — it sits outside the post grid and is side-by-side by default there too, so switching to a grid layout does not neutralise it.
+
+Posts with no thumbnail at all are unaffected. For the cards, grid mode (`grid.columns: 2` and up) is a no-op — those already stack their cover on top. Below 640px every card stacks anyway, so large and normal cards look the same on phones.
+
+The two posts on this index with a full-width thumbnail — *Image Compare Slider Demo* and *Syntax Highlighting Showcase* — are set this way.
+
+{% note warning %}
+If you set `cover.default`, make sure the file actually exists in your site's `source/` directory. The theme trusts the configured path — a missing file means every post without its own `cover_image` shows a broken image in its card cover, and social previews point at a 404.
+{% endnote %}
+
+## Card colours
+
+Cards are uniform by default — the same elevated surface and subtle blue border everywhere. Two front-matter keys recolour a single post's card:
+
+```yaml
+---
+title: Modern JavaScript Async Patterns
+card_border: "#f5c518"
+card_bg: "#1c1608"
+---
+```
+
+There is no theme config counterpart and nothing to switch on: a post that sets neither key renders exactly as before.
+
+The keys are independent — set one, the other, or both. This post uses both; *Image Compare Slider Demo* sets only `card_border` and keeps the default background, while *Audio Player Demo* sets only `card_bg` and keeps the default border.
+
+Values must be **hex codes** — `#rgb`, `#rgba`, `#rrggbb`, or `#rrggbbaa`. Named colours and `rgb()`/`oklch()` notation are deliberately not accepted; anything that isn't a hex code is ignored per key, so a malformed `card_bg` won't take a valid `card_border` down with it.
+
+The colour is a property of the post, not of the index page, so it follows the post wherever its card appears — the grid, the pinned hero, and the *You might also like* strip at the foot of related posts. On hover a custom border keeps its colour rather than snapping to the default blue; the shadow lift still marks the hover.
+
+{% note tip %}
+`card_bg` replaces the card surface but not the text colour on top of it. Stick to dark, low-saturation backgrounds on this theme — a light fill will leave the excerpt and metadata unreadable.
+{% endnote %}
+
+---
+
+## Tag plugins
+
+### note
+
+Renders a callout box with an icon. Types: `tip` | `info` | `warning` | `danger`.
+
+{% raw %}
+```
+{% note tip %}
+This is a **tip** callout. Body is rendered as Markdown.
+{% endnote %}
+```
+{% endraw %}
+
+{% note tip %}
+Tip callout — for helpful hints and best practices.
+{% endnote %}
+
+{% note warning %}
+Warning callout — for caveats and things to watch out for.
+{% endnote %}
+
+### gallery
+
+Renders a LightGallery grid from a list of Markdown images. The optional number sets the column count (default 3).
+
+{% raw %}
+```
+{% gallery 3 %}
+![Caption one](image1.jpg)
+![Caption two](image2.jpg)
+{% endgallery %}
+```
+{% endraw %}
+
+### tabs
+
+CSS-only tab switching via radio inputs — no JavaScript required.
+
+{% raw %}
+```
+{% tabs %}
+<!-- tab JavaScript -->
+console.log('hello')
+<!-- endtab -->
+<!-- tab Python -->
+print('hello')
+<!-- endtab -->
+{% endtabs %}
+```
+{% endraw %}
+
+### download
+
+Renders a styled download button. Add `external` at the end to badge links hosted off-site.
+
+{% raw %}
+```
+{% download /files/report.pdf Report Q4 2025 %}
+{% download https://example.com/file.zip My File external %}
+```
+{% endraw %}
+
+### pdf
+
+Renders a clickable card that opens an in-page PDF preview modal. The first argument is the file path; everything after it is the display title (defaults to the filename without the `.pdf` extension).
+
+{% raw %}
+```
+{% pdf /files/report.pdf Annual Report 2025 %}
+```
+{% endraw %}
+
+Clicking the card loads PDF.js from CDN (once, lazily) and renders the document on a canvas. Controls: previous/next page, zoom out/in (0.5×–3×), download, and close. The modal is keyboard-accessible — `Esc` closes it; the card responds to `Enter` and `Space`.
+
+Requires `pdf_viewer: true` in the theme config (the default).
+
+---
+
+## Post front-matter reference
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `title` | string | Post title (H1 and browser tab) |
+| `date` | datetime | Publication date, used for ordering and display |
+| `categories` | list | First category shown as a pill on post cards |
+| `tags` | list | Tags shown at the bottom of the post |
+| `cover_image` | string | URL or path to the cover image |
+| `cover_large` | boolean | Full-width thumbnail above the card body instead of beside it (overrides `cover.large`) |
+| `excerpt` | string | Override the auto-generated excerpt on post cards |
+| `pinned` | boolean | Promote to featured hero on index page 1 |
+| `series` | string | Group post into a numbered series nav strip |
+| `difficulty` | integer | 1–5 signal-bar meter in the post header and on cards (alias: `effort`) |
+
+Use `` in the post body to set the excerpt boundary instead of the `excerpt` key if you want the card to show a natural cut from the content.
+
+---
+
+# A Clean Git Workflow for Solo Developers
+
+URL: https://cracksoldier.github.io/coldnight-demo/2026/03/06/git-workflow/
+Date: 2026-03-06
+Tags: git, workflow, version-control
+
+Git has hundreds of commands. In practice, you use about a dozen. Here are the ones worth internalising and the patterns that keep history readable.
+
+## Conventional commits
+
+Prefix commit messages with a type to make history scannable at a glance.
+
+```
+feat:     new feature or capability
+fix:      bug fix
+docs:     documentation changes only
+style:    formatting, whitespace (no logic change)
+refactor: code change that is neither feat nor fix
+perf:     performance improvement
+test:     adding or correcting tests
+chore:    build, dependency, or config changes
+```
+
+Examples:
+
+```bash
+git commit -m "feat: add LightGallery auto-mount to post pages"
+git commit -m "fix: language label not rendering (inject data-lang at build time)"
+git commit -m "chore: update hexo-renderer-stylus to v3.0.1"
+```
+
+## Daily aliases
+
+```bash
+# ~/.gitconfig
+[alias]
+  st   = status -sb
+  co   = checkout
+  br   = branch --sort=-committerdate
+  lg   = log --oneline --graph --decorate -20
+  undo = reset HEAD~1 --mixed
+  wip  = !git add -A && git commit -m "chore: wip"
+  unwip = reset HEAD~1 --mixed
+```
+
+```bash
+git lg  # compact visual history
+# * a3f8c12 (HEAD -> main) feat: add diff highlighting
+# * 9d21e04 fix: copy button overlaps language label
+# * 4c1b879 feat: add marked-line support
+```
+
+## Interactive rebase — cleaning up before a PR
+
+```bash
+# Squash the last 3 commits into one
+git rebase -i HEAD~3
+```
+
+The editor opens with:
+
+```diff
+pick a3f8c12 feat: add diff highlighting
+pick 9d21e04 fix: copy button position
+pick 4c1b879 chore: remove debug log
+
+# Change "pick" to "squash" or "s" to fold into the commit above
+```
+
+After editing:
+
+```diff
+pick a3f8c12 feat: add diff highlighting
+squash 9d21e04 fix: copy button position
+squash 4c1b879 chore: remove debug log
+```
+
+{% note warning %}
+Never rebase commits that have already been pushed to a shared branch. Rebasing rewrites history — it forces other collaborators to `git pull --rebase` or re-clone.
+{% endnote %}
+
+## Useful one-liners
+
+```bash
+# Show what changed in the last commit
+git show --stat
+
+# Find which commit introduced a specific string
+git log -S "data-lang" --oneline
+
+# List files changed between two commits
+git diff --name-only HEAD~5 HEAD
+
+# Temporarily shelve uncommitted changes
+git stash push -m "wip: trying new layout"
+git stash pop
+
+# Undo a pushed commit without rewriting history
+git revert HEAD && git push
+
+# See the full diff of a specific commit
+git show a3f8c12
+```
+
+## .gitignore for a Hexo blog
+
+```gitignore
+# Hexo generated output
+public/
+.deploy_git/
+
+# Runtime
+db.json
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json
+*.swp
+```
+
+{% note tip %}
+Commit `yarn.lock` or `package-lock.json`. It ensures everyone (and your CI) installs exactly the same dependency tree. Only omit lock files for published libraries — not for applications.
+{% endnote %}
+
+---
+
+# Understanding Go's Memory Model
+
+URL: https://cracksoldier.github.io/coldnight-demo/2025/11/04/go-memory-model/
+Date: 2025-11-04
+Tags: go, concurrency, memory
+
+The Go memory model is one of those things you can ignore for a long time — until you can't. Most concurrent Go code works by convention rather than by proof. Understanding what the runtime actually guarantees helps you reason about the cases where convention breaks down.
+
+## The happens-before relation
+
+The model is built around one concept: *happens-before*. If event A happens-before event B, then B is guaranteed to observe all memory writes performed before or during A.
+
+Within a single goroutine, everything happens in source order. Across goroutines, the only happens-before edges are created by explicit synchronisation: channel sends and receives, `sync.Mutex` lock and unlock, `sync.WaitGroup`, and a handful of others.
+
+If two goroutines access the same variable without synchronisation, and at least one access is a write, you have a data race. The result is undefined — not "probably fine", undefined.
+
+## What the race detector catches
+
+Go's built-in race detector instruments memory accesses at compile time and reports unsynchronised concurrent accesses at runtime.
+
+```bash
+go test -race ./...
+go run -race main.go
+```
+
+Run with `-race` in CI. It has roughly 2–20× overhead so you don't want it in production, but it's invaluable during development. A clean `-race` run is not a proof of correctness, but it catches a large class of bugs.
+
+## Channel semantics
+
+A send on a channel happens-before the corresponding receive completes. A receive from a closed channel happens-after the close.
+
+```go
+var data []int
+done := make(chan struct{})
+
+go func() {
+    data = compute() // write
+    close(done)      // happens-before...
+}()
+
+<-done               // ...this receive
+fmt.Println(data)   // safe to read here
+```
+
+The close-then-receive pattern is idiomatic for signalling completion. The channel is the synchronisation point.
+
+## sync.Once
+
+`sync.Once` is the canonical way to initialise something exactly once, safely.
+
+```go
+var (
+    instance *Client
+    once     sync.Once
+)
+
+func GetClient() *Client {
+    once.Do(func() {
+        instance = newClient()
+    })
+    return instance
+}
+```
+
+The function passed to `Do` happens-before any call to `Do` returns. All callers block until the first invocation completes, then all receive the same `instance`.
+
+## Atomic operations
+
+`sync/atomic` provides load/store operations that are safe to use concurrently without a mutex.
+
+```go
+var counter int64
+
+// safe from multiple goroutines
+atomic.AddInt64(&counter, 1)
+n := atomic.LoadInt64(&counter)
+```
+
+Atomics are lower overhead than mutexes but they only synchronise the specific variable, not surrounding reads and writes. They're suited for counters and flags, not for protecting compound state.
+
+## The pattern I reach for first
+
+When in doubt, reach for a mutex. The overhead is rarely the bottleneck and the correctness model is simple: hold the lock while reading or writing shared state.
+
+```go
+type Store struct {
+    mu   sync.RWMutex
+    data map[string]string
+}
+
+func (s *Store) Get(key string) (string, bool) {
+    s.mu.RLock()
+    defer s.mu.RUnlock()
+    v, ok := s.data[key]
+    return v, ok
+}
+
+func (s *Store) Set(key, value string) {
+    s.mu.Lock()
+    defer s.mu.Unlock()
+    s.data[key] = value
+}
+```
+
+`sync.RWMutex` allows multiple concurrent readers or one writer. Use it when reads significantly outnumber writes.
+
+## Further reading
+
+The [Go memory model specification](https://go.dev/ref/mem) is short and worth reading in full. The [race detector documentation](https://go.dev/doc/articles/race_detector) covers how to integrate it into your workflow.
+
+---
+
+# Building a Personal CLI Toolkit
+
+URL: https://cracksoldier.github.io/coldnight-demo/2025/08/19/personal-cli-toolkit/
+Date: 2025-08-19
+Tags: bash, cli, productivity, dotfiles
+
+The best tools are the ones so embedded in your workflow you stop noticing them. Here's what lives in my `~/bin` and `.zshrc` after a few years of accumulation.
+
+## The principles I follow
+
+- **One job.** A script that does one thing is easier to trust and easier to replace.
+- **Exit loudly.** Use `set -euo pipefail` in every bash script. Silent failures waste hours.
+- **No magic dependencies.** If a tool requires something exotic to run, it won't survive a fresh machine setup.
+
+## Fuzzy everything with fzf
+
+[fzf](https://github.com/junegunn/fzf) is the single tool that changed how I use the terminal most. Pipe anything to it and get an interactive fuzzy filter.
+
+```bash
+# Open any file in the repo in $EDITOR
+fe() {
+  local file
+  file=$(git ls-files | fzf --preview 'bat --color=always {}') && $EDITOR "$file"
+}
+
+# Switch git branches interactively
+gb() {
+  local branch
+  branch=$(git branch --sort=-committerdate | fzf | tr -d ' ') && git checkout "$branch"
+}
+
+# Kill a process by name
+fkill() {
+  local pid
+  pid=$(ps aux | fzf | awk '{print $2}') && kill -9 "$pid"
+}
+```
+
+## A smarter cd
+
+`z` (or its faster rewrite `zoxide`) tracks your most-visited directories and lets you jump to them by partial name.
+
+```bash
+# Instead of:
+cd ~/Projects/work/backend/services/auth
+
+# Just:
+z auth
+```
+
+After a week of normal use it learns your patterns and the full path becomes unnecessary.
+
+## Project-local environment with direnv
+
+[direnv](https://direnv.net) automatically loads and unloads environment variables when you enter or leave a directory. Each project gets a `.envrc` file:
+
+```bash
+# .envrc
+export DATABASE_URL="postgres://localhost/myapp_dev"
+export LOG_LEVEL="debug"
+export PORT=3001
+```
+
+No more sourcing `.env` files manually. No more accidentally running commands against production because you had the wrong `DATABASE_URL` in your shell.
+
+## A git log worth reading
+
+```bash
+# ~/.gitconfig
+[alias]
+  lg = log --graph --pretty=format:'%C(yellow)%h%Creset %C(blue)%d%Creset %s %C(dim)%cr · %an%Creset' --abbrev-commit
+```
+
+Output:
+```
+* a3f8c12  (HEAD -> main) feat: add rate limiting
+* 9d21e04  fix: handle empty input in parser
+* 4c1b879  chore: update dependencies
+```
+
+## Watching files
+
+`entr` reruns a command when files change. Better than most language-specific watchers because it works everywhere.
+
+```bash
+# Rerun tests when any Go file changes
+find . -name '*.go' | entr -c go test ./...
+
+# Rebuild when source changes
+find src -name '*.ts' | entr -c npm run build
+```
+
+## A scratch buffer
+
+A quick note that doesn't need to become a file:
+
+```bash
+# Open a temp file in $EDITOR, delete it on close
+scratch() {
+  local tmp
+  tmp=$(mktemp /tmp/scratch.XXXXXX.md)
+  $EDITOR "$tmp"
+  rm -f "$tmp"
+}
+```
+
+## Keeping dotfiles in sync
+
+All of this lives in a git repo at `~/.dotfiles`, symlinked into place with [GNU Stow](https://www.gnu.org/software/stow/).
+
+```bash
+cd ~/.dotfiles
+stow zsh git bin  # creates symlinks in ~
+```
+
+One `git pull && stow` and a new machine is configured. The repo is the source of truth.
+
+---
+
+# CSS Container Queries in Practice
+
+URL: https://cracksoldier.github.io/coldnight-demo/2025/05/22/css-container-queries/
+Date: 2025-05-22
+Tags: css, responsive-design, frontend
+
+{% note info %}
+This post has no `cover_image` in its front-matter — the cover on its index card is the site-wide `cover.default` fallback (`/images/og-default.jpg`), which also serves as the `og:image` for social previews.
+{% endnote %}
+
+Container queries landed in all major browsers in late 2023. A year of using them in real projects has clarified where they genuinely help and where media queries are still the right tool.
+
+## The problem they solve
+
+Media queries couple a component's layout to the viewport size. That works when a component always appears in the same position on the page, but breaks down when a component is reused in contexts of different widths — a card that appears at full width on mobile, in a two-column grid on tablet, and in a sidebar on desktop.
+
+With a media query you end up with something like:
+
+```css
+.card { /* full width styles */ }
+
+@media (min-width: 768px) { .card { /* two-column styles */ } }
+@media (min-width: 1024px) { .main-content .card { /* wide styles */ } }
+@media (min-width: 1024px) { .sidebar .card { /* narrow styles */ } }
+```
+
+The component's layout is now tangled with knowledge of where it's placed. Container queries decouple the two.
+
+## Basic syntax
+
+```css
+/* Establish a containment context */
+.card-wrapper {
+  container-type: inline-size;
+}
+
+/* Style the card based on its container's width */
+.card {
+  display: block;
+}
+
+@container (min-width: 400px) {
+  .card {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+  }
+}
+```
+
+The `.card` now switches layout at 400px of its *container*, not the viewport. Drop it in a narrow sidebar or a wide main area — it adapts correctly either way.
+
+## Named containers
+
+When components are nested, you can name containers to query a specific ancestor:
+
+```css
+.layout {
+  container-type: inline-size;
+  container-name: layout;
+}
+
+.sidebar {
+  container-type: inline-size;
+  container-name: sidebar;
+}
+
+@container layout (min-width: 900px) {
+  .nav { flex-direction: row; }
+}
+
+@container sidebar (max-width: 280px) {
+  .widget { font-size: 0.875rem; }
+}
+```
+
+## Container units
+
+Container queries come with their own unit set: `cqw` (1% of container width), `cqh`, `cqi` (inline), `cqb` (block), `cqmin`, `cqmax`.
+
+```css
+.card__title {
+  font-size: clamp(1rem, 4cqi, 1.5rem);
+}
+```
+
+The title scales with the container width, clamped between 1rem and 1.5rem. No JavaScript, no resize observer.
+
+## Where media queries still win
+
+Container queries don't replace media queries — they complement them. Use media queries for:
+
+- **Page-level layout changes** — switching from a single column to a sidebar layout
+- **Global typography scaling** — base font size relative to viewport
+- **Anything that genuinely depends on screen size** — print styles, orientation
+
+Container queries are for **component-level adaptation** — how a component looks given the space it has been given.
+
+## A practical example: a stat card
+
+```css
+.stat-card-wrapper {
+  container-type: inline-size;
+}
+
+.stat-card {
+  padding: 1rem;
+}
+
+.stat-card__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.stat-card__label {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+/* When the card has room, lay out value and label side by side */
+@container (min-width: 240px) {
+  .stat-card {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .stat-card__value {
+    font-size: 2rem;
+  }
+}
+```
+
+This stat card stacks vertically in a narrow column and goes horizontal when it has the space — without any JavaScript or knowledge of where on the page it lives.
+
+## Browser support
+
+Container queries have full support in Chrome 105+, Safari 16+, and Firefox 110+. If you need to support older browsers, the `@container` block is safely ignored, so you can layer it on top of existing media query styles.
+
+---
+
+# Postgres Full-Text Search Without the Overhead
+
+URL: https://cracksoldier.github.io/coldnight-demo/2025/02/11/postgres-full-text-search/
+Date: 2025-02-11
+Tags: postgres, sql, search, databases
+
+The typical path is: application needs search → reach for Elasticsearch or Typesense → spend two weeks on infrastructure. For most applications that's the wrong trade-off. Postgres full-text search handles a surprising amount of load and costs nothing extra to operate.
+
+## How it works
+
+Postgres converts text to a `tsvector` — a sorted list of normalised lexemes (word stems with position information stripped). Queries are expressed as `tsquery` values, which are boolean combinations of lexemes.
+
+```sql
+SELECT to_tsvector('english', 'The quick brown fox jumped over the lazy dog');
+-- 'brown':3 'dog':9 'fox':4 'jump':5 'lazi':8 'quick':2
+
+SELECT to_tsquery('english', 'jumping & fox');
+-- 'jump' & 'fox'
+```
+
+Note that `jumping` is normalised to `jump` and `The`, `over`, `the` are dropped as stop words. The query matches because both lexemes appear in the vector.
+
+## Basic search
+
+```sql
+SELECT title, body
+FROM posts
+WHERE to_tsvector('english', title || ' ' || body) @@ to_tsquery('english', 'postgres & search')
+ORDER BY ts_rank(
+  to_tsvector('english', title || ' ' || body),
+  to_tsquery('english', 'postgres & search')
+) DESC;
+```
+
+`@@` is the match operator. `ts_rank` scores matches by how frequently and prominently the terms appear.
+
+## Adding an index
+
+Computing `to_tsvector` on every query is slow. Store it in a generated column and index it.
+
+```sql
+ALTER TABLE posts
+  ADD COLUMN search_vector tsvector
+  GENERATED ALWAYS AS (
+    setweight(to_tsvector('english', coalesce(title, '')), 'A') ||
+    setweight(to_tsvector('english', coalesce(body, '')), 'B')
+  ) STORED;
+
+CREATE INDEX posts_search_idx ON posts USING GIN (search_vector);
+```
+
+`setweight` assigns label `A` (highest) to title matches and `B` to body matches. This makes title matches rank higher than body matches. The GIN index makes lookups fast.
+
+Now the query simplifies to:
+
+```sql
+SELECT title, ts_rank(search_vector, query) AS rank
+FROM posts, to_tsquery('english', 'postgres & search') query
+WHERE search_vector @@ query
+ORDER BY rank DESC
+LIMIT 20;
+```
+
+## Phrase search and prefix matching
+
+Phrase search uses the `<->` distance operator:
+
+```sql
+-- matches "full text" as adjacent words
+SELECT * FROM posts WHERE search_vector @@ to_tsquery('english', 'full <-> text');
+```
+
+Prefix matching (for autocomplete) uses `:*`:
+
+```sql
+-- matches "postgres", "postgresql", "postgreSQL"
+SELECT * FROM posts WHERE search_vector @@ to_tsquery('english', 'postgr:*');
+```
+
+## Highlighting results
+
+`ts_headline` wraps matched terms in HTML for display:
+
+```sql
+SELECT
+  title,
+  ts_headline(
+    'english',
+    body,
+    to_tsquery('english', 'postgres & search'),
+    'MaxWords=30, MinWords=15, StartSel=<mark>, StopSel=</mark>'
+  ) AS excerpt
+FROM posts
+WHERE search_vector @@ to_tsquery('english', 'postgres & search');
+```
+
+## When to graduate to a dedicated search engine
+
+Postgres full-text search is not the right tool when:
+
+- You need fuzzy matching (typo tolerance) — `pg_trgm` helps but dedicated engines do this better
+- Your search index spans multiple tables or services
+- You need faceted search with aggregations at scale
+- Query latency becomes a bottleneck and you've exhausted index tuning
+
+For a single-service application with a few million rows, Postgres is almost certainly sufficient and dramatically simpler to operate than a separate search cluster.
+
+---
+
+# Structuring Monorepos with Turborepo
+
+URL: https://cracksoldier.github.io/coldnight-demo/2024/10/08/monorepo-turborepo/
+Date: 2024-10-08
+Tags: javascript, monorepo, turborepo, build-systems
+
+Monorepos make sense when multiple packages share code, tooling, or deployment pipelines. The cost is build system complexity. Turborepo is the lowest-friction way to manage that complexity in a JavaScript/TypeScript codebase.
+
+## What Turborepo actually does
+
+Turborepo is a task runner that understands dependencies between packages. It builds a graph of your tasks and runs them in the correct order, in parallel where possible, and skips tasks whose inputs haven't changed.
+
+```
+apps/
+  web/        # Next.js app
+  api/        # Express API
+packages/
+  ui/         # shared React components
+  utils/      # shared utilities
+  config/     # shared ESLint/TypeScript config
+```
+
+If `web` depends on `ui` and `utils`, Turborepo ensures those packages are built before building `web`. If you only change `web`, it skips rebuilding `ui` and `utils`.
+
+## Setting up
+
+```bash
+npx create-turbo@latest
+```
+
+Or add to an existing repo:
+
+```bash
+npm install turbo --save-dev
+```
+
+The key file is `turbo.json` at the root:
+
+```json
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "dist/**"]
+    },
+    "test": {
+      "dependsOn": ["^build"]
+    },
+    "lint": {},
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}
+```
+
+`^build` means "run `build` in all dependencies first". `outputs` tells Turborepo what to cache.
+
+## Package structure
+
+Each package has its own `package.json` declaring its dependencies on other workspace packages:
+
+```json
+{
+  "name": "@myapp/web",
+  "dependencies": {
+    "@myapp/ui": "*",
+    "@myapp/utils": "*"
+  }
+}
+```
+
+The `*` version means "whatever is in the workspace". Your package manager (npm, pnpm, yarn) resolves these to local packages.
+
+## Remote caching
+
+The best feature: share the build cache across machines and CI.
+
+```bash
+npx turbo login
+npx turbo link
+```
+
+After linking, a build on your machine populates the remote cache. Your CI run the next day downloads the cached outputs instead of rebuilding. On a large monorepo this can cut CI time from 20 minutes to under 2.
+
+You can self-host the cache server if you don't want to use Vercel's infrastructure — the [remote caching protocol](https://turbo.build/repo/docs/core-concepts/remote-caching) is open.
+
+## What to put in packages
+
+The common mistake is under-splitting. If `web` and `api` both import from the same directory, that directory should be a package.
+
+Good candidates for extraction:
+- **Shared types** — TypeScript interfaces used by both frontend and backend
+- **Validation schemas** — Zod schemas that validate the same data on both sides
+- **UI components** — any React components used by more than one app
+- **Config** — `tsconfig.json` base, ESLint config, Prettier config
+
+A `config` package that just exports shared tooling config is small but pays dividends in consistency.
+
+## The trade-offs
+
+Turborepo is not the right choice if:
+- Your team isn't already comfortable with npm workspaces
+- You have a single deployable unit with no genuine package boundaries
+- You need polyglot builds (Go, Rust, Python alongside JS) — Bazel handles this better
+
+For a TypeScript-only codebase with 2–10 deployable services sharing code, Turborepo is close to a no-brainer.
+
+---
+
+# Writing Useful Error Messages
+
+URL: https://cracksoldier.github.io/coldnight-demo/2024/07/15/writing-useful-error-messages/
+Date: 2024-07-15
+Tags: ux, errors, api-design, debugging
+
+Error messages are written once and read many times, under stress, by people trying to understand what went wrong. Treating them as an afterthought is a form of technical debt.
+
+## What a good error message contains
+
+A useful error message answers three questions:
+
+1. **What happened?** — the concrete fact of the failure
+2. **Why did it happen?** — the cause, to the extent it's knowable
+3. **What now?** — what the reader should do next, if there's an obvious path
+
+You don't always have all three. A network timeout might not have a clear cause. But the more you can provide, the faster someone gets unstuck.
+
+## Bad and better
+
+**Validation error:**
+
+```
+// Bad
+Error: validation failed
+
+// Better
+Error: invalid email address — "user@" is missing a domain (expected format: user@example.com)
+```
+
+**File not found:**
+
+```
+// Bad
+Error: file not found
+
+// Better
+Error: config file not found at /etc/myapp/config.toml
+  Searched: /etc/myapp/config.toml, ~/.config/myapp/config.toml, ./config.toml
+  Create one with: myapp init
+```
+
+**Database error:**
+
+```
+// Bad
+Error: query failed
+
+// Better
+Error: failed to insert user record — duplicate key on (email)
+  A user with email "alex@example.com" already exists (user_id: 4821)
+```
+
+## Include the value that failed
+
+Any error involving a user-supplied value should include that value in the message. "Invalid email address" is less useful than `invalid email address: "notanemail"`. The reader immediately knows whether they're looking at a typo, a test value, or a bug.
+
+```go
+if !isValidEmail(email) {
+    return fmt.Errorf("invalid email address: %q", email)
+}
+```
+
+## Error wrapping in Go
+
+Wrap errors with context as they travel up the call stack:
+
+```go
+func getUser(id int) (*User, error) {
+    user, err := db.QueryUser(id)
+    if err != nil {
+        return nil, fmt.Errorf("getUser(%d): %w", id, err)
+    }
+    return user, nil
+}
+```
+
+The `%w` verb wraps the error so callers can inspect it with `errors.Is` and `errors.As`. The prefix tells you where in the call stack the error occurred without a stack trace.
+
+A chain like `getUser(42): query row: no rows found` gives you the operation, the ID, and the root cause in one line.
+
+## HTTP API errors
+
+API errors should be structured and consistent. Returning different shapes for different error types forces clients to write brittle parsing code.
+
+```json
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Request body is invalid",
+    "details": [
+      {
+        "field": "email",
+        "message": "must be a valid email address",
+        "value": "notanemail"
+      }
+    ]
+  }
+}
+```
+
+- `code` is a stable machine-readable string — clients can switch on it
+- `message` is a human-readable description
+- `details` carries field-level validation errors
+
+Document every error code your API can return. An undocumented error code is an error message that says nothing.
+
+## Logs vs. errors returned to users
+
+Not all error information belongs in the user-visible message. Stack traces, internal IDs, and SQL query strings should go in your logs, not in the response body. Return a correlation ID the user can quote when contacting support:
+
+```json
+{
+  "error": {
+    "code": "INTERNAL_ERROR",
+    "message": "An unexpected error occurred",
+    "request_id": "req_9kJm3pQxL"
+  }
+}
+```
+
+The request ID lets you pull the full context from your logs without exposing it to the client.
+
+---
+
+# Redis as a Job Queue
+
+URL: https://cracksoldier.github.io/coldnight-demo/2024/04/02/redis-job-queue/
+Date: 2024-04-02
+Tags: redis, queues, background-jobs, infrastructure
+
+Background job processing is one of those things where the simplest approach works for a very long time. If you already have Redis in your stack, you probably don't need a separate message broker.
+
+## The basic pattern
+
+A job queue needs three things: a way to enqueue jobs, a way to dequeue them exactly once, and a way to track which jobs are in progress.
+
+Redis lists give you the first two with `RPUSH` (enqueue) and `BLPOP` (blocking dequeue):
+
+```bash
+# Producer: add a job
+RPUSH jobs:email '{"type":"welcome","user_id":42}'
+
+# Consumer: block until a job is available, then pop it
+BLPOP jobs:email 30  # 30 second timeout
+```
+
+`BLPOP` is atomic — only one consumer receives each job even with multiple workers.
+
+## Reliable queue with acknowledgement
+
+The plain `BLPOP` pattern loses jobs if a worker crashes between dequeuing and completing the job. The reliable queue pattern uses a second list as an in-progress set:
+
+```lua
+-- Atomic: move job from pending to in-progress
+local job = redis.call('RPOPLPUSH', KEYS[1], KEYS[2])
+return job
+```
+
+`RPOPLPUSH` atomically pops from the source list and pushes to the destination. A background process can scan the in-progress list for jobs that have been there too long and requeue them.
+
+## Using a sorted set for scheduling
+
+Sorted sets make it easy to schedule jobs for future execution — use the Unix timestamp as the score:
+
+```bash
+# Schedule a job for 5 minutes from now
+ZADD jobs:scheduled 1735000500 '{"type":"reminder","user_id":42}'
+
+# In a polling loop: fetch jobs ready to run
+ZRANGEBYSCORE jobs:scheduled 0 <current_timestamp>
+```
+
+A scheduler process polls every few seconds, moves ready jobs to the main queue, and removes them from the sorted set.
+
+## Practical implementation
+
+Rather than building this from scratch, use a library built on these primitives:
+
+- **Node.js**: [BullMQ](https://bullmq.io) — mature, actively maintained, excellent UI
+- **Go**: [asynq](https://github.com/hibiken/asynq) — clean API, built-in scheduler
+- **Python**: [rq](https://python-rq.org) or [Celery](https://docs.celeryq.dev) with Redis broker
+- **Ruby**: [Sidekiq](https://sidekiq.org) — the de facto standard
+
+These handle retries, delays, priorities, rate limiting, and job lifecycle management on top of the Redis primitives.
+
+## Monitoring
+
+At minimum, monitor:
+
+```bash
+# Queue depth — jobs waiting
+LLEN jobs:email
+
+# In-progress count
+LLEN jobs:email:processing
+```
+
+BullMQ and asynq both ship with dashboards. If you're rolling your own, expose these metrics to your observability stack and alert when queue depth grows unbounded.
+
+## When to graduate to a dedicated broker
+
+Redis queues work well until:
+
+- **You need durability guarantees stronger than Redis's AOF** — Kafka or SQS have different durability models
+- **You have complex routing** — fanout, topic-based routing, dead-letter queues — RabbitMQ handles these better
+- **Queue depth exceeds available memory** — Redis keeps everything in memory; SQS does not
+- **You're already on a cloud platform** — SQS/Cloud Tasks have zero operational overhead
+
+For most applications processing tens of thousands of jobs per hour, Redis is more than sufficient and significantly simpler to operate than a dedicated broker.
+
+---
+
+# My Terminal Setup in 2024
+
+URL: https://cracksoldier.github.io/coldnight-demo/2024/01/23/terminal-setup-2024/
+Date: 2024-01-23
+Tags: productivity, dotfiles, terminal, zsh
+
+{% note info %}
+Like a handful of other posts on this demo site, this one deliberately omits `cover_image` to show the `cover.default` fallback in action on post cards.
+{% endnote %}
+
+My terminal setup is stable enough that I haven't made major changes in about a year. Here's what it looks like and why each piece is there.
+
+## Shell: zsh with minimal config
+
+I use zsh with a hand-written config rather than a framework like Oh My Zsh. Frameworks are convenient but slow to load and hard to understand when something breaks.
+
+Key options I always set:
+
+```zsh
+# History
+HISTSIZE=100000
+SAVEHIST=100000
+HISTFILE=~/.zsh_history
+setopt SHARE_HISTORY          # share history across sessions
+setopt HIST_IGNORE_DUPS       # don't store duplicate commands
+setopt HIST_IGNORE_SPACE      # don't store commands prefixed with space
+
+# Navigation
+setopt AUTO_CD                # type a directory name to cd into it
+setopt AUTO_PUSHD             # push dirs onto stack automatically
+
+# Completion
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'  # case-insensitive
+```
+
+## Prompt: Starship
+
+[Starship](https://starship.rs) is a cross-shell prompt written in Rust. It's fast, configurable, and shows exactly what I want: directory, git branch, git status, language version when relevant, and exit code on failure.
+
+```toml
+# ~/.config/starship.toml
+format = """
+$directory$git_branch$git_status$cmd_duration
+$character"""
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+
+[git_branch]
+format = " [$symbol$branch]($style) "
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+conflicted = "⚡"
+modified = "!"
+untracked = "?"
+staged = "+"
+```
+
+The two-line format keeps long paths from pushing the cursor too far right.
+
+## Terminal: WezTerm
+
+[WezTerm](https://wezfurlong.org/wezterm/) is a GPU-accelerated terminal emulator configured in Lua. The Lua config is more verbose than a YAML file but far more capable — I can define keybindings as real functions rather than key sequences.
+
+What I actually use:
+- Multiplexing without tmux (WezTerm has native panes and tabs)
+- True colour (correctly renders colour schemes in Neovim)
+- Ligatures for the font
+
+## Editor: Neovim
+
+Neovim with [lazy.nvim](https://github.com/folke/lazy.nvim) for plugin management. The plugin count crept up over the years; I've been cutting it back down. Plugins I currently consider load-bearing:
+
+| Plugin | Purpose |
+|--------|---------|
+| nvim-lspconfig | LSP client config |
+| nvim-cmp | Completion engine |
+| telescope.nvim | Fuzzy finding (files, grep, buffers) |
+| nvim-treesitter | Better syntax highlighting and text objects |
+| gitsigns.nvim | Git hunks in the gutter |
+| oil.nvim | File explorer that behaves like a buffer |
+
+## Tools that replaced GNU coreutils
+
+| Replaced | With | Why |
+|----------|------|-----|
+| `cat` | `bat` | syntax highlighting, line numbers, git diff integration |
+| `ls` | `eza` | colour, icons, git status, tree view |
+| `find` | `fd` | faster, friendlier syntax, respects `.gitignore` |
+| `grep` | `rg` | faster, respects `.gitignore`, better defaults |
+| `top` | `btm` | better layout, mouse support |
+
+None of these are essential but they make the terminal noticeably more pleasant to work in.
+
+## What I stopped using
+
+- **tmux** — WezTerm's native multiplexing is good enough
+- **nvm/pyenv/rbenv** — replaced by [mise](https://mise.jdx.dev), one tool for all language versions
+- **Oh My Zsh** — the overhead isn't worth it for my use case
+- **aliases for git subcommands** — I use the full commands now; muscle memory is more durable
+
+---
+
+# Hello World
+
+URL: https://cracksoldier.github.io/coldnight-demo/2024/01/01/hello-world/
+Date: 2024-01-01
+
+Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
+
+## Quick Start
+
+### Create a new post
+
+``` bash
+$ hexo new "My New Post"
+```
+
+More info: [Writing](https://hexo.io/docs/writing.html)
+
+### Run server
+
+``` bash
+$ hexo server
+```
+
+More info: [Server](https://hexo.io/docs/server.html)
+
+### Generate static files
+
+``` bash
+$ hexo generate
+```
+
+More info: [Generating](https://hexo.io/docs/generating.html)
+
+### Deploy to remote sites
+
+``` bash
+$ hexo deploy
+```
+
+More info: [Deployment](https://hexo.io/docs/one-command-deployment.html)
+
+---
+
+# Hexo Blog
+
+URL: https://cracksoldier.github.io/coldnight-demo/showroom/hexo-blog/
+Date: 2026-05-01
+Subtitle: Static site powered by the coldnight theme
+
+A personal blog built with Hexo 8 and the coldnight dark theme. Features include a 3-column post grid, full-text search, LightGallery image viewer, KaTeX math rendering, Mermaid diagram support, PDF preview, and ePub export.
+
+## Stack
+
+- **Generator**: Hexo 8
+- **Theme**: coldnight (custom)
+- **Renderer**: hexo-renderer-dartsass, hexo-renderer-marked
+- **Deployment**: GitHub Pages via GitHub Actions
+
+## Features
+
+- Dark, minimal design with configurable sidebar
+- Post grid with reading-time estimates and cover images
+- Keyboard navigation and accessibility features
+- Tag plugin ecosystem: `{% gallery %}`, `{% note %}`, `{% tabs %}`, `{% timeline %}`, `{% spoiler %}`, `{% download %}`, `{% video %}`, `{% pdf %}`
+- In-page PDF preview via PDF.js — lazy-loaded modal with page navigation and zoom
+
+---
+
+# Design System
+
+URL: https://cracksoldier.github.io/coldnight-demo/showroom/design-system/
+Date: 2026-04-15
+Subtitle: Component library and visual language
+
+A documentation-first design system built with vanilla CSS custom properties. Ships tokens for color, spacing, typography, and motion — consumed by all other projects in the portfolio.
+
+## Principles
+
+- **Token-driven**: every value is a variable, never hardcoded
+- **Dark-first**: designed for dark backgrounds; light mode opt-in
+- **Zero runtime**: no JavaScript required for the static component library
+
+## Deliverables
+
+- Figma component library
+- SCSS token file exported to CSS custom properties
+- Interactive storybook-style HTML docs
+
+---
+
+# CLI Tool
+
+URL: https://cracksoldier.github.io/coldnight-demo/showroom/cli-tool/
+Date: 2026-03-20
+Subtitle: Developer productivity scripts
+
+A collection of Node.js CLI utilities for automating repetitive development tasks: scaffolding new projects, running local mock servers, and batch-processing media assets.
+
+## Commands
+
+```bash
+# Scaffold a new project from a template
+tool new my-project --template blog
+
+# Start a local JSON mock server
+tool mock --port 3001 --data fixtures/
+
+# Resize and optimise images in bulk
+tool images --input src/ --output dist/ --width 1200
+```
+
+## Installation
+
+```bash
+npm install -g @user/tool
+```
+
+---
+
+# OG Image Generator
+
+URL: https://cracksoldier.github.io/coldnight-demo/showroom/open-graph-generator/
+Date: 2026-03-01
+Subtitle: Automated social preview cards
+
+A serverless function that generates Open Graph preview images on demand. Pass a title, description, and optional background image in the query string and receive a 1200×630 PNG suitable for social sharing.
+
+## Usage
+
+```
+GET /api/og?title=Hello+World&desc=A+short+description&bg=forest
+```
+
+Returns a PNG image rendered with a consistent brand template.
+
+## Tech
+
+- **Runtime**: Node.js on Vercel Edge Functions
+- **Rendering**: `@vercel/og` with JSX template
+- **Fonts**: Geist Sans, self-hosted subset
+
+---
+
+# Markdown Editor
+
+URL: https://cracksoldier.github.io/coldnight-demo/showroom/markdown-editor/
+Date: 2026-02-10
+Subtitle: Browser-based writing tool with live preview
+
+A lightweight, keyboard-first Markdown editor that runs entirely in the browser. No account required — drafts are persisted in `localStorage`. The split-pane layout shows raw Markdown on the left and rendered HTML on the right.
+
+## Features
+
+- Syntax highlighting in the editor pane via CodeMirror 6
+- Live preview with debounced rendering (50 ms)
+- Export to HTML or raw `.md` file
+- Dark theme only; no light mode
+- ~18 KB gzipped (no framework)
+
+---
+
+# RSS Reader
+
+URL: https://cracksoldier.github.io/coldnight-demo/showroom/rss-reader/
+Date: 2026-01-25
+Subtitle: Minimal feed aggregator
+
+A self-hosted RSS aggregator with a clean reading interface. Feeds are stored in a SQLite database; new items are fetched on a configurable cron schedule. The UI is server-rendered HTML — no client-side JavaScript except for the "mark as read" toggle.
+
+## Architecture
+
+- **Backend**: Fastify + better-sqlite3
+- **Frontend**: Server-rendered EJS templates + minimal CSS
+- **Deployment**: Single binary via `pkg`, runs on a Raspberry Pi
+
+## Screenshot
+
+The reading view strips all ads and tracking pixels, presenting only the article title, source, and content.
+
+---
+
+# Photo Gallery
+
+URL: https://cracksoldier.github.io/coldnight-demo/showroom/photo-gallery/
+Date: 2025-12-10
+Subtitle: Static photography portfolio
+
+A performance-focused photography portfolio generated from a folder of RAW/JPEG files. The build pipeline converts each image to WebP, generates LQIP placeholders, and writes the gallery JSON. The frontend is pure HTML + CSS — no JavaScript until the lightbox is opened.
+
+## Build pipeline
+
+1. `exiftool` extracts EXIF metadata (date, camera, lens, focal length)
+2. `sharp` generates three sizes: `thumb`, `medium`, `full`
+3. `blurhash` computes a 4×3 hash for the LQIP placeholder
+4. A Node.js script writes `gallery.json` consumed by the HTML template
+
+## Performance
+
+- First Contentful Paint: &lt; 0.8s on a 4G connection
+- Lighthouse Performance: 98
+
+---
+
+# Budget Tracker
+
+URL: https://cracksoldier.github.io/coldnight-demo/showroom/budget-tracker/
+Date: 2025-11-05
+Subtitle: Personal finance dashboard
+
+A single-page personal finance tracker that imports bank CSV exports and visualises spending by category. All data stays local — nothing is sent to a server. Categories are user-defined and stored in `localStorage`.
+
+## Features
+
+- Drag-and-drop CSV import (works with most EU bank exports)
+- Automatic category detection via keyword rules
+- Monthly spending breakdown as a stacked bar chart
+- Year-over-year comparison view
+- Export categorised data back to CSV
+
+## Tech
+
+- Vanilla JavaScript, no build step
+- Chart.js for visualisations
+- `Papa Parse` for CSV parsing
+
+---
+
+# Keyboard Trainer
+
+URL: https://cracksoldier.github.io/coldnight-demo/showroom/keyboard-trainer/
+Date: 2025-10-18
+Subtitle: Touch-typing practice with custom text
+
+A touch-typing trainer built for developers. Instead of generic word lists it uses real code snippets and prose from classic texts as training material. Paste any text to practice on your own content.
+
+## Metrics tracked
+
+- Words per minute (WPM)
+- Accuracy percentage
+- Per-key error heatmap
+- Session history stored in `IndexedDB`
+
+## Difficulty modes
+
+| Mode | Description |
+|------|-------------|
+| Words | Common English words |
+| Code | Realistic code snippets |
+| Custom | User-pasted text |
+
+---
+
+# Git Dashboard
+
+URL: https://cracksoldier.github.io/coldnight-demo/showroom/git-dashboard/
+Date: 2025-09-30
+Subtitle: Local repository activity overview
+
+A terminal dashboard that displays activity across all local Git repositories. Scans a configurable list of directories, fetches recent commits, and renders a unified activity feed grouped by day.
+
+## Display
+
+```
+Today
+  ● my-blog       feat: add showroom page          2 min ago
+  ● cli-tool      fix: handle missing config        1 h ago
+
+Yesterday
+  ● design-system chore: update spacing tokens     10 h ago
+  ● rss-reader    feat: add OPML import            14 h ago
+```
+
+## Tech
+
+- **Runtime**: Node.js
+- **UI**: `blessed` (terminal UI library)
+- **Git**: `simple-git` for repository introspection
